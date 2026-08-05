@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STACKLY — Our Causes</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Stackly is a global nonprofit standing beside communities on the front line of poverty — funding schools, wells and clinics that families run themselves.">
+  <meta name="keywords" content="nonprofit, charity, global poverty, donate, schools, clean water, mobile clinics, causes">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="libs/tailwind.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'cream-bg': '#FAF8F3',
+            'primary-dark': '#122A26',
+            'primary-dark-hover': '#1b3d37',
+            'mint-green': '#8EE3C2',
+            'mint-green-dark': '#48C39E',
+            'text-muted': '#5C6667',
+          },
+          fontFamily: {
+            serif: ['Instrument Serif', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Global Stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=1.3.2">
+  
+  <!-- Inline overrides for Page Frame and 3D Reveal -->
+  <style>
+    body {
+      background-color: #FAF8F3;
+      color: #122A26;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* 3D Word wrapper reveal */
+    .word-wrap {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: bottom;
+      padding-bottom: 0.05em;
+      margin-right: 0.22em;
+    }
+    
+    .word-inner {
+      display: inline-block;
+      transform-origin: 50% 100%;
+    }
+
+    /* Signature Master Framed Container */
+    .master-frame {
+      border: 1px solid rgba(18, 42, 38, 0.14);
+      max-width: 1440px;
+      margin: 24px auto;
+      background-color: #FAF8F3;
+      position: relative;
+      box-sizing: border-box;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(18, 42, 38, 0.03);
+    }
+
+    @media (max-width: 768px) {
+      .master-frame {
+        margin: 12px;
+        border-radius: 8px;
+      }
+    }
+
+    /* Grayscale to color card hover & touch transitions */
+    .cause-image-container img,
+    #causes-card-main img,
+    .stackly-img img,
+    .stackly-img {
+      filter: grayscale(100%) !important;
+      transition: filter 0.5s ease-in-out, transform 0.5s ease-in-out !important;
+    }
+    
+    /* Bulletproof hover & touch color reveal on all images */
+    .cause-image-container img:hover,
+    .cause-image-container:hover img,
+    .cause-image-container.touched img,
+    #causes-first-img:hover,
+    #causes-second-img:hover,
+    #causes-third-img:hover,
+    #causes-card-main img:hover,
+    #causes-card-main:hover img,
+    #causes-card-main.touched img,
+    .stackly-img img:hover,
+    .stackly-img:hover img,
+    .stackly-img.touched img,
+    .stackly-img:hover,
+    .stackly-img.touched {
+      filter: grayscale(0%) !important;
+    }
+    .cause-image-container.touched > div {
+      transform: scale(1.05) !important;
+    }
+    #causes-card-main.touched img {
+      transform: scale(1.05) !important;
+    }
+
+    /* Bento Spotlight styles */
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .spotlight-overlay {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 10;
+      background: radial-gradient(circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(142, 227, 194, 0.15) 0%, transparent 60%);
+    }
+
+    /* Beneficiary Expandable Cards */
+    .beneficiary-card {
+      position: relative;
+      overflow: hidden;
+      height: 480px;
+    }
+    .beneficiary-img-wrap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 360px;
+      transition: height 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      overflow: hidden;
+    }
+    .beneficiary-card:hover .beneficiary-img-wrap,
+    .beneficiary-card.touched .beneficiary-img-wrap {
+      height: 200px;
+    }
+    .beneficiary-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      background: #ffffff;
+      border-top: 1px solid rgba(18, 42, 38, 0.05);
+      padding: 1.5rem;
+      transition: height 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      z-index: 20;
+      overflow: hidden;
+    }
+    .beneficiary-card:hover .beneficiary-content,
+    .beneficiary-card.touched .beneficiary-content {
+      height: 280px;
+    }
+    .beneficiary-story {
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+    }
+    .beneficiary-card:hover .beneficiary-story,
+    .beneficiary-card.touched .beneficiary-story {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Flip Cards */
+    .flip-card {
+      perspective: 1000px;
+      height: 380px;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+      transform-style: preserve-3d;
+    }
+    .flip-card:hover .flip-card-inner,
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 1rem;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .flip-card-front {
+      background-color: #122A26;
+      color: #FAF8F3;
+    }
+    .flip-card-back {
+      background-color: #FAF8F3;
+      color: #122A26;
+      border: 1px solid rgba(18, 42, 38, 0.14);
+      transform: rotateY(180deg);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Premium Cinematic Preloader -->
+  <div id="preloader" aria-label="Loading STACKLY" aria-live="polite">
+
+    <!-- 3-Panel curtains for cinematic wipe exit -->
+    <div class="preloader-curtain curtain-left"></div>
+    <div class="preloader-curtain curtain-center"></div>
+    <div class="preloader-curtain curtain-right"></div>
+
+    <!-- Animated background particle dots -->
+    <div class="preloader-particles" aria-hidden="true">
+      <span class="pl-dot"></span><span class="pl-dot"></span><span class="pl-dot"></span>
+      <span class="pl-dot"></span><span class="pl-dot"></span><span class="pl-dot"></span>
+      <span class="pl-dot"></span><span class="pl-dot"></span><span class="pl-dot"></span>
+    </div>
+
+    <!-- Floating NGO image collage -->
+    <div class="preloader-collage" aria-hidden="true">
+      <div class="pl-img-card pl-img-1">
+        <img src="assets/home/f7d62a2697b9a7eb753412e50b2d50a08d241d41.webp" alt="" loading="eager">
+        <div class="pl-img-label">Education</div>
+      </div>
+      <div class="pl-img-card pl-img-2">
+        <img src="assets/home/water.webp" alt="" loading="eager">
+        <div class="pl-img-label">Clean Water</div>
+      </div>
+      <div class="pl-img-card pl-img-3">
+        <img src="assets/home/clinic.webp" alt="" loading="eager">
+        <div class="pl-img-label">Healthcare</div>
+      </div>
+      <div class="pl-ring"></div>
+    </div>
+
+    <!-- Central Brand + Progress content -->
+    <div class="preloader-content">
+      <div class="preloader-logo-wrapper">
+        <img src="assets/logo.webp" alt="STACKLY" class="preloader-logo-img">
+      </div>
+      <div class="preloader-brand-name" aria-hidden="true">
+        <span class="pl-letter">S</span><span class="pl-letter">T</span><span class="pl-letter">A</span><span class="pl-letter">C</span><span class="pl-letter">K</span><span class="pl-letter">L</span><span class="pl-letter">Y</span>
+      </div>
+      <div class="preloader-tagline">
+        <span class="pl-tagline-text">Small hands. Big hope.</span>
+      </div>
+      <div class="preloader-progress-container">
+        <div class="preloader-progress-fill">
+          <span class="pl-progress-glow"></span>
+        </div>
+      </div>
+      <div class="preloader-status-wrapper">
+        <div class="preloader-status-text">Sowing seeds of hope...</div>
+        <div class="preloader-counter">00<span class="pl-percent">%</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Signature Master Framed Container -->
+
+  <div class="master-frame min-h-screen flex flex-col justify-between">
+
+    <!-- Header Section -->
+    <header class="site-header">
+      <div class="header-container">
+        <!-- Logo -->
+        <a href="index.html" class="logo-wrapper" id="header-logo-link">
+          <img src="assets/logo.webp" alt="STACKLY logo">
+        </a>
+        
+        <!-- Navigation Menu -->
+        <nav class="nav-menu-wrapper" aria-label="Main Navigation">
+          <ul class="nav-menu">
+            <!-- Spotlight background element -->
+            <div class="nav-spotlight"></div>
+            <li class="nav-item"><a href="index.html" class="nav-link" id="nav-home">Home</a></li>
+            <li class="nav-item"><a href="about.html" class="nav-link" id="nav-about">About</a></li>
+            <li class="nav-item"><a href="causes.html" class="nav-link active" id="nav-causes">Causes</a></li>
+            <li class="nav-item"><a href="impact.html" class="nav-link" id="nav-impact">Impact</a></li>
+            <li class="nav-item"><a href="donate.html" class="nav-link" id="nav-donate">Donate</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link" id="nav-contact">Contact</a></li>
+          </ul>
+          <!-- Mobile actions inside the drawer -->
+          <div class="mobile-actions">
+            <a href="login.html" class="login-btn" id="btn-login-mobile">Log in</a>
+            <a href="404.html" class="donate-btn-header" id="btn-donate-header-mobile">Donate now</a>
+          </div>
+        </nav>
+
+        <!-- Hamburger Menu Button -->
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+        
+        <!-- Actions -->
+        <div class="header-actions">
+          <a href="login.html" class="login-btn" id="btn-login">Log in</a>
+          <a href="404.html" class="donate-btn-header" id="btn-donate-header">Donate now</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+      
+      <!-- HERO SECTION (Premium 2-Column Layout) -->
+      <section class="w-full pt-32 px-8 md:px-16 pb-24 max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center" aria-label="Our Causes Intro">
+        
+        <!-- Left Column: Content -->
+        <div class="flex flex-col items-start text-left" id="causes-hero-content">
+          <!-- Tag / Overline -->
+          <div class="flex items-center gap-3 mb-6 text-xs font-bold tracking-[0.2em] text-[#5C6667] uppercase opacity-0" id="causes-hero-overline" style="transform: translateY(20px);">
+            <span class="w-8 h-[1.5px] bg-[#5C6667]/60"></span>
+            <span>OUR CAUSES</span>
+          </div>
+          
+          <!-- Main Heading (H1) -->
+          <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.1] text-[#122A26] mb-8 perspective-1000 select-none text-left" id="causes-hero-title">
+            <span class="word-wrap"><span class="word-inner">Small</span></span>
+            <span class="word-wrap"><span class="word-inner">acts,</span></span>
+            <span class="word-wrap"><span class="word-inner text-[#48C39E] italic font-semibold">stacked</span></span>
+            <span class="word-wrap"><span class="word-inner">over</span></span>
+            <span class="word-wrap"><span class="word-inner">time.</span></span>
+          </h1>
+          
+          <!-- Description Block -->
+          <p class="text-base md:text-lg text-[#5C6667] leading-relaxed max-w-xl font-sans text-left mb-10 opacity-0" id="causes-hero-desc" style="transform: translateY(20px);">
+            Each program is designed with — not for — the community it serves. Here's a look at where your support goes.
+          </p>
+
+          <!-- Quick Stats Bento Grid specific to Causes page -->
+          <div class="grid grid-cols-3 gap-6 w-full border-t border-gray-300/40 pt-8 opacity-0" id="causes-hero-stats-row" style="transform: translateY(20px);">
+            <div class="flex flex-col">
+              <span class="font-serif text-4xl text-[#122A26] leading-none mb-2">37</span>
+              <span class="text-[10px] font-bold tracking-wider text-[#5C6667] uppercase">Countries</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-serif text-4xl text-[#122A26] leading-none mb-2">12k+</span>
+              <span class="text-[10px] font-bold tracking-wider text-[#5C6667] uppercase">Students</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-serif text-4xl text-[#122A26] leading-none mb-2">100%</span>
+              <span class="text-[10px] font-bold tracking-wider text-[#5C6667] uppercase">Transparent</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Layered, Floating, Tilting Image Stack -->
+        <div class="causes-hero-media relative w-full h-[520px] flex items-center justify-center perspective-1000 select-none" id="causes-hero-visuals">
+          <!-- Backdrop blurred background circle -->
+          <div class="absolute w-[280px] h-[280px] bg-[#8EE3C2]/15 rounded-full blur-3xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" id="causes-hero-backdrop"></div>
+
+          <!-- Card 1: Main Tall Portrait Card -->
+          <div class="w-[280px] h-[380px] rounded-3xl overflow-hidden shadow-2xl relative bg-gray-100 z-10 border border-gray-300/20 opacity-0" id="causes-card-main" style="transform: scale(0.9) rotateY(10deg);">
+            <img src="assets/about/7.webp" alt="Main Causes Visual" class="w-full h-full object-cover grayscale transition-all duration-700 ease-in-out hover:grayscale-0 hover:scale-105">
+          </div>
+
+          <!-- Card 2: Secondary Overlapping Card (Top Left) -->
+          <div class="absolute top-[20px] left-[10px] md:left-[40px] w-[140px] h-[190px] rounded-2xl overflow-hidden shadow-xl bg-gray-200 z-20 border border-gray-300/30 opacity-0" id="causes-card-secondary" style="transform: rotate(-8deg) translateZ(20px);">
+            <img src="assets/about/5.webp" alt="Overlay Visual Left" class="w-full h-full object-cover">
+          </div>
+
+          <!-- Card 3: Tertiary Overlapping Card (Bottom Right) -->
+          <div class="absolute bottom-[20px] right-[10px] md:right-[40px] w-[165px] h-[130px] rounded-2xl overflow-hidden shadow-xl bg-gray-200 z-20 border border-gray-300/30 opacity-0" id="causes-card-tertiary" style="transform: rotate(6deg) translateZ(30px);">
+            <img src="assets/about/6.webp" alt="Overlay Visual Right" class="w-full h-full object-cover">
+          </div>
+
+          <!-- Card 4: Floating Glassmorphism Badge (Top Right) -->
+          <div class="absolute top-[40px] right-[20px] md:right-[60px] z-30 bg-white/80 backdrop-blur-md rounded-2xl p-4 shadow-lg border border-white/20 flex items-center gap-3 opacity-0" id="causes-card-glass" style="transform: translateZ(40px);">
+            <div class="w-8 h-8 rounded-full bg-[#8EE3C2] flex items-center justify-center text-[#122A26]">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.284 2.25 8.5c0-2.43 1.97-4.4 4.4-4.4 1.29 0 2.456.556 3.275 1.44a4.4 4.4 0 016.45 0C17.294 4.656 18.46 4.1 19.75 4.1c2.43 0 4.4 1.97 4.4 4.4 0 3.784-2.438 6.86-4.743 9.02a25.18 25.18 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"/></svg>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-[9px] font-bold text-[#5C6667] uppercase tracking-wider">Join Us</span>
+              <span class="text-xs font-bold text-[#122A26]">Make an Impact</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- CAUSES GRID & SPLIT LAYOUT -->
+      <div class="section-frame-wrapper">
+        <!-- Left Side Camouflage Pattern Strip -->
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+        
+        <!-- Content Area -->
+        <div class="section-frame-content flex flex-col">
+          
+          <!-- Top Horizontal Decorative Banner -->
+          <div class="about-top-banner">
+            <img src="assets/home/banner.webp" alt="STACKLY decorative pattern banner">
+          </div>
+          
+          <div class="py-24 px-8 md:px-16 max-w-[1280px] mx-auto w-full">
+            
+            <!-- First Cause Split Layout (approx. 50/50 split) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center animate-trigger" id="causes-split-first">
+              
+              <!-- Left Column: Image -->
+              <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-lg relative bg-gray-100 cause-image-container group">
+                <div class="w-full h-full overflow-hidden transition-transform duration-500 ease-in-out group-hover:scale-105 relative">
+                  <img src="assets/causes/027f509352f726e457482bb85d8c05874df5ec55.webp" alt="Education for all - Stackly Causes" class="w-full h-full object-cover object-center absolute inset-0 scale-110" id="causes-first-img">
+                </div>
+              </div>
+
+              <!-- Right Column: Content & CTA -->
+              <div class="flex flex-col justify-center text-left" id="causes-first-content">
+                <!-- Tag Badges -->
+                <div class="flex flex-wrap gap-2 mb-6 opacity-0" id="causes-first-tag">
+                  <span class="px-4 py-1.5 text-xs border border-gray-300 rounded-full text-[#5C6667] font-sans font-bold tracking-wider uppercase">SCHOOLS</span>
+                </div>
+
+                <!-- Heading (Serif H2) -->
+                <h2 class="font-serif text-4xl md:text-5xl font-normal leading-[1.15] text-[#122A26] mb-6 select-none text-left perspective-1000" id="causes-first-title">
+                  <span class="word-wrap"><span class="word-inner">Education</span></span>
+                  <span class="word-wrap"><span class="word-inner">for</span></span>
+                  <span class="word-wrap"><span class="word-inner text-[#48C39E] italic">all</span></span>
+                </h2>
+
+                <!-- Description Paragraph -->
+                <p class="text-sm md:text-base text-[#5C6667] leading-relaxed font-sans mb-6 opacity-0" id="causes-first-desc">
+                  Building classrooms, training teachers and funding scholarships from primary school through vocational training. Because a mind fed is a village lifted.
+                </p>
+
+                <!-- Stats text -->
+                <div class="font-serif text-lg md:text-xl text-[#122A26] mb-8 opacity-0" id="causes-first-stats">
+                  38 schools · 12,400 students
+                </div>
+
+                <!-- Buttons Stack (Side-by-side) -->
+                <div class="flex flex-wrap gap-4 opacity-0" id="causes-first-buttons">
+                  <a href="404.html" class="inline-block px-8 py-3.5 bg-[#122A26] text-[#FAF8F3] font-sans font-bold text-sm tracking-wider uppercase rounded-full hover:bg-[#8EE3C2] hover:text-[#122A26] transition-all duration-300">
+                    
+Fund this cause
+                  </a>
+                  <a href="404.html" class="inline-block px-8 py-3.5 border border-[#122A26]/30 text-[#122A26] font-sans font-bold text-sm tracking-wider uppercase rounded-full hover:bg-[#122A26] hover:text-[#FAF8F3] transition-all duration-300">
+                    Volunteer
+                  </a>
+                </div>
+              </div>
+
+            </div><!-- /First Cause Split Layout -->
+
+            <!-- Second Cause Split Layout (Water - Alternating order: Content left, Image right) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center animate-trigger mt-32 pt-32 border-t border-gray-300/40" id="causes-split-second">
+              
+              <!-- Left Column: Content & CTA (order-2 on mobile, order-1 on desktop) -->
+              <div class="flex flex-col justify-center text-left order-2 md:order-1" id="causes-second-content">
+                <!-- Tag Badges -->
+                <div class="flex flex-wrap gap-2 mb-6 opacity-0" id="causes-second-tag">
+                  <span class="px-4 py-1.5 text-xs border border-gray-300 rounded-full text-[#5C6667] font-sans font-bold tracking-wider uppercase">WATER</span>
+                </div>
+
+                <!-- Heading (Serif H2) -->
+                <h2 class="font-serif text-4xl md:text-5xl font-normal leading-[1.15] text-[#122A26] mb-6 select-none text-left perspective-1000" id="causes-second-title">
+                  <span class="word-wrap"><span class="word-inner">Clean</span></span>
+                  <span class="word-wrap"><span class="word-inner text-[#48C39E] italic">water</span></span>
+                  <span class="word-wrap"><span class="word-inner">access</span></span>
+                </h2>
+
+                <!-- Description Paragraph -->
+                <p class="text-sm md:text-base text-[#5C6667] leading-relaxed font-sans mb-6 opacity-0" id="causes-second-desc">
+                  Community-led wells, household filters and hygiene education. Every project is maintained by a local water committee within 12 months.
+                </p>
+
+                <!-- Stats text -->
+                <div class="font-serif text-lg md:text-xl text-[#122A26] mb-8 opacity-0" id="causes-second-stats">
+                  124 wells · 61,000 people served
+                </div>
+
+                <!-- Buttons Stack (Side-by-side) -->
+                <div class="flex flex-wrap gap-4 opacity-0" id="causes-second-buttons">
+                  <a href="404.html" class="inline-block px-8 py-3.5 bg-[#122A26] text-[#FAF8F3] font-sans font-bold text-sm tracking-wider uppercase rounded-full hover:bg-[#8EE3C2] hover:text-[#122A26] transition-all duration-300">
+                    
+Fund this cause
+                  </a>
+                  <a href="404.html" class="inline-block px-8 py-3.5 border border-[#122A26]/30 text-[#122A26] font-sans font-bold text-sm tracking-wider uppercase rounded-full hover:bg-[#122A26] hover:text-[#FAF8F3] transition-all duration-300">
+                    Volunteer
+                  </a>
+                </div>
+              </div>
+
+              <!-- Right Column: Image (order-1 on mobile, order-2 on desktop) -->
+              <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-lg relative bg-gray-100 cause-image-container group order-1 md:order-2">
+                <div class="w-full h-full overflow-hidden transition-transform duration-500 ease-in-out group-hover:scale-105 relative">
+                  <img src="assets/causes/fcd9935a83ae154a8a5c44f431713e845bde007b.webp" alt="Clean water access - Stackly Causes" class="w-full h-full object-cover object-center absolute inset-0 scale-110" id="causes-second-img">
+                </div>
+              </div>
+
+            </div><!-- /Second Cause Split Layout -->
+
+            <!-- Third Cause Split Layout (Healthcare - Standard order: Image left, Content right) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center animate-trigger mt-32 pt-32 border-t border-gray-300/40" id="causes-split-third">
+              
+              <!-- Left Column: Image (order-1 on mobile, order-1 on desktop) -->
+              <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-lg relative bg-gray-100 cause-image-container group order-1 md:order-1">
+                <div class="w-full h-full overflow-hidden transition-transform duration-500 ease-in-out group-hover:scale-105 relative">
+                  <img src="assets/causes/7e6fb4e611979bda6582c2bde6df831caacf73f3.webp" alt="Mobile healthcare - Stackly Causes" class="w-full h-full object-cover object-center absolute inset-0 scale-110" id="causes-third-img">
+                </div>
+              </div>
+
+              <!-- Right Column: Content & CTA (order-2 on mobile, order-2 on desktop) -->
+              <div class="flex flex-col justify-center text-left order-2 md:order-2" id="causes-third-content">
+                <!-- Tag Badges -->
+                <div class="flex flex-wrap gap-2 mb-6 opacity-0" id="causes-third-tag">
+                  <span class="px-4 py-1.5 text-xs border border-gray-300 rounded-full text-[#5C6667] font-sans font-bold tracking-wider uppercase">HEALTH</span>
+                </div>
+
+                <!-- Heading (Serif H2) -->
+                <h2 class="font-serif text-4xl md:text-5xl font-normal leading-[1.15] text-[#122A26] mb-6 select-none text-left perspective-1000" id="causes-third-title">
+                  <span class="word-wrap"><span class="word-inner">Mobile</span></span>
+                  <span class="word-wrap"><span class="word-inner text-[#48C39E] italic">healthcare</span></span>
+                </h2>
+
+                <!-- Description Paragraph -->
+                <p class="text-sm md:text-base text-[#5C6667] leading-relaxed font-sans mb-6 opacity-0" id="causes-third-desc">
+                  Rural clinics on wheels bring maternal care, vaccinations and chronic-disease treatment to villages that have never had a doctor.
+                </p>
+
+                <!-- Stats text -->
+                <div class="font-serif text-lg md:text-xl text-[#122A26] mb-8 opacity-0" id="causes-third-stats">
+                  9 clinics · 44,000 visits / year
+                </div>
+
+                <!-- Buttons Stack (Side-by-side) -->
+                <div class="flex flex-wrap gap-4 opacity-0" id="causes-third-buttons">
+                  <a href="404.html" class="inline-block px-8 py-3.5 bg-[#122A26] text-[#FAF8F3] font-sans font-bold text-sm tracking-wider uppercase rounded-full hover:bg-[#8EE3C2] hover:text-[#122A26] transition-all duration-300">
+                    
+Fund this cause
+                  </a>
+                  <a href="404.html" class="inline-block px-8 py-3.5 border border-[#122A26]/30 text-[#122A26] font-sans font-bold text-sm tracking-wider uppercase rounded-full hover:bg-[#122A26] hover:text-[#FAF8F3] transition-all duration-300">
+                    Volunteer
+                  </a>
+                </div>
+              </div>
+
+            </div><!-- /Third Cause Split Layout -->
+
+          </div>
+        </div><!-- /section-frame-content -->
+      </div><!-- /section-frame-wrapper -->
+
+      <!-- ── SECTION 1: "Our Impact Areas" (Bento Grid + Spotlight + Parallax Badge) ── -->
+      <div class="section-frame-wrapper border-t border-[#122A26]/10" id="impact-areas-section">
+        <!-- Left Side Strip -->
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+
+        <!-- Main Content -->
+        <div class="section-frame-content flex flex-col bg-[#FAF8F3]">
+          <div class="py-24 px-8 md:px-16 max-w-[1280px] mx-auto w-full">
+            
+            <!-- Header -->
+            <div class="flex flex-col items-start mb-16 max-w-xl text-left">
+              <div class="flex items-center gap-3 mb-6 text-xs font-bold tracking-[0.2em] text-[#5C6667] uppercase" id="bento-overline">
+                <span class="w-8 h-[1.5px] bg-[#5C6667]/60"></span>
+                <span>IMPACT AREAS</span>
+              </div>
+              <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-[1.1] text-[#122A26] perspective-1000 select-none text-left" id="bento-title">
+                <span class="word-wrap"><span class="word-inner">Comprehensive</span></span>
+                <span class="word-wrap"><span class="word-inner text-[#48C39E] italic">care,</span></span>
+                <span class="word-wrap"><span class="word-inner font-semibold">targeted</span></span>
+                <span class="word-wrap"><span class="word-inner">impact.</span></span>
+              </h2>
+            </div>
+
+            <!-- Bento Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="bento-grid-container">
+              
+              <!-- Large Card (Spans 2 columns & 2 rows on medium screens and up) -->
+              <div class="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-2xl border border-gray-300/40 bg-white p-8 flex flex-col justify-between min-h-[460px] spotlight-card shadow-sm hover:shadow-md transition-shadow duration-300" id="bento-card-large">
+                <div class="spotlight-overlay"></div>
+                
+                <!-- Background Image -->
+                <div class="absolute inset-0 z-0 stackly-img overflow-hidden">
+                  <img src="assets/about/f7d62a2697b9a7eb753412e50b2d50a08d241d41.webp" alt="Local grassroots support" class="w-full h-full object-cover scale-100 group-hover:scale-105 transition-all duration-700 ease-in-out">
+                  <!-- Dark gradient vignette overlay for text readability -->
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#122A26]/85 via-[#122A26]/40 to-transparent"></div>
+                </div>
+
+                <!-- Floating Glassmorphism Card (3D tilt parallax target) -->
+                <div class="bento-floating-card absolute top-6 right-6 z-20 bg-white/80 backdrop-blur-md rounded-2xl p-4 shadow-lg border border-white/20 flex items-center gap-3 select-none pointer-events-none transition-all duration-300">
+                  <div class="w-8 h-8 rounded-full bg-[#8EE3C2] flex items-center justify-center text-[#122A26]">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.284 2.25 8.5c0-2.43 1.97-4.4 4.4-4.4 1.29 0 2.456.556 3.275 1.44a4.4 4.4 0 016.45 0C17.294 4.656 18.46 4.1 19.75 4.1c2.43 0 4.4 1.97 4.4 4.4 0 3.784-2.438 6.86-4.743 9.02a25.18 25.18 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"/></svg>
+                  </div>
+                  <div class="flex flex-col">
+                    <span class="text-[9px] font-bold text-[#5C6667] uppercase tracking-wider">THIS MONTH</span>
+                    <span class="text-xs font-bold text-[#122A26]">500+ Lives Saved</span>
+                  </div>
+                </div>
+
+                <!-- Text Content at bottom -->
+                <div class="relative z-20 mt-auto text-left text-white max-w-md">
+                  <span class="text-xs font-bold tracking-widest text-[#8EE3C2] uppercase mb-2 block">Grassroots Mobilization</span>
+                  <h3 class="font-serif text-3xl font-normal leading-[1.2] mb-3">Empowering communities to lead their own recovery</h3>
+                  <p class="text-sm text-gray-200/90 leading-relaxed font-sans">
+                    We bypass bureaucratic intermediaries to deliver direct, transparent funding directly into the hands of local committees.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Card 2: Primary Education -->
+              <div class="relative group overflow-hidden rounded-2xl border border-gray-300/40 bg-white p-6 flex flex-col justify-between min-h-[220px] spotlight-card shadow-sm hover:shadow-md transition-shadow duration-300" id="bento-card-2">
+                <div class="spotlight-overlay"></div>
+                <div class="absolute inset-0 z-0 stackly-img overflow-hidden">
+                  <img src="assets/about/1.webp" alt="Primary education" class="w-full h-full object-cover scale-100 group-hover:scale-105 transition-all duration-700 ease-in-out">
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#122A26]/85 via-[#122A26]/35 to-transparent"></div>
+                </div>
+                <div class="relative z-20 mt-auto text-left text-white">
+                  <span class="text-[10px] font-bold tracking-widest text-[#8EE3C2] uppercase mb-1 block">Education</span>
+                  <h3 class="font-serif text-xl font-normal leading-[1.2] mb-1">Primary Education</h3>
+                  <p class="text-xs text-gray-200/80 font-sans">Classroom building, learning materials & scholarships.</p>
+                </div>
+              </div>
+
+              <!-- Card 3: Clean Water -->
+              <div class="relative group overflow-hidden rounded-2xl border border-gray-300/40 bg-white p-6 flex flex-col justify-between min-h-[220px] spotlight-card shadow-sm hover:shadow-md transition-shadow duration-300" id="bento-card-3">
+                <div class="spotlight-overlay"></div>
+                <div class="absolute inset-0 z-0 stackly-img overflow-hidden">
+                  <img src="assets/about/2.webp" alt="Clean water access" class="w-full h-full object-cover scale-100 group-hover:scale-105 transition-all duration-700 ease-in-out">
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#122A26]/85 via-[#122A26]/35 to-transparent"></div>
+                </div>
+                <div class="relative z-20 mt-auto text-left text-white">
+                  <span class="text-[10px] font-bold tracking-widest text-[#8EE3C2] uppercase mb-1 block">Infrastructure</span>
+                  <h3 class="font-serif text-xl font-normal leading-[1.2] mb-1">Clean Water Access</h3>
+                  <p class="text-xs text-gray-200/80 font-sans">Boreholes and hand-pump setups managed by locals.</p>
+                </div>
+              </div>
+
+              <!-- Card 4: Mobile Clinics -->
+              <div class="relative group overflow-hidden rounded-2xl border border-gray-300/40 bg-white p-6 flex flex-col justify-between min-h-[220px] spotlight-card shadow-sm hover:shadow-md transition-shadow duration-300" id="bento-card-4">
+                <div class="spotlight-overlay"></div>
+                <div class="absolute inset-0 z-0 stackly-img overflow-hidden">
+                  <img src="assets/about/3.webp" alt="Healthcare assistance" class="w-full h-full object-cover scale-100 group-hover:scale-105 transition-all duration-700 ease-in-out">
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#122A26]/85 via-[#122A26]/35 to-transparent"></div>
+                </div>
+                <div class="relative z-20 mt-auto text-left text-white">
+                  <span class="text-[10px] font-bold tracking-widest text-[#8EE3C2] uppercase mb-1 block">Health</span>
+                  <h3 class="font-serif text-xl font-normal leading-[1.2] mb-1">Mobile Clinics</h3>
+                  <p class="text-xs text-gray-200/80 font-sans">Delivering critical care to communities off the grid.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SECTION 2: "The Journey of a Donation" (Sticky Section + Horizontal Scroll) ── -->
+      <div class="section-frame-wrapper journey-container border-t border-[#122A26]/10 relative md:h-screen" id="journey-scroll-section">
+        <!-- Left Side Strip -->
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+
+        <!-- Main Content -->
+        <div class="section-frame-content flex flex-col md:flex-row md:h-screen md:sticky md:top-0 overflow-hidden bg-[#FAF8F3]">
+          
+          <!-- Sticky Sidebar -->
+          <div class="journey-sidebar w-full md:w-[380px] shrink-0 p-8 md:p-16 flex flex-col justify-center border-b md:border-b-0 md:border-r border-gray-300/40 bg-[#FAF8F3] z-10 text-left">
+            <span class="text-xs font-bold tracking-[0.2em] text-[#5C6667] uppercase mb-4 block">THE JOURNEY</span>
+            <h2 class="font-serif text-4xl md:text-5xl font-normal leading-[1.15] text-[#122A26] mb-6">How Your Money Moves</h2>
+            <p class="text-sm md:text-base text-[#5C6667] leading-relaxed font-sans">
+              From the moment you hit donate, your funds are tracked, allocated, and deployed to create lasting, community-led change. Here is the step-by-step path.
+            </p>
+          </div>
+
+          <!-- Cards Track Wrapper -->
+          <div class="journey-track-wrapper flex-grow overflow-hidden flex items-center p-8 md:p-16">
+            <div class="journey-track flex flex-col md:flex-row gap-8 md:gap-12 w-full md:w-auto" id="journey-track-row">
+              
+              <!-- Step 1 Card -->
+              <div class="journey-card w-full md:w-[380px] shrink-0 bg-white rounded-2xl border border-gray-300/40 p-6 flex flex-col shadow-sm text-left">
+                <div class="w-full aspect-[16/10] overflow-hidden rounded-xl stackly-img mb-6">
+                  <img src="assets/about/4.webp" alt="Collection phase" class="w-full h-full object-cover">
+                </div>
+                <span class="text-[10px] font-bold text-[#48C39E] uppercase tracking-wider mb-2 block">Step 01</span>
+                <h3 class="font-serif text-2xl text-[#122A26] mb-3">Collection & Pooling</h3>
+                <p class="text-sm text-[#5C6667] leading-relaxed font-sans">
+                  Every donation is received and combined with resources globally, deposited in fully transparent, audited bank structures.
+                </p>
+              </div>
+
+              <!-- Step 2 Card -->
+              <div class="journey-card w-full md:w-[380px] shrink-0 bg-white rounded-2xl border border-gray-300/40 p-6 flex flex-col shadow-sm text-left">
+                <div class="w-full aspect-[16/10] overflow-hidden rounded-xl stackly-img mb-6">
+                  <img src="assets/about/5.webp" alt="Allocation phase" class="w-full h-full object-cover">
+                </div>
+                <span class="text-[10px] font-bold text-[#48C39E] uppercase tracking-wider mb-2 block">Step 02</span>
+                <h3 class="font-serif text-2xl text-[#122A26] mb-3">Community Allocation</h3>
+                <p class="text-sm text-[#5C6667] leading-relaxed font-sans">
+                  Local committees review project needs, submitting vetted requests directly to the board for immediate fund distribution.
+                </p>
+              </div>
+
+              <!-- Step 3 Card -->
+              <div class="journey-card w-full md:w-[380px] shrink-0 bg-white rounded-2xl border border-gray-300/40 p-6 flex flex-col shadow-sm text-left">
+                <div class="w-full aspect-[16/10] overflow-hidden rounded-xl stackly-img mb-6">
+                  <img src="assets/about/6.webp" alt="Action phase" class="w-full h-full object-cover">
+                </div>
+                <span class="text-[10px] font-bold text-[#48C39E] uppercase tracking-wider mb-2 block">Step 03</span>
+                <h3 class="font-serif text-2xl text-[#122A26] mb-3">Local Project Action</h3>
+                <p class="text-sm text-[#5C6667] leading-relaxed font-sans">
+                  Construction supplies are bought from local businesses and communities carry out the physical setups, building self-reliance.
+                </p>
+              </div>
+
+              <!-- Step 4 Card -->
+              <div class="journey-card w-full md:w-[380px] shrink-0 bg-white rounded-2xl border border-gray-300/40 p-6 flex flex-col shadow-sm text-left">
+                <div class="w-full aspect-[16/10] overflow-hidden rounded-xl stackly-img mb-6">
+                  <img src="assets/causes/027f509352f726e457482bb85d8c05874df5ec55.webp" alt="Results phase" class="w-full h-full object-cover">
+                </div>
+                <span class="text-[10px] font-bold text-[#48C39E] uppercase tracking-wider mb-2 block">Step 04</span>
+                <h3 class="font-serif text-2xl text-[#122A26] mb-3">Audit & Results</h3>
+                <p class="text-sm text-[#5C6667] leading-relaxed font-sans">
+                  Third-party audits confirm proper deployment, and final impact metrics are shared back to you in quarterly reports.
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── SECTION 3: "Meet the Beneficiaries" (Hover Reveal Expandable Cards) ── -->
+      <div class="section-frame-wrapper border-t border-[#122A26]/10" id="beneficiaries-section">
+        <!-- Left Side Strip -->
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+
+        <!-- Main Content -->
+        <div class="section-frame-content flex flex-col bg-[#FAF8F3]">
+          <div class="py-24 px-8 md:px-16 max-w-[1280px] mx-auto w-full">
+            
+            <!-- Header -->
+            <div class="flex flex-col items-start mb-16 max-w-xl text-left">
+              <div class="flex items-center gap-3 mb-6 text-xs font-bold tracking-[0.2em] text-[#5C6667] uppercase" id="beneficiary-overline">
+                <span class="w-8 h-[1.5px] bg-[#5C6667]/60"></span>
+                <span>STORIES OF HOPE</span>
+              </div>
+              <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-[1.1] text-[#122A26] perspective-1000 select-none text-left" id="beneficiary-title">
+                <span class="word-wrap"><span class="word-inner">Meet</span></span>
+                <span class="word-wrap"><span class="word-inner">the</span></span>
+                <span class="word-wrap"><span class="word-inner text-[#48C39E] italic">beneficiaries</span></span>
+              </h2>
+            </div>
+
+            <!-- 3-Column Expandable Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+              
+              <!-- Beneficiary 1 -->
+              <div class="beneficiary-card group shadow-sm hover:shadow-md transition-shadow duration-300 rounded-2xl bg-white border border-gray-300/40">
+                <div class="beneficiary-img-wrap stackly-img">
+                  <img src="assets/about/7.webp" alt="Amina's Story" class="w-full h-full object-cover">
+                </div>
+                <div class="beneficiary-content text-left">
+                  <div class="mb-4">
+                    <h3 class="font-serif text-2xl text-[#122A26]">Amina's Schooling</h3>
+                    <span class="text-[10px] font-bold text-[#5C6667] uppercase tracking-wider">EDUCATION SPONSORSHIP</span>
+                  </div>
+                  <div class="beneficiary-story flex flex-col justify-between flex-grow">
+                    <p class="text-sm text-[#5C6667] leading-relaxed font-sans mb-4">
+                      "With the scholarship, I became the first girl in my family to finish secondary school. Now I'm studying to be a teacher."
+                    </p>
+                    <a href="404.html" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#122A26] hover:text-[#48C39E] transition-colors mt-auto">
+                      Read Story
+                      <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Beneficiary 2 -->
+              <div class="beneficiary-card group shadow-sm hover:shadow-md transition-shadow duration-300 rounded-2xl bg-white border border-gray-300/40">
+                <div class="beneficiary-img-wrap stackly-img">
+                  <img src="assets/causes/fcd9935a83ae154a8a5c44f431713e845bde007b.webp" alt="Carlos' Story" class="w-full h-full object-cover">
+                </div>
+                <div class="beneficiary-content text-left">
+                  <div class="mb-4">
+                    <h3 class="font-serif text-2xl text-[#122A26]">Carlos' Clean Water</h3>
+                    <span class="text-[10px] font-bold text-[#5C6667] uppercase tracking-wider">INFRASTRUCTURE DEVELOPMENT</span>
+                  </div>
+                  <div class="beneficiary-story flex flex-col justify-between flex-grow">
+                    <p class="text-sm text-[#5C6667] leading-relaxed font-sans mb-4">
+                      "We used to walk four miles every day for water. Now, the clean well is in our village square, and our children are healthy."
+                    </p>
+                    <a href="404.html" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#122A26] hover:text-[#48C39E] transition-colors mt-auto">
+                      Read Story
+                      <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Beneficiary 3 -->
+              <div class="beneficiary-card group shadow-sm hover:shadow-md transition-shadow duration-300 rounded-2xl bg-white border border-gray-300/40">
+                <div class="beneficiary-img-wrap stackly-img">
+                  <img src="assets/causes/7e6fb4e611979bda6582c2bde6df831caacf73f3.webp" alt="Dr. Grace's Story" class="w-full h-full object-cover">
+                </div>
+                <div class="beneficiary-content text-left">
+                  <div class="mb-4">
+                    <h3 class="font-serif text-2xl text-[#122A26]">Dr. Grace's Clinic</h3>
+                    <span class="text-[10px] font-bold text-[#5C6667] uppercase tracking-wider">HEALTHCARE ASSISTANCE</span>
+                  </div>
+                  <div class="beneficiary-story flex flex-col justify-between flex-grow">
+                    <p class="text-sm text-[#5C6667] leading-relaxed font-sans mb-4">
+                      "Our mobile clinic on wheels treats up to eighty mothers and infants daily, bringing hope and critical care right to their doorsteps."
+                    </p>
+                    <a href="404.html" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#122A26] hover:text-[#48C39E] transition-colors mt-auto">
+                      Read Story
+                      <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SECTION 4: "Join the Movement" (Infinite Marquee + Flip Cards) ── -->
+      <div class="section-frame-wrapper border-t border-[#122A26]/10" id="join-movement-section">
+        <!-- Left Side Strip -->
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+
+        <!-- Main Content -->
+        <div class="section-frame-content flex flex-col bg-[#FAF8F3]">
+          
+          <!-- Top Infinite Marquee Banner -->
+          <div class="w-full bg-[#8EE3C2] py-6 overflow-hidden flex items-center border-b border-[#122A26]/10" aria-label="Movement Marquee">
+            <div class="flex whitespace-nowrap w-full join-marquee-container">
+              <div class="flex shrink-0 items-center gap-16 pr-16 join-marquee-track text-[#122A26] font-bold text-base md:text-lg tracking-widest uppercase">
+                <span>Together We Build</span>
+                <span class="opacity-40">·</span>
+                <span>Together We Heal</span>
+                <span class="opacity-40">·</span>
+                <span>Together We Grow</span>
+                <span class="opacity-40">·</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom: Grid of 4 Flip Cards -->
+          <div class="py-24 px-8 md:px-16 max-w-[1280px] mx-auto w-full">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              
+              <!-- Card 1 -->
+              <div class="flip-card cursor-pointer">
+                <div class="flip-card-inner">
+                  <!-- Front Plate -->
+                  <div class="flip-card-front shadow-sm border border-gray-300/10">
+                    <div class="w-12 h-12 rounded-full bg-[#FAF8F3]/10 flex items-center justify-center text-[#8EE3C2] mb-6">
+                      <!-- Eyeball / Transparency Icon -->
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><circle cx="12" cy="12" r="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div class="flex-grow flex flex-col justify-center items-center">
+                      <span class="font-serif text-5xl font-normal leading-none text-[#8EE3C2] mb-3">100%</span>
+                      <span class="text-sm font-bold uppercase tracking-wider text-white">Transparency</span>
+                    </div>
+                    <span class="text-[10px] font-bold tracking-wider uppercase text-white/50">HOVER TO FLIP</span>
+                  </div>
+                  <!-- Back Plate -->
+                  <div class="flip-card-back shadow-md">
+                    <span class="text-[10px] font-bold text-[#48C39E] uppercase tracking-wider block">OUR PROMISE</span>
+                    <h4 class="font-serif text-xl font-normal text-[#122A26]">Complete Clarity</h4>
+                    <p class="text-xs text-[#5C6667] leading-relaxed font-sans">
+                      We track every single dollar donated and provide audited quarterly impact reports, ensuring direct allocation.
+                    </p>
+                    <a href="404.html" class="inline-block px-6 py-2 border border-[#122A26]/30 text-[#122A26] font-sans font-bold text-[10px] tracking-wider uppercase rounded-full hover:bg-[#122A26] hover:text-[#FAF8F3] transition-all duration-300">Learn More
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 2 -->
+              <div class="flip-card cursor-pointer">
+                <div class="flip-card-inner">
+                  <!-- Front Plate -->
+                  <div class="flip-card-front shadow-sm border border-gray-300/10">
+                    <div class="w-12 h-12 rounded-full bg-[#FAF8F3]/10 flex items-center justify-center text-[#8EE3C2] mb-6">
+                      <!-- Tree/Sprout Icon -->
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M12 9a4 4 0 00-4-4M12 13a4 4 0 014-4M12 17a4 4 0 00-4 4"/></svg>
+                    </div>
+                    <div class="flex-grow flex flex-col justify-center items-center">
+                      <span class="font-serif text-5xl font-normal leading-none text-[#8EE3C2] mb-3">Local</span>
+                      <span class="text-sm font-bold uppercase tracking-wider text-white">Leadership</span>
+                    </div>
+                    <span class="text-[10px] font-bold tracking-wider uppercase text-white/50">HOVER TO FLIP</span>
+                  </div>
+                  <!-- Back Plate -->
+                  <div class="flip-card-back shadow-md">
+                    <span class="text-[10px] font-bold text-[#48C39E] uppercase tracking-wider block">OUR MODEL</span>
+                    <h4 class="font-serif text-xl font-normal text-[#122A26]">Community Ownership</h4>
+                    <p class="text-xs text-[#5C6667] leading-relaxed font-sans">
+                      Our initiatives are run by local committees, ensuring projects match true local priorities and are sustained long-term.
+                    </p>
+                    <a href="404.html" class="inline-block px-6 py-2 border border-[#122A26]/30 text-[#122A26] font-sans font-bold text-[10px] tracking-wider uppercase rounded-full hover:bg-[#122A26] hover:text-[#FAF8F3] transition-all duration-300">Learn More
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 3 -->
+              <div class="flip-card cursor-pointer">
+                <div class="flip-card-inner">
+                  <!-- Front Plate -->
+                  <div class="flip-card-front shadow-sm border border-gray-300/10">
+                    <div class="w-12 h-12 rounded-full bg-[#FAF8F3]/10 flex items-center justify-center text-[#8EE3C2] mb-6">
+                      <!-- Bolt / Flash Icon -->
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <div class="flex-grow flex flex-col justify-center items-center">
+                      <span class="font-serif text-5xl font-normal leading-none text-[#8EE3C2] mb-3">Direct</span>
+                      <span class="text-sm font-bold uppercase tracking-wider text-white">Deployments</span>
+                    </div>
+                    <span class="text-[10px] font-bold tracking-wider uppercase text-white/50">HOVER TO FLIP</span>
+                  </div>
+                  <!-- Back Plate -->
+                  <div class="flip-card-back shadow-md">
+                    <span class="text-[10px] font-bold text-[#48C39E] uppercase tracking-wider block">EFFICIENCY</span>
+                    <h4 class="font-serif text-xl font-normal text-[#122A26]">Minimal Overhead</h4>
+                    <p class="text-xs text-[#5C6667] leading-relaxed font-sans">
+                      We minimize administration expenses to deploy clean water, schools, and medical materials quickly into the field.
+                    </p>
+                    <a href="404.html" class="inline-block px-6 py-2 border border-[#122A26]/30 text-[#122A26] font-sans font-bold text-[10px] tracking-wider uppercase rounded-full hover:bg-[#122A26] hover:text-[#FAF8F3] transition-all duration-300">Learn More
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 4 -->
+              <div class="flip-card cursor-pointer">
+                <div class="flip-card-inner">
+                  <!-- Front Plate -->
+                  <div class="flip-card-front shadow-sm border border-gray-300/10">
+                    <div class="w-12 h-12 rounded-full bg-[#FAF8F3]/10 flex items-center justify-center text-[#8EE3C2] mb-6">
+                      <!-- Earth / Globe Icon -->
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18zm0 0a8.987 8.987 0 004.184-1.026M12 21c-4.97 0-9-4.03-9-9s4.03-9 9-9M12 3c1.7 0 3.29.56 4.58 1.5M12 3a8.987 8.987 0 014.184 1.026M12 3v18m0-18c-4.97 0-9 4.03-9 9s4.03 9 9 9"/></svg>
+                    </div>
+                    <div class="flex-grow flex flex-col justify-center items-center">
+                      <span class="font-serif text-5xl font-normal leading-none text-[#8EE3C2] mb-3">214</span>
+                      <span class="text-sm font-bold uppercase tracking-wider text-white">Local Partners</span>
+                    </div>
+                    <span class="text-[10px] font-bold tracking-wider uppercase text-white/50">HOVER TO FLIP</span>
+                  </div>
+                  <!-- Back Plate -->
+                  <div class="flip-card-back shadow-md">
+                    <span class="text-[10px] font-bold text-[#48C39E] uppercase tracking-wider block">SCALE</span>
+                    <h4 class="font-serif text-xl font-normal text-[#122A26]">Global Impact</h4>
+                    <p class="text-xs text-[#5C6667] leading-relaxed font-sans">
+                      Our network supports community infrastructure projects in 37 countries, feeding local insights to scale success.
+                    </p>
+                    <a href="404.html" class="inline-block px-6 py-2 border border-[#122A26]/30 text-[#122A26] font-sans font-bold text-[10px] tracking-wider uppercase rounded-full hover:bg-[#122A26] hover:text-[#FAF8F3] transition-all duration-300">Learn More
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── SECTION 5: "Also on our table" (Call to Action Banner) ── -->
+      <div class="section-frame-wrapper border-t border-[#122A26]/10" id="also-on-table-section">
+        <!-- Left Side Strip -->
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+
+        <!-- Main Content -->
+        <div class="section-frame-content flex flex-col bg-[#FAF8F3]">
+          <div class="w-full py-16 px-8 md:px-16 max-w-[1280px] mx-auto">
+            <div class="bg-[#D4EFE3] rounded-[32px] p-8 md:p-12 lg:p-16 flex flex-col md:flex-row md:items-center md:justify-between gap-8 border border-[#122A26]/5 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div class="max-w-xl text-left">
+                <h2 class="font-serif text-4xl md:text-5xl font-normal text-[#122A26] leading-tight mb-4" id="also-table-title">
+                  <span class="word-wrap"><span class="word-inner">Also</span></span>
+                  <span class="word-wrap"><span class="word-inner">on</span></span>
+                  <span class="word-wrap"><span class="word-inner">our</span></span>
+                  <span class="word-wrap"><span class="word-inner">table.</span></span>
+                </h2>
+                <p class="text-sm md:text-base text-[#122A26]/80 font-sans leading-relaxed" id="also-table-desc">
+                  Women-led co-ops, youth mentorship, and rapid emergency relief for climate-affected regions.
+                </p>
+              </div>
+              <div class="shrink-0 text-left" id="also-table-button">
+                <a href="causes.html" class="inline-block bg-[#122A26] text-[#FAF8F3] hover:bg-[#48C39E] hover:text-[#122A26] transition-all duration-300 px-8 py-4 rounded-full font-sans font-bold text-xs md:text-sm tracking-wider uppercase shadow-sm">
+                  Support all causes
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Footer Section -->
+    <footer class="site-footer" id="site-footer" aria-label="Site Footer">
+      <div class="section-frame-wrapper" style="border-top: none;">
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+        <div class="section-frame-content">
+          <div class="footer-top-accent" aria-hidden="true"></div>
+          <div class="footer-inner">
+            <div class="footer-grid">
+              <!-- Col 1: Brand + Socials -->
+              <div class="footer-col footer-col--brand" id="footer-col-1">
+                <a href="index.html" class="footer-logo-link" aria-label="Stackly home">
+                  <img src="assets/logo.webp" alt="STACKLY" class="footer-logo-img">
+                </a>
+                <p class="footer-brand-desc">
+                  A nonprofit lifting communities through education, clean water and healthcare — one hand, one life at a time.
+                </p>
+                <div class="footer-socials">
+                  <a href="404.html" class="footer-social-btn" aria-label="Facebook" id="social-fb">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                  </a>
+                  <a href="404.html" class="footer-social-btn" aria-label="Instagram" id="social-ig">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                  </a>
+                  <a href="404.html" class="footer-social-btn" aria-label="Twitter/X" id="social-tw">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  </a>
+                  <a href="404.html" class="footer-social-btn" aria-label="YouTube" id="social-yt">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12z"/></svg>
+                  </a>
+                </div>
+              </div>
+              <!-- Col 2: Explore -->
+              <div class="footer-col" id="footer-col-2">
+                <h4 class="footer-col-heading">EXPLORE</h4>
+                <ul class="footer-link-list">
+                  <li><a href="index.html" class="footer-link"><span>Home</span></a></li>
+                  <li><a href="about.html" class="footer-link"><span>About</span></a></li>
+                  <li><a href="causes.html" class="footer-link"><span>Causes</span></a></li>
+                  <li><a href="impact.html" class="footer-link"><span>Impact</span></a></li>
+                  <li><a href="donate.html" class="footer-link"><span>Donate</span></a></li>
+                  <li><a href="contact.html" class="footer-link"><span>Contact</span></a></li>
+                  <li><a href="404.html" class="footer-link footer-link--highlight"><span>Donate now &#x2197;</span></a></li>
+                </ul>
+              </div>
+              <!-- Col 3: Get Involved -->
+              <div class="footer-col" id="footer-col-3">
+                <h4 class="footer-col-heading">GET INVOLVED</h4>
+                <ul class="footer-link-list">
+                  <li><a href="404.html" class="footer-link"><span>Volunteer</span></a></li>
+                  <li><a href="404.html" class="footer-link"><span>Partner with us</span></a></li>
+                  <li><a href="404.html" class="footer-link"><span>Fundraise</span></a></li>
+                  <li><a href="404.html" class="footer-link"><span>Contact us</span></a></li>
+                </ul>
+              </div>
+              <!-- Col 4: Account -->
+              <div class="footer-col" id="footer-col-4">
+                <h4 class="footer-col-heading">ACCOUNT</h4>
+                <ul class="footer-link-list">
+                  <li><a href="login.html" class="footer-link"><span>Log in</span></a></li>
+                  <li><a href="login.html#signup" class="footer-link"><span>Sign up</span></a></li>
+                </ul>
+                <div class="footer-stat-chip">
+                  <span class="footer-stat-num">10K+</span>
+                  <span class="footer-stat-lbl">Meals served</span>
+                </div>
+              </div>
+              <!-- Col 5: Newsletter -->
+              <div class="footer-col footer-col--newsletter" id="footer-col-5">
+                <h4 class="footer-col-heading">NEWSLETTER</h4>
+                <p class="footer-newsletter-desc">Stories from the field, delivered once a month.</p>
+                <form class="footer-newsletter-form" onsubmit="return false;" aria-label="Newsletter signup">
+                  <div class="footer-newsletter-field">
+                    <svg class="footer-input-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <input type="email" id="footer-email-input" class="footer-email-input" placeholder="your@email.com" aria-label="Your email">
+                    <button type="submit" class="footer-join-btn" id="footer-join-btn" aria-label="Subscribe">Join &#x2192;</button>
+                  </div>
+                </form>
+                <p class="footer-privacy-note">No spam. Unsubscribe anytime.</p>
+              </div>
+            </div><!-- /footer-grid -->
+            <div class="footer-divider" aria-hidden="true"></div>
+            <div class="footer-bottom" id="footer-bottom">
+              <div class="footer-bottom-left">
+                <span class="footer-copyright">&#169; 2026 Stackly Foundation. All rights reserved.</span>
+              </div>
+              <div class="footer-bottom-center">
+                <a href="404.html" class="footer-bottom-link">Privacy</a>
+                <span class="footer-bottom-sep">&#183;</span>
+                <a href="404.html" class="footer-bottom-link">Terms</a>
+                <span class="footer-bottom-sep">&#183;</span>
+                <a href="404.html" class="footer-bottom-link">Cookies</a>
+              </div>
+              <div class="footer-bottom-right">
+                <span class="footer-ein">Registered nonprofit &#183; EIN 00-0000000</span>
+              </div>
+            </div>
+          </div><!-- /footer-inner -->
+        </div><!-- /section-frame-content -->
+      </div><!-- /section-frame-wrapper -->
+    </footer><!-- /site-footer -->
+
+  </div><!-- /master-frame -->
+
+  <!-- JS Libraries (self-hosted) -->
+  <script src="libs/gsap.min.js"></script>
+  <script src="libs/ScrollTrigger.min.js"></script>
+  <script src="libs/lenis.min.js"></script>
+  <script src="js/preloader.js?v=1.3.2"></script>
+
+  <!-- Custom Page Scripts & Animations -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check for preloader overlay
+      const preloader = document.getElementById('preloader');
+      const hasPreloader = preloader !== null;
+
+      if (hasPreloader) {
+        document.body.style.overflow = 'hidden';
+      }
+
+      // 1. Initialize Lenis Smooth Scrolling
+      let lenis;
+      if (typeof Lenis !== 'undefined') {
+        lenis = new Lenis({
+          duration: 1.4,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          direction: 'vertical',
+          gestureDirection: 'vertical',
+          smooth: true,
+          mouseMultiplier: 1.0,
+          smoothTouch: false,
+          touchMultiplier: 2,
+          infinite: false,
+        });
+
+        lenis.on('scroll', () => {
+          if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.update();
+          }
+        });
+
+        gsap.ticker.add((time) => {
+          lenis.raf(time * 1000);
+        });
+
+        gsap.ticker.lagSmoothing(0);
+
+        if (hasPreloader) {
+          lenis.stop();
+        }
+      }
+
+      if (typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+      }
+
+      // 2. Header spotlight, mobile menu toggle, sticky header, newsletter, touch support
+      initNavSpotlight();
+      initStickyHeader();
+      initMobileMenu();
+      initFooterNewsletter();
+      initTouchGrayscale();
+
+      // Wrap animations in a gsap.context() for scoping/stability
+      const ctx = gsap.context(() => {
+        // 3. GSAP Causes Page Hero Entrance Animations
+        const tl = gsap.timeline({
+          paused: hasPreloader,
+          defaults: { ease: 'power4.out', duration: 1.2 }
+        });
+
+        // Run preloader if present
+        if (hasPreloader) {
+          runPreloader(preloader, tl, lenis);
+        }
+
+        // Header fades in first
+        tl.from('header.site-header', { y: -30, opacity: 0, duration: 1.0, ease: 'power3.out' });
+
+        // Heading 3D word reveal
+        tl.from('#causes-hero-title .word-inner', {
+          rotationX: -45,
+          y: 50,
+          opacity: 0,
+          stagger: 0.08,
+          duration: 1.2,
+          ease: 'power3.out'
+        }, '-=0.6');
+
+        // Paragraph and Overline fade in slightly after
+        tl.to('#causes-hero-overline', {
+          opacity: 1,
+          y: 0,
+          duration: 1.0,
+          ease: 'power3.out'
+        }, '-=0.9');
+
+        tl.to('#causes-hero-desc', {
+          opacity: 1,
+          y: 0,
+          duration: 1.0,
+          ease: 'power3.out'
+        }, '-=0.9');
+
+        tl.to('#causes-hero-stats-row', {
+          opacity: 1,
+          y: 0,
+          duration: 1.0,
+          ease: 'power3.out'
+        }, '-=0.9');
+
+        // Image stack reveals
+        tl.fromTo('#causes-card-main', {
+          opacity: 0,
+          scale: 0.8,
+          rotateY: 25,
+          y: 100
+        }, {
+          opacity: 1,
+          scale: 1,
+          rotateY: 0,
+          y: 0,
+          duration: 1.5,
+          ease: 'power3.out'
+        }, '-=1.2');
+
+        tl.fromTo('#causes-card-secondary', {
+          opacity: 0,
+          scale: 0.8,
+          x: -50,
+          y: -50
+        }, {
+          opacity: 1,
+          scale: 1,
+          x: 0,
+          y: 0,
+          duration: 1.2,
+          ease: 'back.out(1.2)'
+        }, '-=1.0');
+
+        tl.fromTo('#causes-card-tertiary', {
+          opacity: 0,
+          scale: 0.8,
+          x: 50,
+          y: 50
+        }, {
+          opacity: 1,
+          scale: 1,
+          x: 0,
+          y: 0,
+          duration: 1.2,
+          ease: 'back.out(1.2)'
+        }, '-=1.0');
+
+        tl.fromTo('#causes-card-glass', {
+          opacity: 0,
+          scale: 0.7,
+          y: 20
+        }, {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 1.0,
+          ease: 'back.out(1.5)'
+        }, '-=0.8');
+
+        // 3a. Start Continuous Idle Floating Animations
+        gsap.to('#causes-card-secondary', {
+          y: -12,
+          rotation: -9,
+          duration: 4.0,
+          yoyo: true,
+          repeat: -1,
+          ease: 'sine.inOut'
+        });
+
+        gsap.to('#causes-card-tertiary', {
+          y: 8,
+          x: 4,
+          rotation: 7,
+          duration: 4.8,
+          yoyo: true,
+          repeat: -1,
+          ease: 'sine.inOut'
+        });
+
+        gsap.to('#causes-card-glass', {
+          y: -6,
+          duration: 3.5,
+          yoyo: true,
+          repeat: -1,
+          ease: 'sine.inOut'
+        });
+
+        // 3b. Interactive 3D mouse tilt parallax on right visual stack
+        const visualContainer = document.querySelector('.causes-hero-media');
+        const mainCard = document.querySelector('#causes-card-main');
+        const secCard = document.querySelector('#causes-card-secondary');
+        const tertCard = document.querySelector('#causes-card-tertiary');
+        const glassCard = document.querySelector('#causes-card-glass');
+        const backdrop = document.querySelector('#causes-hero-backdrop');
+
+        if (visualContainer && window.innerWidth >= 1024) {
+          visualContainer.addEventListener('mousemove', (e) => {
+            const rect = visualContainer.getBoundingClientRect();
+            const normX = (e.clientX - rect.left) / rect.width - 0.5;
+            const normY = (e.clientY - rect.top) / rect.height - 0.5;
+
+            // 3D rotation angles
+            const rotX = -normY * 12;
+            const rotY = normX * 14;
+
+            gsap.to(mainCard, { rotateX: rotX, rotateY: rotY, x: normX * 10, y: normY * 10, duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
+            gsap.to(secCard, { rotateX: rotX * 0.8, rotateY: rotY * 0.8, x: normX * 25, y: normY * 25, duration: 0.4, ease: 'power2.out', overwrite: 'auto' });
+            gsap.to(tertCard, { rotateX: rotX * 0.9, rotateY: rotY * 0.9, x: normX * 35, y: normY * 35, duration: 0.45, ease: 'power2.out', overwrite: 'auto' });
+            gsap.to(glassCard, { rotateX: rotX * 0.7, rotateY: rotY * 0.7, x: normX * 45, y: normY * 45, duration: 0.35, ease: 'power2.out', overwrite: 'auto' });
+            if (backdrop) {
+              gsap.to(backdrop, { x: normX * -15, y: normY * -15, duration: 0.6, ease: 'power2.out', overwrite: 'auto' });
+            }
+          });
+
+          visualContainer.addEventListener('mouseleave', () => {
+            gsap.to([mainCard, secCard, tertCard, glassCard], { rotateX: 0, rotateY: 0, x: 0, y: 0, duration: 0.8, ease: 'power3.out', overwrite: 'auto' });
+            if (backdrop) {
+              gsap.to(backdrop, { x: 0, y: 0, duration: 0.8, ease: 'power3.out', overwrite: 'auto' });
+            }
+          });
+        }
+
+        // 4. GSAP Scroll Parallax on Left Image (First Cause)
+        gsap.fromTo('#causes-first-img', {
+          yPercent: -10
+        }, {
+          yPercent: 10,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#causes-split-first',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+
+        // 5. GSAP Cascade Entrance for Split Layout Content (First Cause)
+        const splitTL = gsap.timeline({
+          scrollTrigger: {
+            trigger: '#causes-split-first',
+            start: 'top 75%',
+            toggleActions: 'play none none none'
+          }
+        });
+
+        splitTL
+          .fromTo('#causes-split-first .cause-image-container', {
+            opacity: 0,
+            x: -30
+          }, {
+            opacity: 1,
+            x: 0,
+            duration: 1.2,
+            ease: 'power3.out'
+          })
+          .fromTo('#causes-first-tag', {
+            opacity: 0,
+            y: 20
+          }, {
+            opacity: 1,
+            y: 0,
+            duration: 1.0,
+            ease: 'power3.out'
+          }, '-=0.9')
+          .from('#causes-first-title .word-inner', {
+            rotationX: -40,
+            y: 35,
+            opacity: 0,
+            stagger: 0.08,
+            duration: 1.2,
+            ease: 'power3.out'
+          }, '-=0.8')
+          .fromTo('#causes-first-desc', {
+            opacity: 0,
+            y: 20
+          }, {
+            opacity: 1,
+            y: 0,
+            duration: 1.0,
+            ease: 'power3.out'
+          }, '-=0.8')
+          .fromTo('#causes-first-stats', {
+            opacity: 0,
+            y: 20
+          }, {
+            opacity: 1,
+            y: 0,
+            duration: 1.0,
+            ease: 'power3.out'
+          }, '-=0.8')
+          .fromTo('#causes-first-buttons', {
+            opacity: 0,
+            y: 20
+          }, {
+            opacity: 1,
+            y: 0,
+            duration: 1.0,
+            ease: 'power3.out'
+          }, '-=0.8');
+
+        // 4b. GSAP Scroll Parallax on Right Image (Second Cause)
+        gsap.fromTo('#causes-second-img', {
+          yPercent: -10
+        }, {
+          yPercent: 10,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#causes-split-second',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+
+        // 4c. GSAP Scroll Parallax on Left Image (Third Cause)
+        gsap.fromTo('#causes-third-img', {
+          yPercent: -10
+        }, {
+          yPercent: 10,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#causes-split-third',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+
+        // 5b. GSAP Cascade Entrance for Split Layout Content (Second Cause)
+        const secondTL = gsap.timeline({
+          scrollTrigger: {
+            trigger: '#causes-split-second',
+            start: 'top 75%',
+            toggleActions: 'play none none none'
+          }
+        });
+
+        secondTL
+          .fromTo('#causes-split-second .cause-image-container', {
+            opacity: 0,
+            x: 30
+          }, {
+            opacity: 1,
+            x: 0,
+            duration: 1.2,
+            ease: 'power3.out'
+          })
+          .fromTo('#causes-second-tag', {
+            opacity: 0,
+            y: 20
+          }, {
+            opacity: 1,
+            y: 0,
+            duration: 1.0,
+            ease: 'power3.out'
+          }, '-=0.9')
+          .from('#causes-second-title .word-inner', {
+            rotationX: -40,
+            y: 35,
+            opacity: 0,
+            stagger: 0.08,
+            duration: 1.2,
+            ease: 'power3.out'
+          }, '-=0.8')
+          .fromTo('#causes-second-desc', {
+            opacity: 0,
+            y: 20
+          }, {
+            opacity: 1,
+            y: 0,
+            duration: 1.0,
+            ease: 'power3.out'
+          }, '-=0.8')
+          .fromTo('#causes-second-stats', {
+            opacity: 0,
+            y: 20
+          }, {
+            opacity: 1,
+            y: 0,
+            duration: 1.0,
+            ease: 'power3.out'
+          }, '-=0.8')
+          .fromTo('#causes-second-buttons', {
+            opacity: 0,
+            y: 20
+          }, {
+            opacity: 1,
+            y: 0,
+            duration: 1.0,
+            ease: 'power3.out'
+          }, '-=0.8');
+
+        // 5c. GSAP Cascade Entrance for Split Layout Content (Third Cause)
+        const thirdTL = gsap.timeline({
+          scrollTrigger: {
+            trigger: '#causes-split-third',
+            start: 'top 75%',
+            toggleActions: 'play none none none'
+          }
+        });
+
+        thirdTL
+          .fromTo('#causes-split-third .cause-image-container', {
+            opacity: 0,
+            x: -30
+          }, {
+            opacity: 1,
+            x: 0,
+            duration: 1.2,
+            ease: 'power3.out'
+          })
+          .fromTo('#causes-third-tag', {
+            opacity: 0,
+            y: 20
+          }, {
+            opacity: 1,
+            y: 0,
+            duration: 1.0,
+            ease: 'power3.out'
+          }, '-=0.9')
+          .from('#causes-third-title .word-inner', {
+            rotationX: -40,
+            y: 35,
+            opacity: 0,
+            stagger: 0.08,
+            duration: 1.2,
+            ease: 'power3.out'
+          }, '-=0.8')
+          .fromTo('#causes-third-desc', {
+            opacity: 0,
+            y: 20
+          }, {
+            opacity: 1,
+            y: 0,
+            duration: 1.0,
+            ease: 'power3.out'
+          }, '-=0.8')
+          .fromTo('#causes-third-stats', {
+            opacity: 0,
+            y: 20
+          }, {
+            opacity: 1,
+            y: 0,
+            duration: 1.0,
+            ease: 'power3.out'
+          }, '-=0.8')
+          .fromTo('#causes-third-buttons', {
+            opacity: 0,
+            y: 20
+          }, {
+            opacity: 1,
+            y: 0,
+            duration: 1.0,
+            ease: 'power3.out'
+          }, '-=0.8');
+
+        // 6. "Our Impact Areas" Bento Grid Interactions & Animations
+        // 6a. Bento Spotlight Hover Effect
+        const spotlightCards = document.querySelectorAll('.spotlight-card');
+        spotlightCards.forEach(card => {
+          const overlay = card.querySelector('.spotlight-overlay');
+          if (!overlay) return;
+          card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+            overlay.style.opacity = '1';
+          });
+          card.addEventListener('mouseleave', () => {
+            overlay.style.opacity = '0';
+          });
+        });
+
+        // 6b. Large Card 3D Parallax Badge Tilt
+        const bentoLarge = document.querySelector('#bento-card-large');
+        const bentoBadge = document.querySelector('.bento-floating-card');
+        if (bentoLarge && bentoBadge) {
+          bentoLarge.addEventListener('mousemove', (e) => {
+            const rect = bentoLarge.getBoundingClientRect();
+            const normX = (e.clientX - rect.left) / rect.width - 0.5;
+            const normY = (e.clientY - rect.top) / rect.height - 0.5;
+            gsap.to(bentoBadge, {
+              x: normX * 30,
+              y: normY * 30,
+              rotateX: -normY * 15,
+              rotateY: normX * 15,
+              duration: 0.3,
+              ease: 'power2.out',
+              overwrite: 'auto'
+            });
+          });
+          bentoLarge.addEventListener('mouseleave', () => {
+            gsap.to(bentoBadge, {
+              x: 0,
+              y: 0,
+              rotateX: 0,
+              rotateY: 0,
+              duration: 0.6,
+              ease: 'power3.out',
+              overwrite: 'auto'
+            });
+          });
+        }
+
+        // 6c. Bento Grid Entrance Animation
+        const bentoTL = gsap.timeline({
+          scrollTrigger: {
+            trigger: '#impact-areas-section',
+            start: 'top 75%',
+            toggleActions: 'play none none none'
+          }
+        });
+        bentoTL.from('#bento-title .word-inner', {
+          rotationX: -45,
+          y: 40,
+          opacity: 0,
+          stagger: 0.08,
+          duration: 1.2,
+          ease: 'power3.out'
+        })
+        .from('#bento-grid-container > div', {
+          opacity: 0,
+          y: 40,
+          stagger: 0.12,
+          duration: 1.0,
+          ease: 'power3.out'
+        }, '-=0.8');
+
+        // 7. "The Journey of a Donation" Pinned Horizontal Scroll (Desktop-only)
+        const track = document.querySelector('#journey-track-row');
+        const container = document.querySelector('#journey-scroll-section');
+        const sidebar = document.querySelector('.journey-sidebar');
+        if (track && container) {
+          let mm = gsap.matchMedia();
+          mm.add("(min-width: 768px)", () => {
+            const getTranslateVal = () => {
+              const scrollWidth = track.scrollWidth;
+              const wrapper = container.querySelector('.journey-track-wrapper');
+              const wrapperWidth = wrapper ? wrapper.offsetWidth : (window.innerWidth - (sidebar ? sidebar.offsetWidth : 380));
+              return scrollWidth - wrapperWidth + 128;
+            };
+            gsap.to(track, {
+              x: () => -getTranslateVal(),
+              ease: 'none',
+              scrollTrigger: {
+                trigger: container,
+                pin: true,
+                scrub: true,
+                start: 'top top',
+                end: () => `+=${getTranslateVal()}`,
+                invalidateOnRefresh: true
+              }
+            });
+          });
+        }
+
+        // 7b. Journey Section Entrance Animation (Fade & Slide)
+        const journeyEntranceTL = gsap.timeline({
+          scrollTrigger: {
+            trigger: '#journey-scroll-section',
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+          }
+        });
+        journeyEntranceTL.from('.journey-sidebar', {
+          opacity: 0,
+          x: -30,
+          duration: 1.0,
+          ease: 'power3.out'
+        })
+        .from('.journey-card', {
+          opacity: 0,
+          y: 30,
+          stagger: 0.12,
+          duration: 1.0,
+          ease: 'power3.out'
+        }, '-=0.6');
+
+        // 8. "Meet the Beneficiaries" Expandable Cards Stagger Entrance & Touch Support
+        const beneficiaryTL = gsap.timeline({
+          scrollTrigger: {
+            trigger: '#beneficiaries-section',
+            start: 'top 75%',
+            toggleActions: 'play none none none'
+          }
+        });
+        beneficiaryTL.from('#beneficiary-title .word-inner', {
+          rotationX: -45,
+          y: 40,
+          opacity: 0,
+          stagger: 0.08,
+          duration: 1.2,
+          ease: 'power3.out'
+        })
+        .from('.beneficiary-card', {
+          y: 50,
+          opacity: 0,
+          stagger: 0.15,
+          duration: 1.0,
+          ease: 'power3.out'
+        }, '-=0.8');
+
+        // Touch toggling for expandable beneficiary cards on mobile
+        const beneficiaryCards = document.querySelectorAll('.beneficiary-card');
+        beneficiaryCards.forEach(card => {
+          card.addEventListener('click', (e) => {
+            if (window.innerWidth < 1024) {
+              // Expand this one, collapse others
+              beneficiaryCards.forEach(c => {
+                if (c !== card) c.classList.remove('touched');
+              });
+              card.classList.toggle('touched');
+            }
+          });
+        });
+
+        // 9. "Join the Movement" Infinite Marquee & 3D Flip Cards
+        // 9a. Loop Marquee Track horizontally with GSAP
+        const marqueeTrack = document.querySelector('.join-marquee-track');
+        if (marqueeTrack) {
+          const parent = marqueeTrack.parentElement;
+          const clone = marqueeTrack.cloneNode(true);
+          parent.appendChild(clone);
+          
+          gsap.to([marqueeTrack, clone], {
+            xPercent: -100,
+            ease: 'none',
+            duration: 16,
+            repeat: -1
+          });
+        }
+
+        // 9b. Flip Cards Stagger Entrance (3D Y-axis Rotate)
+        const flipCardsTL = gsap.timeline({
+          scrollTrigger: {
+            trigger: '#join-movement-section',
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+          }
+        });
+        flipCardsTL.from('.flip-card', {
+          rotationY: -90,
+          opacity: 0,
+          stagger: 0.12,
+          duration: 1.2,
+          ease: 'power3.out'
+        });
+
+        // 9c. Mobile click/tap flip toggles
+        const flipCards = document.querySelectorAll('.flip-card');
+        flipCards.forEach(card => {
+          card.addEventListener('click', () => {
+            if (window.innerWidth < 1024) {
+              card.classList.toggle('flipped');
+            }
+          });
+        });
+
+        // 10. "Also on our table" Section Entrance Animation
+        const alsoTableTL = gsap.timeline({
+          scrollTrigger: {
+            trigger: '#also-on-table-section',
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          }
+        });
+        alsoTableTL.from('#also-table-title .word-inner', {
+          rotationX: -45,
+          y: 40,
+          opacity: 0,
+          stagger: 0.08,
+          duration: 1.2,
+          ease: 'power3.out'
+        })
+        .from('#also-table-desc', {
+          opacity: 0,
+          y: 20,
+          duration: 1.0,
+          ease: 'power3.out'
+        }, '-=0.8')
+        .from('#also-table-button', {
+          opacity: 0,
+          scale: 0.9,
+          y: 20,
+          duration: 1.0,
+          ease: 'back.out(1.5)'
+        }, '-=0.8');
+      });
+    });
+
+    /* ── Header Nav Spotlight Effect ── */
+    function initNavSpotlight() {
+      const navMenu  = document.querySelector('.nav-menu');
+      const navLinks = document.querySelectorAll('.nav-link');
+      const spotlight = document.querySelector('.nav-spotlight');
+      if (!navMenu || !spotlight) return;
+
+      navLinks.forEach(link => {
+        link.addEventListener('mouseenter', e => {
+          const linkRect = e.target.getBoundingClientRect();
+          const menuRect = navMenu.getBoundingClientRect();
+          spotlight.style.width   = `${linkRect.width}px`;
+          spotlight.style.left    = `${linkRect.left - menuRect.left}px`;
+          spotlight.style.opacity = '1';
+        });
+      });
+      navMenu.addEventListener('mouseleave', () => { spotlight.style.opacity = '0'; });
+    }
+
+    /* ── Sticky Header Effect ── */
+    function initStickyHeader() {
+      const header = document.querySelector('header.site-header');
+      if (!header) return;
+      const handle = () => header.classList.toggle('scrolled', window.scrollY > 40);
+      window.addEventListener('scroll', handle);
+      handle();
+    }
+
+    /* ── Mobile Menu Toggle ── */
+    function initMobileMenu() {
+      const toggleBtn = document.getElementById('mobile-nav-toggle');
+      const navWrapper = document.querySelector('.nav-menu-wrapper');
+      
+      if (!toggleBtn || !navWrapper) return;
+      
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isActive = document.body.classList.contains('mobile-menu-active');
+        if (isActive) {
+          document.body.classList.remove('mobile-menu-active');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        } else {
+          document.body.classList.add('mobile-menu-active');
+          toggleBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
+
+      const navLinks = navWrapper.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          document.body.classList.remove('mobile-menu-active');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        const isActive = document.body.classList.contains('mobile-menu-active');
+        if (isActive && !navWrapper.contains(e.target) && !toggleBtn.contains(e.target)) {
+          document.body.classList.remove('mobile-menu-active');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
+    /* ── Footer Newsletter ── */
+    function initFooterNewsletter() {
+      const footer = document.getElementById('site-footer');
+      if (!footer) return;
+      const form  = footer.querySelector('.footer-newsletter-form');
+      const input = footer.querySelector('.footer-email-input');
+      const btn   = footer.querySelector('.footer-join-btn');
+
+      if (form && input && btn) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!input.value.trim() || !emailRegex.test(input.value)) {
+            input.style.borderColor = '#f87171';
+            const origPh = input.placeholder;
+            input.placeholder = 'Enter a valid email first';
+            input.addEventListener('input', () => {
+              input.style.borderColor = '';
+              input.placeholder = origPh;
+            }, { once: true });
+            return;
+          }
+          btn.textContent = '✓';
+          btn.style.color = '#8EE3C2';
+          btn.style.pointerEvents = 'none';
+          if (typeof gsap !== 'undefined') {
+            gsap.fromTo(btn, { scale: 0.8 }, { scale: 1, duration: 0.4, ease: 'back.out(1.5)' });
+          }
+          setTimeout(() => { window.location.href = '404.html'; }, 800);
+        });
+      }
+    }
+
+    /* ── Touch Support for Grayscale Color Reveal ── */
+    function initTouchGrayscale() {
+      const touchContainers = document.querySelectorAll('.cause-image-container, #causes-card-main');
+      touchContainers.forEach(container => {
+        container.addEventListener('click', (e) => {
+          // Toggle color state on touch/click
+          const isTouched = container.classList.contains('touched');
+          touchContainers.forEach(c => c.classList.remove('touched'));
+          
+          if (!isTouched) {
+            container.classList.add('touched');
+          }
+        });
+      });
+
+      // Clear color if tapping outside
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.cause-image-container') && !e.target.closest('#causes-card-main')) {
+          touchContainers.forEach(c => c.classList.remove('touched'));
+        }
+      });
+    }
+  </script>
+</body>
+</html>

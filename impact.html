@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STACKLY — Impact Dashboard</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="A live look at donations, programs and the communities we serve — updated in near real time.">
+  <meta name="keywords" content="nonprofit, charity, impact, dashboard, donations, transparent data">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="libs/tailwind.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'cream-bg': '#FAF8F3',
+            'primary-dark': '#122A26',
+            'primary-dark-hover': '#1b3d37',
+            'mint-green': '#8EE3C2',
+            'mint-green-dark': '#48C39E',
+            'text-muted': '#5C6667',
+          },
+          fontFamily: {
+            serif: ['Instrument Serif', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Global Stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=1.3.2">
+
+  <!-- Inline Stylesheet overrides for Page Frame and Animations -->
+  <style>
+    body {
+      background-color: #FAF8F3;
+      color: #122A26;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 3D Word wrapper reveal */
+    .word-wrap {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: bottom;
+      padding-bottom: 0.05em;
+      margin-right: 0.22em;
+    }
+    
+    .word-inner {
+      display: inline-block;
+      transform-origin: 50% 100%;
+    }
+
+  </style>
+  <script src="libs/apexcharts.min.js"></script>
+</head>
+<body>
+
+  <!-- Premium Cinematic Preloader -->
+  <div id="preloader" aria-label="Loading STACKLY" aria-live="polite">
+
+    <!-- 3-Panel curtains for cinematic wipe exit -->
+    <div class="preloader-curtain curtain-left"></div>
+    <div class="preloader-curtain curtain-center"></div>
+    <div class="preloader-curtain curtain-right"></div>
+
+    <!-- Animated background particle dots -->
+    <div class="preloader-particles" aria-hidden="true">
+      <span class="pl-dot"></span><span class="pl-dot"></span><span class="pl-dot"></span>
+      <span class="pl-dot"></span><span class="pl-dot"></span><span class="pl-dot"></span>
+      <span class="pl-dot"></span><span class="pl-dot"></span><span class="pl-dot"></span>
+    </div>
+
+    <!-- Floating NGO image collage -->
+    <div class="preloader-collage" aria-hidden="true">
+      <div class="pl-img-card pl-img-1">
+        <img src="assets/home/f7d62a2697b9a7eb753412e50b2d50a08d241d41.webp" alt="" loading="eager">
+        <div class="pl-img-label">Education</div>
+      </div>
+      <div class="pl-img-card pl-img-2">
+        <img src="assets/home/water.webp" alt="" loading="eager">
+        <div class="pl-img-label">Clean Water</div>
+      </div>
+      <div class="pl-img-card pl-img-3">
+        <img src="assets/home/clinic.webp" alt="" loading="eager">
+        <div class="pl-img-label">Healthcare</div>
+      </div>
+      <div class="pl-ring"></div>
+    </div>
+
+    <!-- Central Brand + Progress content -->
+    <div class="preloader-content">
+      <div class="preloader-logo-wrapper">
+        <img src="assets/logo.webp" alt="STACKLY" class="preloader-logo-img">
+      </div>
+      <div class="preloader-brand-name" aria-hidden="true">
+        <span class="pl-letter">S</span><span class="pl-letter">T</span><span class="pl-letter">A</span><span class="pl-letter">C</span><span class="pl-letter">K</span><span class="pl-letter">L</span><span class="pl-letter">Y</span>
+      </div>
+      <div class="preloader-tagline">
+        <span class="pl-tagline-text">Small hands. Big hope.</span>
+      </div>
+      <div class="preloader-progress-container">
+        <div class="preloader-progress-fill">
+          <span class="pl-progress-glow"></span>
+        </div>
+      </div>
+      <div class="preloader-status-wrapper">
+        <div class="preloader-status-text">Sowing seeds of hope...</div>
+        <div class="preloader-counter">00<span class="pl-percent">%</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Signature Master Framed Container -->
+
+  <div class="master-frame min-h-screen flex flex-col justify-between">
+
+    <!-- Header Section -->
+    <header class="site-header">
+      <div class="header-container">
+        <!-- Logo -->
+        <a href="index.html" class="logo-wrapper" id="header-logo-link">
+          <img src="assets/logo.webp" alt="STACKLY logo">
+        </a>
+        
+        <!-- Navigation Menu -->
+        <nav class="nav-menu-wrapper" aria-label="Main Navigation">
+          <ul class="nav-menu">
+            <!-- Spotlight background element -->
+            <div class="nav-spotlight"></div>
+            <li class="nav-item"><a href="index.html" class="nav-link" id="nav-home">Home</a></li>
+            <li class="nav-item"><a href="about.html" class="nav-link" id="nav-about">About</a></li>
+            <li class="nav-item"><a href="causes.html" class="nav-link" id="nav-causes">Causes</a></li>
+            <li class="nav-item"><a href="impact.html" class="nav-link active" id="nav-impact">Impact</a></li>
+            <li class="nav-item"><a href="donate.html" class="nav-link" id="nav-donate">Donate</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link" id="nav-contact">Contact</a></li>
+          </ul>
+          <!-- Mobile actions inside the drawer -->
+          <div class="mobile-actions">
+            <a href="login.html" class="login-btn" id="btn-login-mobile">Log in</a>
+            <a href="404.html" class="donate-btn-header" id="btn-donate-header-mobile">Donate now</a>
+          </div>
+        </nav>
+
+        <!-- Hamburger Menu Button -->
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+        
+        <!-- Actions -->
+        <div class="header-actions">
+          <a href="login.html" class="login-btn" id="btn-login">Log in</a>
+          <a href="404.html" class="donate-btn-header" id="btn-donate-header">Donate now</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Body -->
+    <main class="flex-grow">
+
+      <!-- ── SECTION 1: Enhanced split Hero Section ── -->
+      <section class="section-frame-wrapper border-b border-[#122A26]/10 relative" id="impact-hero-section">
+        <!-- Left Side Strip -->
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+
+        <!-- Main Content -->
+        <div class="section-frame-content flex flex-col bg-[#FAF8F3]">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 py-24 px-8 md:px-16 max-w-[1280px] mx-auto w-full items-center">
+            
+            <!-- Left Column (Content & CTA) -->
+            <div class="flex flex-col text-left">
+              <span class="text-xs font-bold tracking-[0.2em] text-[#5C6667] uppercase mb-4 block">— ABOUT · IMPACT DASHBOARD</span>
+              
+              <h1 class="font-serif text-5xl md:text-6xl font-normal leading-[1.1] text-[#122A26] mb-6" id="impact-hero-title">
+                <span class="word-wrap"><span class="word-inner">Every</span></span>
+                <span class="word-wrap"><span class="word-inner">gift,</span></span>
+                <span class="word-wrap"><span class="word-inner text-[#48C39E] italic">accounted</span></span>
+                <span class="word-wrap"><span class="word-inner">for.</span></span>
+              </h1>
+              
+              <p class="text-base md:text-lg text-[#5C6667] leading-relaxed font-sans mb-6 max-w-lg">
+                A live look at donations, programs and the communities we serve — updated in near real time.
+              </p>
+              
+              <!-- Live Status Indicator Pill -->
+              <div id="impact-live-pill" class="flex items-center gap-2.5 bg-[#D4EFE3] border border-[#48C39E]/20 text-[#122A26] rounded-full px-4.5 py-2 w-fit mb-8 shadow-sm">
+                <span class="relative flex h-2.5 w-2.5">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                </span>
+                <span class="font-sans font-bold text-[10px] tracking-wider uppercase">Live Network Data</span>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="flex flex-wrap gap-4 items-center" id="impact-hero-buttons">
+                <a href="404.html" class="inline-flex bg-[#122A26] text-[#FAF8F3] hover:bg-[#48C39E] hover:text-[#122A26] transition-colors duration-300 px-8 py-4 rounded-full font-sans font-bold text-xs md:text-sm tracking-wider uppercase shadow-sm">Donate ↗
+                </a>
+                <a href="404.html" class="inline-flex border border-[#122A26]/30 text-[#122A26] hover:bg-[#122A26] hover:text-[#FAF8F3] transition-colors duration-300 px-8 py-4 rounded-full font-sans font-bold text-xs md:text-sm tracking-wider uppercase">
+                  View causes
+                </a>
+              </div>
+            </div>
+            
+            <!-- Right Column (Animated Dashboard Graphs) -->
+            <div class="relative w-full h-[400px] sm:h-[480px] lg:h-[500px] flex items-center justify-center" id="impact-hero-collage">
+              <!-- Backdrop decorative glow circle -->
+              <div class="absolute w-[280px] sm:w-[360px] h-[280px] sm:h-[360px] rounded-full bg-[#8EE3C2]/15 blur-3xl z-0"></div>
+
+              <!-- Card A: Allocation Donut Chart -->
+              <div class="absolute left-[2%] sm:left-[5%] top-[15%] w-[220px] sm:w-[240px] bg-white rounded-2xl border border-gray-200/50 shadow-lg p-5 z-20 rotate-[-4deg] collage-img" data-depth="0.12">
+                <h4 class="text-[10px] font-bold text-[#5C6667] uppercase tracking-wider mb-3">Donation Split</h4>
+                <div class="flex items-center gap-4">
+                  <!-- Donut SVG -->
+                  <svg class="w-16 h-16 sm:w-20 sm:h-20 transform -rotate-90 overflow-visible" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="30" fill="none" stroke="#f1f0ea" stroke-width="12" />
+                    <!-- Segment 1: Education (45%) -> Offset: 0, Target stroke-dasharray: 84.8 188.5 -->
+                    <circle class="donut-segment-1" cx="50" cy="50" r="30" fill="none" stroke="#48C39E" stroke-width="12" stroke-dasharray="0 188.5" stroke-dashoffset="0" />
+                    <!-- Segment 2: Clean Water (35%) -> Offset: -84.8, Target stroke-dasharray: 66.0 188.5 -->
+                    <circle class="donut-segment-2" cx="50" cy="50" r="30" fill="none" stroke="#8EE3C2" stroke-width="12" stroke-dasharray="0 188.5" stroke-dashoffset="-84.8" />
+                    <!-- Segment 3: Health (20%) -> Offset: -150.8, Target stroke-dasharray: 37.7 188.5 -->
+                    <circle class="donut-segment-3" cx="50" cy="50" r="30" fill="none" stroke="#122A26" stroke-width="12" stroke-dasharray="0 188.5" stroke-dashoffset="-150.8" />
+                  </svg>
+                  <!-- Legends -->
+                  <div class="flex flex-col gap-1 text-left">
+                    <div class="flex items-center gap-1.5">
+                      <span class="w-2 h-2 rounded-full bg-[#48C39E]"></span>
+                      <span class="text-[9px] font-medium text-[#122A26]">45% Educ.</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                      <span class="w-2 h-2 rounded-full bg-[#8EE3C2]"></span>
+                      <span class="text-[9px] font-medium text-[#122A26]">35% Water</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                      <span class="w-2 h-2 rounded-full bg-[#122A26]"></span>
+                      <span class="text-[9px] font-medium text-[#122A26]">20% Med</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card B: Monthly Goal Radial Progress -->
+              <div class="absolute right-[2%] sm:right-[5%] top-[8%] w-[160px] sm:w-[180px] bg-white rounded-2xl border border-gray-200/50 shadow-md p-4 z-10 rotate-[6deg] collage-img" data-depth="0.22">
+                <h4 class="text-[10px] font-bold text-[#5C6667] uppercase tracking-wider mb-2">Goal progress</h4>
+                <div class="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto flex items-center justify-center">
+                  <!-- Circular Ring SVG -->
+                  <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="38" fill="none" stroke="#f1f0ea" stroke-width="8" />
+                    <!-- Progress (78%) -> Circumference: 238.7, Offset: 238.7 * (1 - 0.78) = 52.5 -->
+                    <circle class="progress-ring-circle" cx="50" cy="50" r="38" fill="none" stroke="#48C39E" stroke-width="8" stroke-dasharray="238.7" stroke-dashoffset="238.7" stroke-linecap="round" />
+                  </svg>
+                  <!-- Text in center -->
+                  <div class="absolute flex flex-col items-center">
+                    <span class="font-serif text-xl sm:text-2xl font-normal text-[#122A26] leading-none">78%</span>
+                    <span class="text-[6px] sm:text-[7px] text-[#5C6667] uppercase tracking-wider mt-0.5">reached</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card C: Live Activity Wave Sparkline -->
+              <div class="absolute left-[15%] sm:left-[20%] bottom-[8%] w-[240px] sm:w-[260px] bg-white rounded-2xl border border-gray-200/50 shadow-xl p-4 z-25 rotate-[-2deg] collage-img" data-depth="0.18">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="text-[10px] font-bold text-[#5C6667] uppercase tracking-wider">Live Activity</h4>
+                  <div class="flex items-center gap-1 bg-[#D4EFE3] px-2 py-0.5 rounded-full">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 pulse-dot"></span>
+                    <span class="text-[7px] font-bold text-[#122A26] uppercase">Active</span>
+                  </div>
+                </div>
+                <!-- Sparkline SVG -->
+                <div class="w-full h-12 relative overflow-hidden mb-2">
+                  <svg class="w-full h-full" viewBox="0 0 240 50">
+                    <defs>
+                      <linearGradient id="spark-grad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#48C39E" stop-opacity="0.3" />
+                        <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                      </linearGradient>
+                    </defs>
+                    <!-- Gradient Area Fill -->
+                    <path class="sparkline-fill" d="M 0 50 L 0 35 Q 25 15, 50 30 T 100 15 T 150 40 T 200 20 T 240 30 L 240 50 Z" fill="url(#spark-grad)" opacity="0" />
+                    <!-- Line -->
+                    <path class="sparkline-line" d="M 0 35 Q 25 15, 50 30 T 100 15 T 150 40 T 200 20 T 240 30" fill="none" stroke="#122A26" stroke-width="2.5" stroke-linecap="round" pathLength="100" />
+                  </svg>
+                </div>
+                <!-- Live text indicator ticker -->
+                <div class="flex items-center justify-between text-[8px] font-medium text-[#122A26]/80 border-t border-gray-100 pt-2">
+                  <span class="live-activity-alert">Anonymous gift received</span>
+                  <span class="text-[#5C6667] live-activity-time">$250 · Just now</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ── SECTION 2: Dashboard metrics and growth chart ── -->
+      <section class="section-frame-wrapper border-b border-[#122A26]/10 relative" id="impact-dashboard-section">
+        <!-- Left Side Strip -->
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+
+        <!-- Main Content -->
+        <div class="section-frame-content flex flex-col bg-[#FAF8F3]">
+          <div class="py-20 px-8 md:px-16 max-w-[1280px] mx-auto w-full">
+            
+            <!-- Live Data Stat Cards (4-Column Grid) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full stat-cards-grid">
+              
+              <!-- Card 1: Raised this Month -->
+              <div class="bg-white rounded-2xl border border-gray-300/20 shadow-sm p-6 flex flex-col justify-between min-h-[160px] hover:shadow-md transition-shadow duration-300 stat-card">
+                <div class="flex items-center justify-between w-full mb-4">
+                  <div class="w-10 h-10 rounded-full bg-[#D4EFE3] flex items-center justify-center text-[#48C39E]">
+                    <!-- Wallet Icon -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5"><rect x="2" y="5" width="20" height="14" rx="2" ry="2"/><path d="M22 10h-6a2 2 0 0 0-2 2v0a2 2 0 0 0 2 2h6"/></svg>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-600 font-sans">↗ +18.2%</span>
+                </div>
+                <div>
+                  <h3 class="font-serif text-3xl md:text-4xl font-normal text-[#122A26] mb-1 stat-card-value animate-value" data-target="248320" data-currency="true">$0</h3>
+                  <span class="text-[9px] font-bold text-[#5C6667] uppercase tracking-widest font-sans">Raised This Month</span>
+                </div>
+              </div>
+
+              <!-- Card 2: Active Donors -->
+              <div class="bg-white rounded-2xl border border-gray-300/20 shadow-sm p-6 flex flex-col justify-between min-h-[160px] hover:shadow-md transition-shadow duration-300 stat-card">
+                <div class="flex items-center justify-between w-full mb-4">
+                  <div class="w-10 h-10 rounded-full bg-[#D4EFE3] flex items-center justify-center text-[#48C39E]">
+                    <!-- Users Icon -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-600 font-sans">↗ +412</span>
+                </div>
+                <div>
+                  <h3 class="font-serif text-3xl md:text-4xl font-normal text-[#122A26] mb-1 stat-card-value animate-value" data-target="12489" data-currency="false">0</h3>
+                  <span class="text-[9px] font-bold text-[#5C6667] uppercase tracking-widest font-sans">Active Donors</span>
+                </div>
+              </div>
+
+              <!-- Card 3: Lives Touched -->
+              <div class="bg-white rounded-2xl border border-gray-300/20 shadow-sm p-6 flex flex-col justify-between min-h-[160px] hover:shadow-md transition-shadow duration-300 stat-card">
+                <div class="flex items-center justify-between w-full mb-4">
+                  <div class="w-10 h-10 rounded-full bg-[#D4EFE3] flex items-center justify-center text-[#48C39E]">
+                    <!-- Heart Icon -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-600 font-sans">↗ +3,120</span>
+                </div>
+                <div>
+                  <h3 class="font-serif text-3xl md:text-4xl font-normal text-[#122A26] mb-1 stat-card-value animate-value" data-target="128204" data-currency="false">0</h3>
+                  <span class="text-[9px] font-bold text-[#5C6667] uppercase tracking-widest font-sans">Lives Touched</span>
+                </div>
+              </div>
+
+              <!-- Card 4: Countries Reached -->
+              <div class="bg-white rounded-2xl border border-gray-300/20 shadow-sm p-6 flex flex-col justify-between min-h-[160px] hover:shadow-md transition-shadow duration-300 stat-card">
+                <div class="flex items-center justify-between w-full mb-4">
+                  <div class="w-10 h-10 rounded-full bg-[#D4EFE3] flex items-center justify-center text-[#48C39E]">
+                    <!-- Globe Icon -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-600 font-sans">↗ +2</span>
+                </div>
+                <div>
+                  <h3 class="font-serif text-3xl md:text-4xl font-normal text-[#122A26] mb-1 stat-card-value animate-value" data-target="37" data-currency="false">0</h3>
+                  <span class="text-[9px] font-bold text-[#5C6667] uppercase tracking-widest font-sans">Countries Reached</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Growth Curve Graph Card -->
+            <div class="mt-12 bg-white rounded-[32px] border border-gray-300/20 shadow-sm p-6 md:p-10 hover:shadow-md transition-shadow duration-300 w-full text-left" id="graph-card">
+              
+              <!-- Graph Header -->
+              <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-gray-100 pb-8 mb-8">
+                <div class="flex flex-col">
+                  <span class="text-[10px] font-bold tracking-[0.2em] text-[#5C6667] uppercase mb-2 block">— CUMULATIVE DONATIONS · TRAILING 12 MONTHS</span>
+                  <h2 class="font-serif text-3xl md:text-4xl font-normal text-[#122A26]">Growth curve</h2>
+                </div>
+                <div class="flex flex-col md:text-right">
+                  <h3 class="font-serif text-3xl md:text-4xl font-normal text-[#122A26]">$2,481k <span class="text-base text-[#5C6667] font-sans font-normal">raised year-to-date</span></h3>
+                </div>
+              </div>
+
+              <!-- Responsive SVG Graph Container -->
+              <div class="w-full overflow-x-auto relative" style="-webkit-overflow-scrolling: touch;">
+                <div class="min-w-[800px] w-full h-[400px] relative select-none">
+                  
+                  <svg viewBox="0 0 1000 400" class="w-full h-full overflow-visible">
+                    <defs>
+                      <linearGradient id="graph-grad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#48C39E" stop-opacity="0.25" />
+                        <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0" />
+                      </linearGradient>
+                    </defs>
+
+                    <!-- Horizontal Grid Lines -->
+                    <line x1="50" y1="50" x2="950" y2="50" stroke="#f1f0ea" stroke-width="1" stroke-dasharray="4 4" />
+                    <line x1="50" y1="125" x2="950" y2="125" stroke="#f1f0ea" stroke-width="1" stroke-dasharray="4 4" />
+                    <line x1="50" y1="200" x2="950" y2="200" stroke="#f1f0ea" stroke-width="1" stroke-dasharray="4 4" />
+                    <line x1="50" y1="275" x2="950" y2="275" stroke="#f1f0ea" stroke-width="1" stroke-dasharray="4 4" />
+                    <line x1="50" y1="350" x2="950" y2="350" stroke="#FAF8F3" stroke-width="1.5" />
+
+                    <!-- Grid Y-axis Labels -->
+                    <text x="35" y="54" fill="#5C6667" font-size="10" font-family="Plus Jakarta Sans" text-anchor="end">$2.5M</text>
+                    <text x="35" y="129" fill="#5C6667" font-size="10" font-family="Plus Jakarta Sans" text-anchor="end">$2.0M</text>
+                    <text x="35" y="204" fill="#5C6667" font-size="10" font-family="Plus Jakarta Sans" text-anchor="end">$1.5M</text>
+                    <text x="35" y="279" fill="#5C6667" font-size="10" font-family="Plus Jakarta Sans" text-anchor="end">$1.0M</text>
+                    <text x="35" y="354" fill="#5C6667" font-size="10" font-family="Plus Jakarta Sans" text-anchor="end">$0</text>
+
+                    <!-- Gradient Area Fill under the Curve -->
+                    <path id="graph-gradient-fill" d="M 50 350 L 50 335.7 C 90 330, 110 328, 131.8 325.8 C 170 320, 190 315, 213.6 310.8 C 250 300, 270 295, 295.5 290 C 330 280, 350 270, 377.3 262.1 C 410 250, 430 245, 459.1 236.9 C 495 225, 515 218, 540.9 209.2 C 580 195, 600 188, 622.7 179.2 C 660 165, 680 158, 704.5 151.5 C 740 140, 760 130, 786.4 121.5 C 825 108, 845 100, 868.2 91.5 C 900 80, 920 70, 950 63.7 L 950 350 Z" fill="url(#graph-grad)" opacity="0" />
+
+                    <!-- Charcoal Line Curve -->
+                    <path id="graph-line" d="M 50 335.7 C 90 330, 110 328, 131.8 325.8 C 170 320, 190 315, 213.6 310.8 C 250 300, 270 295, 295.5 290 C 330 280, 350 270, 377.3 262.1 C 410 250, 430 245, 459.1 236.9 C 495 225, 515 218, 540.9 209.2 C 580 195, 600 188, 622.7 179.2 C 660 165, 680 158, 704.5 151.5 C 740 140, 760 130, 786.4 121.5 C 825 108, 845 100, 868.2 91.5 C 900 80, 920 70, 950 63.7" fill="none" stroke="#122A26" stroke-width="4.5" stroke-linecap="round" />
+
+                    <!-- Month Labels on X-axis -->
+                    <text x="50" y="380" fill="#5C6667" font-size="10" font-family="Plus Jakarta Sans" text-anchor="middle">Jan</text>
+                    <text x="131.8" y="380" fill="#5C6667" font-size="10" font-family="Plus Jakarta Sans" text-anchor="middle">Feb</text>
+                    <text x="213.6" y="380" fill="#5C6667" font-size="10" font-family="Plus Jakarta Sans" text-anchor="middle">Mar</text>
+                    <text x="295.5" y="380" fill="#5C6667" font-size="10" font-family="Plus Jakarta Sans" text-anchor="middle">Apr</text>
+                    <text x="377.3" y="380" fill="#5C6667" font-size="10" font-family="Plus Jakarta Sans" text-anchor="middle">May</text>
+                    <text x="459.1" y="380" fill="#5C6667" font-size="10" font-family="Plus Jakarta Sans" text-anchor="middle">Jun</text>
+                    <text x="540.9" y="380" fill="#5C6667" font-size="10" font-family="Plus Jakarta Sans" text-anchor="middle">Jul</text>
+                    <text x="622.7" y="380" fill="#5C6667" font-size="10" font-family="Plus Jakarta Sans" text-anchor="middle">Aug</text>
+                    <text x="704.5" y="380" fill="#5C6667" font-size="10" font-family="Plus Jakarta Sans" text-anchor="middle">Sep</text>
+                    <text x="786.4" y="380" fill="#5C6667" font-size="10" font-family="Plus Jakarta Sans" text-anchor="middle">Oct</text>
+                    <text x="868.2" y="380" fill="#5C6667" font-size="10" font-family="Plus Jakarta Sans" text-anchor="middle">Nov</text>
+                    <text x="950" y="380" fill="#5C6667" font-size="10" font-family="Plus Jakarta Sans" text-anchor="middle">Dec</text>
+
+                    <!-- Interactive Plotted Points & Tooltips -->
+                    
+                    <!-- Plotted Point 1: Jan -->
+                    <g class="graph-point-group">
+                      <circle cx="50" cy="335.7" r="6" fill="#122A26" stroke="#ffffff" stroke-width="2" />
+                      <text x="50" y="315" fill="#122A26" font-size="10" font-family="Plus Jakarta Sans" font-weight="bold" text-anchor="middle" paint-order="stroke" stroke="#FAF8F3" stroke-width="4" stroke-linejoin="round">Jan: $124k</text>
+                    </g>
+
+                    <!-- Plotted Point 5: May -->
+                    <g class="graph-point-group">
+                      <circle cx="377.3" cy="262.1" r="6" fill="#122A26" stroke="#ffffff" stroke-width="2" />
+                      <text x="377.3" y="242" fill="#122A26" font-size="10" font-family="Plus Jakarta Sans" font-weight="bold" text-anchor="middle" paint-order="stroke" stroke="#FAF8F3" stroke-width="4" stroke-linejoin="round">May: $762k</text>
+                    </g>
+
+                    <!-- Plotted Point 12: Dec -->
+                    <g class="graph-point-group">
+                      <circle cx="950" cy="63.7" r="6" fill="#122A26" stroke="#ffffff" stroke-width="2" />
+                      <text x="950" y="44" fill="#122A26" font-size="10" font-family="Plus Jakarta Sans" font-weight="bold" text-anchor="middle" paint-order="stroke" stroke="#FAF8F3" stroke-width="4" stroke-linejoin="round">Dec: $2,481k</text>
+                    </g>
+
+                  </svg>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ── SECTION 3: Monthly Donations & Goals in Motion ── -->
+      <section class="section-frame-wrapper border-b border-[#122A26]/10 relative" id="impact-goals-section">
+        <!-- Left Side Strip -->
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+
+        <!-- Main Content -->
+        <div class="section-frame-content flex flex-col bg-[#FAF8F3]">
+          <div class="py-20 px-8 md:px-16 max-w-[1280px] mx-auto w-full">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
+              
+              <!-- Left Card: Monthly Donations (Bar Chart) -->
+              <div class="bg-white rounded-2xl border border-gray-300/20 shadow-sm p-5 md:p-8 flex flex-col justify-between" id="monthly-donations-card">
+                <div>
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-[9px] font-bold text-[#5C6667] uppercase tracking-widest font-sans">— MONTHLY DONATIONS · LAST 12 MONTHS</span>
+                    <span class="text-xs font-bold text-[#5C6667]/80 font-sans">JAN — DEC 2025</span>
+                  </div>
+                  <h3 class="font-serif text-4xl md:text-5xl font-normal text-[#122A26] mb-8">$2.48M raised</h3>
+                </div>
+
+                <!-- 12 Bars Container -->
+                <div class="relative w-full h-[240px] grid grid-cols-12 items-end gap-1.5 md:gap-2 px-1 pt-10" id="bars-chart-container">
+                  <!-- Bar 1 (JAN) -->
+                  <div class="flex flex-col items-center justify-end group h-full">
+                    <span class="text-[8px] md:text-[10px] font-bold text-[#122A26] mb-1.5 font-sans">$124k</span>
+                    <div class=" bg-[#8EE3C2] rounded-t-[4px] md:rounded-t-[6px] origin-bottom bar-element" style="height: 0px; width: 90%;" data-height="41%"></div>
+                    <span class="text-[9px] md:text-[11px] font-bold text-[#5C6667]/60 mt-3 font-sans uppercase">Jan</span>
+                  </div>
+                  <!-- Bar 2 (FEB) -->
+                  <div class="flex flex-col items-center justify-end group h-full">
+                    <span class="text-[8px] md:text-[10px] font-bold text-[#122A26] mb-1.5 font-sans">$138k</span>
+                    <div class=" bg-[#8EE3C2] rounded-t-[4px] md:rounded-t-[6px] origin-bottom bar-element" style="height: 0px; width: 90%;" data-height="46%"></div>
+                    <span class="text-[9px] md:text-[11px] font-bold text-[#5C6667]/60 mt-3 font-sans uppercase">Feb</span>
+                  </div>
+                  <!-- Bar 3 (MAR) -->
+                  <div class="flex flex-col items-center justify-end group h-full">
+                    <span class="text-[8px] md:text-[10px] font-bold text-[#122A26] mb-1.5 font-sans">$152k</span>
+                    <div class=" bg-[#8EE3C2] rounded-t-[4px] md:rounded-t-[6px] origin-bottom bar-element" style="height: 0px; width: 90%;" data-height="51%"></div>
+                    <span class="text-[9px] md:text-[11px] font-bold text-[#5C6667]/60 mt-3 font-sans uppercase">Mar</span>
+                  </div>
+                  <!-- Bar 4 (APR) -->
+                  <div class="flex flex-col items-center justify-end group h-full">
+                    <span class="text-[8px] md:text-[10px] font-bold text-[#122A26] mb-1.5 font-sans">$167k</span>
+                    <div class=" bg-[#8EE3C2] rounded-t-[4px] md:rounded-t-[6px] origin-bottom bar-element" style="height: 0px; width: 90%;" data-height="56%"></div>
+                    <span class="text-[9px] md:text-[11px] font-bold text-[#5C6667]/60 mt-3 font-sans uppercase">Apr</span>
+                  </div>
+                  <!-- Bar 5 (MAY) -->
+                  <div class="flex flex-col items-center justify-end group h-full">
+                    <span class="text-[8px] md:text-[10px] font-bold text-[#122A26] mb-1.5 font-sans">$181k</span>
+                    <div class=" bg-[#8EE3C2] rounded-t-[4px] md:rounded-t-[6px] origin-bottom bar-element" style="height: 0px; width: 90%;" data-height="61%"></div>
+                    <span class="text-[9px] md:text-[11px] font-bold text-[#5C6667]/60 mt-3 font-sans uppercase">May</span>
+                  </div>
+                  <!-- Bar 6 (JUN) -->
+                  <div class="flex flex-col items-center justify-end group h-full">
+                    <span class="text-[8px] md:text-[10px] font-bold text-[#122A26] mb-1.5 font-sans">$196k</span>
+                    <div class=" bg-[#8EE3C2] rounded-t-[4px] md:rounded-t-[6px] origin-bottom bar-element" style="height: 0px; width: 90%;" data-height="66%"></div>
+                    <span class="text-[9px] md:text-[11px] font-bold text-[#5C6667]/60 mt-3 font-sans uppercase">Jun</span>
+                  </div>
+                  <!-- Bar 7 (JUL) -->
+                  <div class="flex flex-col items-center justify-end group h-full">
+                    <span class="text-[8px] md:text-[10px] font-bold text-[#122A26] mb-1.5 font-sans">$214k</span>
+                    <div class=" bg-[#8EE3C2] rounded-t-[4px] md:rounded-t-[6px] origin-bottom bar-element" style="height: 0px; width: 90%;" data-height="72%"></div>
+                    <span class="text-[9px] md:text-[11px] font-bold text-[#5C6667]/60 mt-3 font-sans uppercase">Jul</span>
+                  </div>
+                  <!-- Bar 8 (AUG) -->
+                  <div class="flex flex-col items-center justify-end flex-1 w-full group h-full">
+                    <span class="text-[8px] md:text-[10px] font-bold text-[#122A26] mb-1.5 font-sans">$228k</span>
+                    <div class="w-[85%] bg-[#8EE3C2] rounded-t-[4px] md:rounded-t-[6px] origin-bottom bar-element" style="height: 0px;" data-height="77%"></div>
+                    <span class="text-[9px] md:text-[11px] font-bold text-[#5C6667]/60 mt-3 font-sans uppercase">Aug</span>
+                  </div>
+                  <!-- Bar 9 (SEP) -->
+                  <div class="flex flex-col items-center justify-end flex-1 w-full group h-full">
+                    <span class="text-[8px] md:text-[10px] font-bold text-[#122A26] mb-1.5 font-sans">$243k</span>
+                    <div class="w-[85%] bg-[#8EE3C2] rounded-t-[4px] md:rounded-t-[6px] origin-bottom bar-element" style="height: 0px;" data-height="82%"></div>
+                    <span class="text-[9px] md:text-[11px] font-bold text-[#5C6667]/60 mt-3 font-sans uppercase">Sep</span>
+                  </div>
+                  <!-- Bar 10 (OCT) -->
+                  <div class="flex flex-col items-center justify-end flex-1 w-full group h-full">
+                    <span class="text-[8px] md:text-[10px] font-bold text-[#122A26] mb-1.5 font-sans">$261k</span>
+                    <div class="w-[85%] bg-[#8EE3C2] rounded-t-[4px] md:rounded-t-[6px] origin-bottom bar-element" style="height: 0px;" data-height="88%"></div>
+                    <span class="text-[9px] md:text-[11px] font-bold text-[#5C6667]/60 mt-3 font-sans uppercase">Oct</span>
+                  </div>
+                  <!-- Bar 11 (NOV) -->
+                  <div class="flex flex-col items-center justify-end flex-1 w-full group h-full">
+                    <span class="text-[8px] md:text-[10px] font-bold text-[#122A26] mb-1.5 font-sans">$279k</span>
+                    <div class="w-[85%] bg-[#8EE3C2] rounded-t-[4px] md:rounded-t-[6px] origin-bottom bar-element" style="height: 0px;" data-height="94%"></div>
+                    <span class="text-[9px] md:text-[11px] font-bold text-[#5C6667]/60 mt-3 font-sans uppercase">Nov</span>
+                  </div>
+                  <!-- Bar 12 (DEC) -->
+                  <div class="flex flex-col items-center justify-end flex-1 w-full group h-full">
+                    <span class="text-[8px] md:text-[10px] font-bold text-[#122A26] mb-1.5 font-sans">$298k</span>
+                    <div class="w-[85%] bg-[#122A26] rounded-t-[4px] md:rounded-t-[6px] origin-bottom bar-element" style="height: 0px;" data-height="100%"></div>
+                    <span class="text-[9px] md:text-[11px] font-bold text-[#122A26] mt-3 font-sans uppercase font-bold">Dec</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Card: Program Funding (Goals in Motion) -->
+              <div class="bg-white rounded-2xl border border-gray-300/20 shadow-sm p-5 md:p-8 flex flex-col justify-between" id="program-funding-card">
+                <div>
+                  <span class="text-[9px] font-bold text-[#5C6667] uppercase tracking-widest font-sans">— PROGRAM FUNDING</span>
+                  <h3 class="font-serif text-4xl md:text-5xl font-normal text-[#122A26] mb-8">Goals in motion</h3>
+                </div>
+
+                <div class="flex flex-col gap-6">
+                  <!-- Education Row -->
+                  <div class="goal-item-row flex flex-col">
+                    <div class="flex items-center justify-between mb-3">
+                      <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-[#8EE3C2]/20 flex items-center justify-center text-[#122A26]">
+                          <!-- Graduation Cap Icon -->
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-5 h-5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>
+                        </div>
+                        <div>
+                          <h4 class="font-sans font-bold text-[#122A26] text-sm md:text-base">Education</h4>
+                          <span class="text-[11px] font-medium text-[#5C6667]">1,240 families</span>
+                        </div>
+                      </div>
+                      <div class="font-serif text-2xl md:text-3xl font-normal text-[#122A26]"><span class="goal-percentage" data-val="62">0</span>%</div>
+                    </div>
+                    <!-- Progress Bar -->
+                    <div class="w-full h-2.5 bg-[#FAF8F3] rounded-full overflow-hidden relative border border-gray-200/40 mb-2">
+                      <div class="h-full bg-[#122A26] rounded-full origin-left goal-progress-bar" style="width: 0px;" data-width="62%"></div>
+                    </div>
+                    <div class="flex items-center justify-between text-[11px] font-bold text-[#5C6667] uppercase font-sans">
+                      <span>$92,400 raised</span>
+                      <span>Goal $150,000</span>
+                    </div>
+                  </div>
+
+                  <!-- Clean Water Row -->
+                  <div class="goal-item-row flex flex-col">
+                    <div class="flex items-center justify-between mb-3">
+                      <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-[#8EE3C2]/20 flex items-center justify-center text-[#122A26]">
+                          <!-- Water Droplet Icon -->
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-5 h-5"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                        </div>
+                        <div>
+                          <h4 class="font-sans font-bold text-[#122A26] text-sm md:text-base">Clean water</h4>
+                          <span class="text-[11px] font-medium text-[#5C6667]">2,830 families</span>
+                        </div>
+                      </div>
+                      <div class="font-serif text-2xl md:text-3xl font-normal text-[#122A26]"><span class="goal-percentage" data-val="76">0</span>%</div>
+                    </div>
+                    <!-- Progress Bar -->
+                    <div class="w-full h-2.5 bg-[#FAF8F3] rounded-full overflow-hidden relative border border-gray-200/40 mb-2">
+                      <div class="h-full bg-[#122A26] rounded-full origin-left goal-progress-bar" style="width: 0px;" data-width="76%"></div>
+                    </div>
+                    <div class="flex items-center justify-between text-[11px] font-bold text-[#5C6667] uppercase font-sans">
+                      <span>$61,100 raised</span>
+                      <span>Goal $80,000</span>
+                    </div>
+                  </div>
+
+                  <!-- Healthcare Row -->
+                  <div class="goal-item-row flex flex-col">
+                    <div class="flex items-center justify-between mb-3">
+                      <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-[#8EE3C2]/20 flex items-center justify-center text-[#122A26]">
+                          <!-- Stethoscope Icon -->
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-5 h-5"><path d="M4.82 7.26A3 3 0 1 1 9 4v8a3 3 0 0 0 3 3h1.42M21 10h-2M19 14h2M12 17v4M12 21a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
+                        </div>
+                        <div>
+                          <h4 class="font-sans font-bold text-[#122A26] text-sm md:text-base">Healthcare</h4>
+                          <span class="text-[11px] font-medium text-[#5C6667]">940 families</span>
+                        </div>
+                      </div>
+                      <div class="font-serif text-2xl md:text-3xl font-normal text-[#122A26]"><span class="goal-percentage" data-val="41">0</span>%</div>
+                    </div>
+                    <!-- Progress Bar -->
+                    <div class="w-full h-2.5 bg-[#FAF8F3] rounded-full overflow-hidden relative border border-gray-200/40 mb-2">
+                      <div class="h-full bg-[#122A26] rounded-full origin-left goal-progress-bar" style="width: 0px;" data-width="41%"></div>
+                    </div>
+                    <div class="flex items-center justify-between text-[11px] font-bold text-[#5C6667] uppercase font-sans">
+                      <span>$48,820 raised</span>
+                      <span>Goal $120,000</span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    
+      <!-- ── SECTION 4: Live Donation Feed & Funding Breakdown ── -->
+      <section class="section-frame-wrapper" id="impact-section-4" style="border-top: none;">
+        <!-- Left Side Strip -->
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+        <div class="section-frame-content">
+          <div class="py-12 md:py-20 px-4 md:px-8 bg-[#FAF8F3]">
+            
+            <!-- Cards Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+              
+              <!-- Left Card: Recent Donations -->
+              <div class="bg-white rounded-2xl border border-gray-300/20 shadow-sm p-6 md:p-8 flex flex-col justify-between" id="recent-donations-card">
+                <div>
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="text-[9px] font-bold text-[#5C6667]/60 uppercase tracking-widest font-sans">— RECENT DONATIONS</span>
+                    <a href="causes.html" class="text-xs font-bold text-[#122A26] font-sans hover:underline flex items-center gap-1">Give now &rarr;</a>
+                  </div>
+                  <h3 class="font-serif text-3xl md:text-4xl font-normal text-[#122A26] mb-6 reveal-title" id="recent-donations-title">
+                    <span class="word-wrap"><span class="word-inner">Fresh</span></span>
+                    <span class="word-wrap"><span class="word-inner">from</span></span>
+                    <span class="word-wrap"><span class="word-inner">the</span></span>
+                    <span class="word-wrap"><span class="word-inner">field</span></span>
+                  </h3>
+                  
+                  <!-- Responsive Table Wrapper -->
+                  <div class="overflow-x-auto border border-gray-100 rounded-xl">
+                    <table class="w-full text-left border-collapse">
+                      <thead>
+                        <tr class="bg-[#E2F2EB]">
+                          <th class="py-3 px-4 font-sans font-bold text-xs uppercase text-[#122A26] rounded-l-lg">Donor</th>
+                          <th class="py-3 px-4 font-sans font-bold text-xs uppercase text-[#122A26]">Cause</th>
+                          <th class="py-3 px-4 font-sans font-bold text-xs uppercase text-[#122A26]">Amount</th>
+                          <th class="py-3 px-4 font-sans font-bold text-xs uppercase text-[#122A26] rounded-r-lg">When</th>
+                        </tr>
+                      </thead>
+                      <tbody id="recent-donations-tbody" class="divide-y divide-gray-50">
+                        <tr class="table-row-item">
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#122A26] font-medium">Amara O.</td>
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#5C6667]/80">Education</td>
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#122A26] font-bold">$120</td>
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#5C6667]/60 font-medium">2m ago</td>
+                        </tr>
+                        <tr class="table-row-item">
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#122A26] font-medium">Jonas R.</td>
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#5C6667]/80">Clean water</td>
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#122A26] font-bold">$45</td>
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#5C6667]/60 font-medium">11m ago</td>
+                        </tr>
+                        <tr class="table-row-item">
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#122A26] font-medium">Priya S.</td>
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#5C6667]/80">Healthcare</td>
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#122A26] font-bold">$300</td>
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#5C6667]/60 font-medium">38m ago</td>
+                        </tr>
+                        <tr class="table-row-item">
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#122A26] font-medium">Marco B.</td>
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#5C6667]/80">Emergency relief</td>
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#122A26] font-bold">$60</td>
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#5C6667]/60 font-medium">1h ago</td>
+                        </tr>
+                        <tr class="table-row-item">
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#122A26] font-medium">Ines K.</td>
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#5C6667]/80">Education</td>
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#122A26] font-bold">$25</td>
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#5C6667]/60 font-medium">3h ago</td>
+                        </tr>
+                        <tr class="table-row-item">
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#122A26] font-medium">Wen L.</td>
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#5C6667]/80">Clean water</td>
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#122A26] font-bold">$500</td>
+                          <td class="py-3.5 px-4 font-sans text-sm text-[#5C6667]/60 font-medium">5h ago</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Right Card: Where the Money Went -->
+              <div class="bg-[#E2F2EB] rounded-2xl p-6 md:p-8 flex flex-col justify-between" id="where-money-went-card">
+                <div>
+                  <span class="text-[9px] font-bold text-[#5C6667] uppercase tracking-widest font-sans">— THIS YEAR</span>
+                  <h3 class="font-serif text-3xl md:text-4xl font-normal text-[#122A26] mb-8 reveal-title" id="where-money-went-title">
+                    <span class="word-wrap"><span class="word-inner">Where</span></span>
+                    <span class="word-wrap"><span class="word-inner">the</span></span>
+                    <span class="word-wrap"><span class="word-inner">money</span></span>
+                    <span class="word-wrap"><span class="word-inner">went</span></span>
+                  </h3>
+                  
+                  <div class="flex flex-col gap-6">
+                    <!-- Program work -->
+                    <div class="flex flex-col">
+                      <div class="flex items-center justify-between mb-2">
+                        <span class="font-sans font-bold text-[#122A26] text-sm md:text-base">Program work</span>
+                        <span class="font-serif text-xl md:text-2xl font-normal text-[#122A26] goal-fluctuate-percent" id="text-program">87%</span>
+                      </div>
+                      <div class="w-full h-2 bg-white/60 rounded-full overflow-hidden">
+                        <div class="h-full bg-[#122A26] rounded-full origin-left duration-500" id="bar-program" style="width: 87%;"></div>
+                      </div>
+                    </div>
+                    
+                    <!-- Community grants -->
+                    <div class="flex flex-col">
+                      <div class="flex items-center justify-between mb-2">
+                        <span class="font-sans font-bold text-[#122A26] text-sm md:text-base">Community grants</span>
+                        <span class="font-serif text-xl md:text-2xl font-normal text-[#122A26] goal-fluctuate-percent" id="text-community">8%</span>
+                      </div>
+                      <div class="w-full h-2 bg-white/60 rounded-full overflow-hidden">
+                        <div class="h-full bg-[#122A26] rounded-full origin-left duration-500" id="bar-community" style="width: 8%;"></div>
+                      </div>
+                    </div>
+                    
+                    <!-- Operations -->
+                    <div class="flex flex-col">
+                      <div class="flex items-center justify-between mb-2">
+                        <span class="font-sans font-bold text-[#122A26] text-sm md:text-base">Operations</span>
+                        <span class="font-serif text-xl md:text-2xl font-normal text-[#122A26] goal-fluctuate-percent" id="text-operations">5%</span>
+                      </div>
+                      <div class="w-full h-2 bg-white/60 rounded-full overflow-hidden">
+                        <div class="h-full bg-[#122A26] rounded-full origin-left duration-500" id="bar-operations" style="width: 5%;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <p class="text-[11px] font-medium text-[#5C6667]/80 leading-relaxed mt-8 pt-4 border-t border-[#122A26]/10">
+                  Audited annually by an independent third party. Full report available on request.
+                </p>
+              </div>
+              
+            </div>
+            
+          </div>
+        </div>
+      </section>
+
+      <!-- ── ADVANCED IMPACT DATA (SECTIONS 5, 6, 7) ── -->
+      <section class="section-frame-wrapper" id="impact-advanced-data" style="border-top: none;">
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+        <div class="section-frame-content">
+          <div class="py-24 px-4 md:px-12 bg-[#FAF8F3] flex flex-col gap-32">
+            
+            <!-- Section 5: Allocation of Funds (Donut) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center advanced-section" id="allocation-section">
+              <div class="order-2 lg:order-1 relative w-full h-[350px] md:h-[400px] flex justify-center items-center">
+                <div id="allocation-chart" class="w-full max-w-[400px]"></div>
+                <!-- Center overlay for dynamic GSAP counter -->
+                <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none opacity-0" id="allocation-center-text">
+                  <span class="text-[10px] font-bold text-[#5C6667] uppercase tracking-widest font-sans mb-1 mt-6">Total</span>
+                  <span class="font-serif text-5xl text-[#122A26]"><span id="allocation-counter">0</span>%</span>
+                </div>
+              </div>
+              <div class="order-1 lg:order-2 flex flex-col justify-center">
+                <span class="text-[9px] font-bold text-[#5C6667]/60 uppercase tracking-widest font-sans mb-4">— ALLOCATION OF FUNDS</span>
+                <h3 class="font-serif text-4xl md:text-5xl font-normal text-[#122A26] mb-6 reveal-title">
+                  <span class="word-wrap"><span class="word-inner">Where</span></span>
+                  <span class="word-wrap"><span class="word-inner">Every</span></span>
+                  <span class="word-wrap"><span class="word-inner">Dollar</span></span>
+                  <span class="word-wrap"><span class="word-inner">Goes</span></span>
+                </h3>
+                <p class="font-sans text-base md:text-lg text-[#5C6667] mb-10 leading-relaxed max-w-lg">
+                  We believe in radical transparency. See exactly how your contributions are distributed across our global initiatives.
+                </p>
+                <div class="overflow-hidden rounded-2xl group w-full h-48 md:h-64 relative bg-gray-200">
+                  <img src="assets/home/fe2e0855b4bac8a5bc832afa98b18f4a6b06c50e.webp" alt="Allocation" class="w-full h-full object-cover grayscale transition-all duration-500 ease-out group-hover:grayscale-0 group-hover:scale-105">
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 6: Financial Transparency (Waterfall) -->
+            <div class="flex flex-col items-center advanced-section w-full" id="transparency-section">
+              <div class="text-center mb-12 max-w-2xl">
+                <span class="text-[9px] font-bold text-[#5C6667]/60 uppercase tracking-widest font-sans mb-4 inline-block">— FINANCIAL TRANSPARENCY</span>
+                <h3 class="font-serif text-4xl md:text-5xl font-normal text-[#122A26] mb-6 reveal-title">
+                  <span class="word-wrap"><span class="word-inner">The</span></span>
+                  <span class="word-wrap"><span class="word-inner">Impact</span></span>
+                  <span class="word-wrap"><span class="word-inner">Multiplier</span></span>
+                </h3>
+                <p class="font-sans text-base md:text-lg text-[#5C6667] leading-relaxed">
+                  How initial seed funding cascades into sustainable community wealth over 5 years.
+                </p>
+              </div>
+              
+              <div class="w-full bg-white rounded-3xl p-6 md:p-10 shadow-sm border border-gray-100 flex justify-center overflow-x-auto relative min-h-[450px]">
+                <div id="waterfall-chart" class="w-full min-w-[700px] h-[400px] opacity-0 transition-opacity duration-1000"></div>
+              </div>
+            </div>
+
+            <!-- Section 7: The Project Lifecycle (Funnel) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center advanced-section" id="lifecycle-section">
+              <div class="flex flex-col justify-center">
+                <span class="text-[9px] font-bold text-[#5C6667]/60 uppercase tracking-widest font-sans mb-4">— THE PROJECT LIFECYCLE</span>
+                <h3 class="font-serif text-4xl md:text-5xl font-normal text-[#122A26] mb-8 reveal-title">
+                  <span class="word-wrap"><span class="word-inner">From</span></span>
+                  <span class="word-wrap"><span class="word-inner">Proposal</span></span>
+                  <span class="word-wrap"><span class="word-inner">to</span></span>
+                  <span class="word-wrap"><span class="word-inner">Reality</span></span>
+                </h3>
+                
+                <ul class="flex flex-col gap-2 relative mt-4">
+                  <div class="absolute left-[11px] top-4 bottom-4 w-px bg-gray-200"></div>
+                  
+                  <li class="relative pl-10 py-3 cursor-pointer group funnel-step" data-index="0">
+                    <div class="absolute left-0 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-[#FAF8F3] border-2 border-gray-300 flex items-center justify-center transition-colors duration-300 group-hover:border-[#8EE3C2] indicator-ring">
+                      <div class="w-2 h-2 rounded-full bg-transparent transition-colors duration-300 indicator-dot"></div>
+                    </div>
+                    <h4 class="font-sans font-bold text-[#122A26] text-lg mb-1 transition-colors duration-300 group-hover:text-[#8EE3C2]">Community Proposal</h4>
+                    <p class="font-sans text-sm text-[#5C6667]/80">Initial screening of 1,200 requests from global communities.</p>
+                  </li>
+                  
+                  <li class="relative pl-10 py-3 cursor-pointer group funnel-step" data-index="1">
+                    <div class="absolute left-0 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-[#FAF8F3] border-2 border-gray-300 flex items-center justify-center transition-colors duration-300 group-hover:border-[#8EE3C2] indicator-ring">
+                      <div class="w-2 h-2 rounded-full bg-transparent transition-colors duration-300 indicator-dot"></div>
+                    </div>
+                    <h4 class="font-sans font-bold text-[#122A26] text-lg mb-1 transition-colors duration-300 group-hover:text-[#8EE3C2]">Vetting & Audit</h4>
+                    <p class="font-sans text-sm text-[#5C6667]/80">Rigorous on-the-ground auditing reduces the pool to 450.</p>
+                  </li>
+                  
+                  <li class="relative pl-10 py-3 cursor-pointer group funnel-step" data-index="2">
+                    <div class="absolute left-0 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-[#FAF8F3] border-2 border-gray-300 flex items-center justify-center transition-colors duration-300 group-hover:border-[#8EE3C2] indicator-ring">
+                      <div class="w-2 h-2 rounded-full bg-transparent transition-colors duration-300 indicator-dot"></div>
+                    </div>
+                    <h4 class="font-sans font-bold text-[#122A26] text-lg mb-1 transition-colors duration-300 group-hover:text-[#8EE3C2]">Funding Phase</h4>
+                    <p class="font-sans text-sm text-[#5C6667]/80">Capital is allocated to 120 highly viable projects.</p>
+                  </li>
+                  
+                  <li class="relative pl-10 py-3 cursor-pointer group funnel-step" data-index="3">
+                    <div class="absolute left-0 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-[#FAF8F3] border-2 border-gray-300 flex items-center justify-center transition-colors duration-300 group-hover:border-[#8EE3C2] indicator-ring">
+                      <div class="w-2 h-2 rounded-full bg-transparent transition-colors duration-300 indicator-dot"></div>
+                    </div>
+                    <h4 class="font-sans font-bold text-[#122A26] text-lg mb-1 transition-colors duration-300 group-hover:text-[#8EE3C2]">Project Launch</h4>
+                    <p class="font-sans text-sm text-[#5C6667]/80">120 fully operational water and education facilities deployed.</p>
+                  </li>
+                </ul>
+              </div>
+              <div class="flex flex-col items-center h-full justify-between">
+                <div id="funnel-chart" class="w-full max-w-[500px] h-[350px] opacity-0 transition-opacity duration-1000"></div>
+                <div class="mt-8 overflow-hidden rounded-2xl group w-48 h-32 md:h-48 relative bg-gray-200">
+                  <img src="assets/home/f7d62a2697b9a7eb753412e50b2d50a08d241d41.webp" alt="Lifecycle" class="w-full h-full object-cover grayscale transition-all duration-500 ease-out group-hover:grayscale-0 group-hover:scale-105">
+                </div>
+              </div>
+            </div>
+            <!-- Full Width CTA Banner -->
+            <div class="bg-[#122A26] rounded-3xl p-8 md:p-12 lg:p-16 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 relative overflow-hidden shadow-lg mt-8" id="cta-banner-wrapper">
+              <!-- Decorative background grids -->
+              <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(circle, #8EE3C2 1px, transparent 1px); background-size: 16px 16px;"></div>
+              
+              <div class="relative z-10 max-w-2xl">
+                <h2 class="font-serif text-3xl md:text-5xl font-normal text-white leading-tight mb-4 reveal-title-white" id="cta-banner-title">
+                  <span class="word-wrap"><span class="word-inner">Numbers</span></span>
+                  <span class="word-wrap"><span class="word-inner">only</span></span>
+                  <span class="word-wrap"><span class="word-inner">matter</span></span>
+                  <span class="word-wrap"><span class="word-inner">if</span></span>
+                  <span class="word-wrap"><span class="word-inner">they</span></span>
+                  <span class="word-wrap"><span class="word-inner">turn</span></span>
+                  <span class="word-wrap"><span class="word-inner">into</span></span>
+                  <span class="word-wrap"><span class="word-inner">lives</span></span>
+                  <span class="word-wrap"><span class="word-inner">changed.</span></span>
+                </h2>
+                <p class="text-[#8EE3C2]/80 font-sans text-sm md:text-base">
+                  Join 12,000+ donors funding schools, wells and clinics run by the communities themselves.
+                </p>
+              </div>
+              
+              <div class="relative z-10 flex-shrink-0">
+                <a href="404.html" class="inline-flex items-center gap-2 bg-[#8EE3C2] text-[#122A26] hover:bg-white hover:scale-105 transition-all duration-300 font-sans font-bold py-4 px-8 rounded-full shadow-md text-base" id="cta-banner-button">
+                  Donate now <span class="text-lg font-normal">&nearr;</span>
+                </a>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+</main>
+    <!-- Footer Section -->
+    <footer class="site-footer" id="site-footer" aria-label="Site Footer">
+      <div class="section-frame-wrapper" style="border-top: none;">
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+        <div class="section-frame-content">
+          <div class="footer-top-accent" aria-hidden="true"></div>
+          <div class="footer-inner">
+            <div class="footer-grid">
+              <!-- Col 1: Brand + Socials -->
+              <div class="footer-col footer-col--brand" id="footer-col-1">
+                <a href="index.html" class="footer-logo-link" aria-label="Stackly home">
+                  <img src="assets/logo.webp" alt="STACKLY" class="footer-logo-img">
+                </a>
+                <p class="footer-brand-desc">
+                  A nonprofit lifting communities through education, clean water and healthcare — one hand, one life at a time.
+                </p>
+                <div class="footer-socials">
+                  <a href="404.html" class="footer-social-btn" aria-label="Facebook" id="social-fb">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                  </a>
+                  <a href="404.html" class="footer-social-btn" aria-label="Instagram" id="social-ig">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                  </a>
+                  <a href="404.html" class="footer-social-btn" aria-label="Twitter/X" id="social-tw">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  </a>
+                  <a href="404.html" class="footer-social-btn" aria-label="YouTube" id="social-yt">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12z"/></svg>
+                  </a>
+                </div>
+              </div>
+              <!-- Col 2: Explore -->
+              <div class="footer-col" id="footer-col-2">
+                <h4 class="footer-col-heading">EXPLORE</h4>
+                <ul class="footer-link-list">
+                  <li><a href="index.html" class="footer-link"><span>Home</span></a></li>
+                  <li><a href="about.html" class="footer-link"><span>About</span></a></li>
+                  <li><a href="causes.html" class="footer-link"><span>Causes</span></a></li>
+                  <li><a href="impact.html" class="footer-link"><span>Impact</span></a></li>
+                  <li><a href="donate.html" class="footer-link"><span>Donate</span></a></li>
+                  <li><a href="contact.html" class="footer-link"><span>Contact</span></a></li>
+                  <li><a href="404.html" class="footer-link footer-link--highlight"><span>Donate now &#x2197;</span></a></li>
+                </ul>
+              </div>
+              <!-- Col 3: Get Involved -->
+              <div class="footer-col" id="footer-col-3">
+                <h4 class="footer-col-heading">GET INVOLVED</h4>
+                <ul class="footer-link-list">
+                  <li><a href="404.html" class="footer-link"><span>Volunteer</span></a></li>
+                  <li><a href="404.html" class="footer-link"><span>Partner with us</span></a></li>
+                  <li><a href="404.html" class="footer-link"><span>Fundraise</span></a></li>
+                  <li><a href="404.html" class="footer-link"><span>Contact us</span></a></li>
+                </ul>
+              </div>
+              <!-- Col 4: Account -->
+              <div class="footer-col" id="footer-col-4">
+                <h4 class="footer-col-heading">ACCOUNT</h4>
+                <ul class="footer-link-list">
+                  <li><a href="login.html" class="footer-link"><span>Log in</span></a></li>
+                  <li><a href="login.html#signup" class="footer-link"><span>Sign up</span></a></li>
+                </ul>
+                <div class="footer-stat-chip">
+                  <span class="footer-stat-num">10K+</span>
+                  <span class="footer-stat-lbl">Meals served</span>
+                </div>
+              </div>
+              <!-- Col 5: Newsletter -->
+              <div class="footer-col footer-col--newsletter" id="footer-col-5">
+                <h4 class="footer-col-heading">NEWSLETTER</h4>
+                <p class="footer-newsletter-desc">Stories from the field, delivered once a month.</p>
+                <form class="footer-newsletter-form" onsubmit="return false;" aria-label="Newsletter signup">
+                  <div class="footer-newsletter-field">
+                    <svg class="footer-input-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <input type="email" id="footer-email-input" class="footer-email-input" placeholder="your@email.com" aria-label="Your email">
+                    <button type="submit" class="footer-join-btn" id="footer-join-btn" aria-label="Subscribe">Join &#x2192;</button>
+                  </div>
+                </form>
+                <p class="footer-privacy-note">No spam. Unsubscribe anytime.</p>
+              </div>
+            </div><!-- /footer-grid -->
+            <div class="footer-divider" aria-hidden="true"></div>
+            <div class="footer-bottom" id="footer-bottom">
+              <div class="footer-bottom-left">
+                <span class="footer-copyright">&#169; 2026 Stackly Foundation. All rights reserved.</span>
+              </div>
+              <div class="footer-bottom-center">
+                <a href="404.html" class="footer-bottom-link">Privacy</a>
+                <span class="footer-bottom-sep">&#183;</span>
+                <a href="404.html" class="footer-bottom-link">Terms</a>
+                <span class="footer-bottom-sep">&#183;</span>
+                <a href="404.html" class="footer-bottom-link">Cookies</a>
+              </div>
+              <div class="footer-bottom-right">
+                <span class="footer-ein">Registered nonprofit &#183; EIN 00-0000000</span>
+              </div>
+            </div>
+          </div><!-- /footer-inner -->
+        </div><!-- /section-frame-content -->
+      </div><!-- /section-frame-wrapper -->
+    </footer><!-- /site-footer -->
+
+  </div><!-- /master-frame -->
+
+  <!-- JS Libraries (self-hosted) -->
+  <script src="libs/gsap.min.js"></script>
+  <script src="libs/ScrollTrigger.min.js"></script>
+  <script src="libs/lenis.min.js"></script>
+  <script src="js/preloader.js?v=1.3.2"></script>
+
+  <!-- Custom Page Scripts & Animations -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check for preloader overlay
+      const preloader = document.getElementById('preloader');
+      const hasPreloader = preloader !== null;
+
+      if (hasPreloader) {
+        document.body.style.overflow = 'hidden';
+      }
+
+      // 1. Initialize Lenis Smooth Scrolling
+      let lenis;
+      if (typeof Lenis !== 'undefined') {
+        lenis = new Lenis({
+          duration: 1.4,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          direction: 'vertical',
+          gestureDirection: 'vertical',
+          smooth: true,
+          mouseMultiplier: 1.0,
+          smoothTouch: false,
+          touchMultiplier: 2,
+          infinite: false,
+        });
+
+        lenis.on('scroll', () => {
+          if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.update();
+          }
+        });
+
+        gsap.ticker.add((time) => {
+          lenis.raf(time * 1000);
+        });
+
+        gsap.ticker.lagSmoothing(0);
+
+        if (hasPreloader) {
+          lenis.stop();
+        }
+      }
+
+      if (typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+      }
+
+      // 2. Header spotlight, mobile menu toggle, sticky header, newsletter, touch support
+      initNavSpotlight();
+      initStickyHeader();
+      initMobileMenu();
+      initFooterNewsletter();
+
+      // Wrap animations in a gsap.context() for scoping/stability
+      const ctx = gsap.context(() => {
+        // 3. GSAP Hero Entrance Animations
+        const tl = gsap.timeline({
+          paused: hasPreloader,
+          defaults: { ease: 'power4.out', duration: 1.2 }
+        });
+
+        // Run preloader if present
+        if (hasPreloader) {
+          runPreloader(preloader, tl, lenis);
+        }
+
+        // Header fades in first
+        tl.from('header.site-header', { y: -30, opacity: 0, duration: 1.0, ease: 'power3.out' });
+
+        // Heading 3D word reveal
+        tl.from('#impact-hero-title .word-inner', {
+          rotationX: -45,
+          y: 50,
+          opacity: 0,
+          stagger: 0.08,
+          duration: 1.2,
+          ease: 'power3.out'
+        }, '-=0.6');
+
+        // Subtext and live status pill
+        tl.from('#impact-hero-section p, #impact-live-pill', {
+          y: 20,
+          opacity: 0,
+          stagger: 0.1,
+          duration: 1.0,
+          ease: 'power3.out'
+        }, '-=0.8');
+
+        // Action buttons
+        tl.from('#impact-hero-buttons > *', {
+          y: 20,
+          opacity: 0,
+          stagger: 0.1,
+          duration: 1.0,
+          ease: 'power3.out'
+        }, '-=0.8');
+
+        // Collage Float-in Parallax
+        tl.from('.collage-img', {
+          opacity: 0,
+          scale: 0.9,
+          y: 40,
+          rotation: (i) => i === 0 ? -12 : i === 1 ? 12 : -5,
+          stagger: 0.12,
+          duration: 1.4,
+          ease: 'back.out(1.2)'
+        }, '-=1.0');
+
+        // 4. Collage Interactive Hover Parallax (Mouse Move)
+        const collageContainer = document.querySelector('#impact-hero-collage');
+        const collageImages = document.querySelectorAll('.collage-img');
+        if (collageContainer && collageImages.length > 0) {
+          collageContainer.addEventListener('mousemove', (e) => {
+            const rect = collageContainer.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left - rect.width / 2;
+            const mouseY = e.clientY - rect.top - rect.height / 2;
+
+            collageImages.forEach((img) => {
+              const depth = parseFloat(img.getAttribute('data-depth')) || 0.2;
+              const moveX = mouseX * depth;
+              const moveY = mouseY * depth;
+
+              gsap.to(img, {
+                x: moveX,
+                y: moveY,
+                duration: 0.5,
+                ease: 'power2.out',
+                overwrite: 'auto'
+              });
+            });
+          });
+
+          collageContainer.addEventListener('mouseleave', () => {
+            collageImages.forEach((img) => {
+              gsap.to(img, {
+                x: 0,
+                y: 0,
+                duration: 0.8,
+                ease: 'power3.out',
+                overwrite: 'auto'
+              });
+            });
+          });
+
+          // Individual card hover scaling and rotation reset
+          collageImages.forEach((img) => {
+            const originalRotation = img.classList.contains('rotate-[-4deg]') ? -4 : img.classList.contains('rotate-[6deg]') ? 6 : -2;
+            const originalZ = img.classList.contains('z-20') ? 20 : img.classList.contains('z-10') ? 10 : 25;
+
+            img.addEventListener('mouseenter', () => {
+              gsap.to(img, {
+                scale: 1.05,
+                rotation: 0,
+                zIndex: 35,
+                duration: 0.4,
+                ease: 'power2.out',
+                overwrite: 'auto'
+              });
+            });
+
+            img.addEventListener('mouseleave', () => {
+              gsap.to(img, {
+                scale: 1,
+                rotation: originalRotation,
+                zIndex: originalZ,
+                duration: 0.5,
+                ease: 'power2.out',
+                overwrite: 'auto'
+              });
+            });
+          });
+        }
+
+        // 4a. Hero Mini-Charts Animations
+        // Card A: Donut segments
+        gsap.to('.donut-segment-1', { attr: { 'stroke-dasharray': '84.8 188.5' }, duration: 1.5, ease: 'power2.out', delay: 0.6 });
+        gsap.to('.donut-segment-2', { attr: { 'stroke-dasharray': '66.0 188.5' }, duration: 1.5, ease: 'power2.out', delay: 0.8 });
+        gsap.to('.donut-segment-3', { attr: { 'stroke-dasharray': '37.7 188.5' }, duration: 1.5, ease: 'power2.out', delay: 1.0 });
+
+        // Card B: Progress circular ring
+        gsap.to('.progress-ring-circle', { strokeDashoffset: 52.5, duration: 1.8, ease: 'power2.out', delay: 0.8 });
+
+        // Card C: Sparkline line and area fill
+        gsap.to('.sparkline-line', { strokeDashoffset: 0, duration: 1.8, ease: 'power2.out', delay: 0.9 });
+        gsap.to('.sparkline-fill', { opacity: 1, duration: 1.0, ease: 'power2.out', delay: 1.8 });
+
+        // Live activity ticker animation (simulate periodic real-time events)
+        const alerts = [
+          { text: "Gift to Clean Water program", detail: "$100 · 1m ago" },
+          { text: "Supporter joined from Germany", detail: "Active donor · 3m ago" },
+          { text: "Gift to Primary Education", detail: "$500 · 5m ago" },
+          { text: "Anonymous gift received", detail: "$250 · Just now" }
+        ];
+        let alertIdx = 0;
+        const alertText = document.querySelector('.live-activity-alert');
+        const alertTime = document.querySelector('.live-activity-time');
+        
+        if (alertText && alertTime) {
+          setInterval(() => {
+            alertIdx = (alertIdx + 1) % alerts.length;
+            
+            // Fade out
+            gsap.to([alertText, alertTime], {
+              opacity: 0,
+              y: -5,
+              duration: 0.3,
+              onComplete: () => {
+                alertText.textContent = alerts[alertIdx].text;
+                alertTime.textContent = alerts[alertIdx].detail;
+                // Fade in
+                gsap.fromTo([alertText, alertTime], { y: 5, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 });
+              }
+            });
+          }, 4500);
+        }
+
+        // 5. Stat Cards Counter & Stagger Animation
+        const statCards = document.querySelectorAll('.stat-card');
+        const statValues = document.querySelectorAll('.stat-card-value');
+        
+        // Counter Animation
+        statValues.forEach(valueElement => {
+          const target = parseFloat(valueElement.getAttribute('data-target'));
+          const isCurrency = valueElement.getAttribute('data-currency') === 'true';
+          const counterObj = { val: 0 };
+
+          gsap.to(counterObj, {
+            val: target,
+            duration: 2.0,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: '.stat-cards-grid',
+              start: 'top 85%'
+            },
+            onUpdate: () => {
+              const currentVal = Math.floor(counterObj.val).toLocaleString();
+              valueElement.textContent = isCurrency ? `$${currentVal}` : currentVal;
+            }
+          });
+        });
+
+        // Cards Fade Up Stagger
+        gsap.from(statCards, {
+          y: 40,
+          opacity: 0,
+          stagger: 0.1,
+          duration: 1.0,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.stat-cards-grid',
+            start: 'top 85%'
+          }
+        });
+
+        // 6. SVG Graph Path Drawing and Gradient Fill Animation
+        const graphPath = document.querySelector('#graph-line');
+        const graphGrad = document.querySelector('#graph-gradient-fill');
+        
+        if (graphPath) {
+          const pathLength = graphPath.getTotalLength();
+          gsap.set(graphPath, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
+
+          gsap.to(graphPath, {
+            strokeDashoffset: 0,
+            duration: 2.2,
+            ease: 'power2.inOut',
+            scrollTrigger: {
+              trigger: '#graph-card',
+              start: 'top 75%'
+            }
+          });
+        }
+
+        if (graphGrad) {
+          gsap.to(graphGrad, {
+            opacity: 1,
+            duration: 1.5,
+            ease: 'power2.out',
+            delay: 1.2,
+            scrollTrigger: {
+              trigger: '#graph-card',
+              start: 'top 75%'
+            }
+          });
+        }
+
+        // Fade in plotted graph point dots
+        gsap.from('.graph-point-group', {
+          scale: 0,
+          opacity: 0,
+          transformOrigin: "50% 50%",
+          stagger: 0.2,
+          duration: 0.8,
+          ease: 'back.out(1.8)',
+          delay: 1.6,
+          scrollTrigger: {
+            trigger: '#graph-card',
+            start: 'top 75%'
+          }
+        });
+
+        // 7. Monthly Donations Bar Chart Animation
+        gsap.to('#monthly-donations-card .bar-element', {
+          height: (i, el) => el.getAttribute('data-height'),
+          duration: 1.5,
+          ease: 'power2.out',
+          stagger: 0.08,
+          scrollTrigger: {
+            trigger: '#monthly-donations-card',
+            start: 'top 80%'
+          }
+        });
+
+        // 8. Program Funding Goals & Progress Animation
+        gsap.to('#program-funding-card .goal-progress-bar', {
+          width: (i, el) => el.getAttribute('data-width'),
+          duration: 1.8,
+          ease: 'power3.out',
+          stagger: 0.18,
+          scrollTrigger: {
+            trigger: '#program-funding-card',
+            start: 'top 80%'
+          }
+        });
+
+        document.querySelectorAll('#program-funding-card .goal-percentage').forEach(span => {
+          const target = parseInt(span.getAttribute('data-val'));
+          gsap.to(span, {
+            innerText: target,
+            duration: 1.8,
+            snap: { innerText: 1 },
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: '#program-funding-card',
+              start: 'top 80%'
+            }
+          });
+        });
+
+        // 9. Section 4: Heading reveal animations
+        gsap.utils.toArray('#impact-section-4 .reveal-title').forEach((title) => {
+          gsap.from(title.querySelectorAll('.word-inner'), {
+            rotationX: -45,
+            y: 30,
+            opacity: 0,
+            stagger: 0.08,
+            duration: 1.0,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 85%'
+            }
+          });
+        });
+
+        gsap.from('#cta-banner-title .word-inner', {
+          rotationX: -45,
+          y: 40,
+          opacity: 0,
+          stagger: 0.06,
+          duration: 1.2,
+          ease: 'power4.out',
+          scrollTrigger: {
+            trigger: '#cta-banner-wrapper',
+            start: 'top 85%'
+          }
+        });
+
+        // 10. Table Dynamic Row Insertion Feed
+        const donorNames = ["Lucas H.", "Sophia M.", "Emma K.", "Oliver D.", "Ava L.", "Noah P.", "Isabella G.", "Liam N.", "Mia T.", "Ethan W.", "Chloe R.", "Aiden S."];
+        const causesList = ["Education", "Clean water", "Healthcare", "Emergency relief"];
+        const amountsList = ["$50", "$75", "$100", "$150", "$200", "$250", "$300", "$500"];
+        
+        function addNewDonation() {
+          const tbody = document.getElementById('recent-donations-tbody');
+          if (!tbody) return;
+
+          const donor = donorNames[Math.floor(Math.random() * donorNames.length)];
+          const cause = causesList[Math.floor(Math.random() * causesList.length)];
+          const amount = amountsList[Math.floor(Math.random() * amountsList.length)];
+          
+          const tr = document.createElement('tr');
+          tr.className = 'table-row-item';
+          tr.style.opacity = 0;
+          tr.style.backgroundColor = '#E2F2EB';
+          
+          tr.innerHTML = `
+            <td class="py-3.5 px-4 font-sans text-sm text-[#122A26] font-medium">${donor}</td>
+            <td class="py-3.5 px-4 font-sans text-sm text-[#5C6667]/80">${cause}</td>
+            <td class="py-3.5 px-4 font-sans text-sm text-[#122A26] font-bold">${amount}</td>
+            <td class="py-3.5 px-4 font-sans text-sm text-[#5C6667]/60 font-medium">Just now</td>
+          `;
+          
+          tbody.insertBefore(tr, tbody.firstChild);
+          
+          gsap.to(tr, {
+            opacity: 1,
+            duration: 0.6,
+            ease: 'power2.out'
+          });
+          
+          gsap.to(tr, {
+            backgroundColor: 'rgba(255, 255, 255, 0)',
+            duration: 2.0,
+            delay: 0.5,
+            ease: 'power1.out'
+          });
+          
+          const rows = tbody.querySelectorAll('.table-row-item');
+          if (rows.length > 6) {
+            const lastRow = rows[rows.length - 1];
+            gsap.to(lastRow, {
+              opacity: 0,
+              y: 10,
+              duration: 0.5,
+              ease: 'power2.in',
+              onComplete: () => { lastRow.remove(); }
+            });
+          }
+          
+          // Update relative times for other rows
+          for (let i = 1; i < Math.min(rows.length, 6); i++) {
+            const timeTd = rows[i].querySelector('td:last-child');
+            if (timeTd) {
+              const currentText = timeTd.textContent;
+              if (currentText === 'Just now') {
+                timeTd.textContent = '1m ago';
+              } else if (currentText.includes('m ago')) {
+                const mins = parseInt(currentText);
+                if (!isNaN(mins)) {
+                  timeTd.textContent = (mins + 1) + 'm ago';
+                }
+              }
+            }
+          }
+        }
+        
+        // Start donation feed interval
+        setInterval(addNewDonation, 4000);
+
+        // 11. Dynamic Progress Fluctuation (Where the money went)
+        function fluctuateFunding() {
+          const delta = (Math.random() - 0.5) * 1.5;
+          const progVal = Math.max(82, Math.min(92, 87 + delta));
+          const commVal = Math.max(4, Math.min(14, 8 - delta));
+          
+          updateFundingBar('#bar-program', '#text-program', progVal);
+          updateFundingBar('#bar-community', '#text-community', commVal);
+        }
+
+        function updateFundingBar(barSel, textSel, targetVal) {
+          const bar = document.querySelector(barSel);
+          const textEl = document.querySelector(textSel);
+          if (!bar || !textEl) return;
+          
+          gsap.to(bar, {
+            width: targetVal + '%',
+            duration: 1.5,
+            ease: 'power2.out'
+          });
+          
+          const currentText = parseFloat(textEl.textContent);
+          const counterObj = { val: currentText };
+          
+          gsap.to(counterObj, {
+            val: targetVal,
+            duration: 1.5,
+            ease: 'power2.out',
+            onUpdate: () => {
+              textEl.textContent = Math.round(counterObj.val) + '%';
+            },
+            onComplete: () => {
+              gsap.fromTo(textEl, { scale: 1.15, color: '#48C39E' }, { scale: 1, color: '#122A26', duration: 0.4 });
+            }
+          });
+        }
+
+        // Start progress fluctuation interval
+        setInterval(fluctuateFunding, 5000);
+
+        // 12. Advanced ApexCharts Initialization & ScrollTrigger Integration
+        
+        // --- 12a. Allocation of Funds (Donut Chart) ---
+        const donutOptions = {
+          series: [75, 15, 10],
+          chart: {
+            type: 'donut',
+            height: 350,
+            fontFamily: 'Inter, sans-serif',
+            animations: {
+              enabled: true,
+              easing: 'easeinout',
+              speed: 1500,
+              animateGradually: { enabled: true, delay: 150 },
+              dynamicAnimation: { enabled: true, speed: 350 }
+            }
+          },
+          labels: ['Program Work', 'Administration', 'Fundraising'],
+          colors: ['#8EE3C2', '#122A26', '#E2F2EB'],
+          stroke: { width: 0 },
+          dataLabels: { enabled: false },
+          legend: { show: false },
+          plotOptions: {
+            pie: {
+              donut: {
+                size: '75%',
+                labels: { show: false }
+              }
+            }
+          },
+          tooltip: {
+            theme: 'light',
+            y: { formatter: function(val) { return val + "%" } }
+          }
+        };
+        
+        let donutChart = new ApexCharts(document.querySelector("#allocation-chart"), donutOptions);
+        let donutRendered = false;
+        
+        ScrollTrigger.create({
+          trigger: "#allocation-section",
+          start: "top 75%",
+          onEnter: () => {
+            if (!donutRendered) {
+              donutChart.render();
+              donutRendered = true;
+              
+              // Animate center text opacity and counter
+              const textGroup = document.getElementById('allocation-center-text');
+              const counterEl = document.getElementById('allocation-counter');
+              
+              gsap.to(textGroup, { opacity: 1, duration: 1, delay: 0.8, ease: 'power2.out' });
+              
+              const counterObj = { val: 0 };
+              gsap.to(counterObj, {
+                val: 100,
+                duration: 2.0,
+                delay: 0.8,
+                ease: 'power3.out',
+                onUpdate: () => {
+                  counterEl.textContent = Math.round(counterObj.val);
+                }
+              });
+            }
+          }
+        });
+        
+        // --- 12b. Financial Transparency (Waterfall Chart) ---
+        const waterfallOptions = {
+          series: [{
+            name: 'Financial Flow',
+            data: [
+              { x: 'Initial Grants', y: 500000 },
+              { x: 'Setup Costs', y: -85000 },
+              { x: 'Local Match', y: 150000 },
+              { x: 'Community Rev', y: 320000 },
+              { x: 'Total Impact', y: 885000, isIntermediateSum: true }
+            ]
+          }],
+          chart: {
+            type: 'bar',
+            height: 400,
+            fontFamily: 'Inter, sans-serif',
+            toolbar: { show: false },
+            animations: {
+              enabled: true,
+              easing: 'easeinout',
+              speed: 1200
+            }
+          },
+          plotOptions: {
+            bar: {
+              colors: {
+                ranges: [
+                  { from: -9999999, to: -1, color: '#FF7A7A' }, // Red for negative
+                  { from: 1, to: 9999999, color: '#8EE3C2' }    // Mint for positive
+                ]
+              },
+              columnWidth: '60%',
+              borderRadius: 4
+            }
+          },
+          dataLabels: {
+            enabled: true,
+            formatter: function (val) {
+              return '$' + (val / 1000) + 'k';
+            },
+            style: { colors: ['#122A26'] },
+            offsetY: -20
+          },
+          yaxis: {
+            labels: {
+              formatter: function (val) { return '$' + (val / 1000) + 'k'; }
+            }
+          },
+          xaxis: {
+            type: 'category',
+            labels: {
+              style: { colors: '#5C6667', fontWeight: 600 }
+            }
+          },
+          tooltip: {
+            theme: 'light',
+            y: { formatter: function (val) { return '$' + val.toLocaleString(); } }
+          }
+        };
+
+        waterfallOptions.colors = ['#122A26']; // Default base sum color
+
+        let waterfallChart = new ApexCharts(document.querySelector("#waterfall-chart"), waterfallOptions);
+        let waterfallRendered = false;
+        
+        ScrollTrigger.create({
+          trigger: "#transparency-section",
+          start: "top 75%",
+          onEnter: () => {
+            if (!waterfallRendered) {
+              document.querySelector('#waterfall-chart').classList.remove('opacity-0');
+              waterfallChart.render();
+              waterfallRendered = true;
+            }
+          }
+        });
+
+        // --- 12c. The Project Lifecycle (Funnel Chart) ---
+        const funnelOptions = {
+          series: [
+            {
+              name: "Projects",
+              data: [1200, 450, 120, 120],
+            },
+          ],
+          chart: {
+            type: 'bar',
+            height: 350,
+            fontFamily: 'Inter, sans-serif',
+            toolbar: { show: false },
+            animations: { enabled: true, speed: 1000 }
+          },
+          plotOptions: {
+            bar: {
+              borderRadius: 0,
+              horizontal: true,
+              barHeight: '80%',
+              isFunnel: true,
+            },
+          },
+          dataLabels: {
+            enabled: true,
+            formatter: function (val, opt) {
+              return opt.w.globals.labels[opt.dataPointIndex] + ': ' + val
+            },
+            dropShadow: { enabled: true }
+          },
+          colors: ['#8EE3C2', '#48C39E', '#1D5A4E', '#122A26'],
+          xaxis: { categories: ['Proposals', 'Vetted', 'Funded', 'Launched'] },
+          legend: { show: false },
+          tooltip: { theme: 'light' }
+        };
+        
+        let funnelChart = new ApexCharts(document.querySelector("#funnel-chart"), funnelOptions);
+        let funnelRendered = false;
+        
+        ScrollTrigger.create({
+          trigger: "#lifecycle-section",
+          start: "top 75%",
+          onEnter: () => {
+            if (!funnelRendered) {
+              document.querySelector('#funnel-chart').classList.remove('opacity-0');
+              funnelChart.render();
+              funnelRendered = true;
+            }
+          }
+        });
+
+        // Funnel Step Interactive Hover
+        const funnelSteps = document.querySelectorAll('.funnel-step');
+        funnelSteps.forEach(step => {
+          step.addEventListener('mouseenter', () => {
+            const index = parseInt(step.getAttribute('data-index'));
+            step.querySelector('.indicator-ring').classList.replace('border-gray-300', 'border-[#8EE3C2]');
+            step.querySelector('.indicator-dot').classList.replace('bg-transparent', 'bg-[#8EE3C2]');
+            
+            if (funnelRendered && funnelChart) {
+              funnelChart.toggleDataPointSelection(0, index);
+            }
+          });
+          
+          step.addEventListener('mouseleave', () => {
+            const index = parseInt(step.getAttribute('data-index'));
+            step.querySelector('.indicator-ring').classList.replace('border-[#8EE3C2]', 'border-gray-300');
+            step.querySelector('.indicator-dot').classList.replace('bg-[#8EE3C2]', 'bg-transparent');
+            
+            if (funnelRendered && funnelChart) {
+              funnelChart.toggleDataPointSelection(0, index);
+            }
+          });
+        });
+
+        // 13. Advanced Sections Entrance & Text Animations
+        gsap.utils.toArray('#impact-advanced-data .reveal-title').forEach((title) => {
+          gsap.from(title.querySelectorAll('.word-inner'), {
+            rotationX: -45,
+            y: 30,
+            opacity: 0,
+            stagger: 0.08,
+            duration: 1.0,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 85%'
+            }
+          });
+        });
+
+        gsap.utils.toArray('.advanced-section').forEach((section) => {
+          gsap.from(section, {
+            y: 50,
+            opacity: 0,
+            duration: 1.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 85%'
+            }
+          });
+        });
+
+      });
+    });
+
+    /* ── Header Nav Spotlight Effect ── */
+    function initNavSpotlight() {
+      const navMenu  = document.querySelector('.nav-menu');
+      const navLinks = document.querySelectorAll('.nav-link');
+      const spotlight = document.querySelector('.nav-spotlight');
+
+      if (!navMenu || !navLinks.length || !spotlight) return;
+
+      navLinks.forEach(link => {
+        link.addEventListener('mouseenter', (e) => {
+          const linkRect = e.target.getBoundingClientRect();
+          const menuRect = navMenu.getBoundingClientRect();
+          spotlight.style.width   = `${linkRect.width}px`;
+          spotlight.style.left    = `${linkRect.left - menuRect.left}px`;
+          spotlight.style.opacity = '1';
+        });
+      });
+      navMenu.addEventListener('mouseleave', () => { spotlight.style.opacity = '0'; });
+    }
+
+    /* ── Sticky Header Effect ── */
+    function initStickyHeader() {
+      const header = document.querySelector('header.site-header');
+      if (!header) return;
+      const handle = () => header.classList.toggle('scrolled', window.scrollY > 40);
+      window.addEventListener('scroll', handle);
+      handle();
+    }
+
+    /* ── Mobile Menu Toggle ── */
+    function initMobileMenu() {
+      const toggleBtn = document.getElementById('mobile-nav-toggle');
+      const navWrapper = document.querySelector('.nav-menu-wrapper');
+      
+      if (!toggleBtn || !navWrapper) return;
+      
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isActive = document.body.classList.contains('mobile-menu-active');
+        if (isActive) {
+          document.body.classList.remove('mobile-menu-active');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        } else {
+          document.body.classList.add('mobile-menu-active');
+          toggleBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
+
+      const navLinks = navWrapper.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          document.body.classList.remove('mobile-menu-active');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        const isActive = document.body.classList.contains('mobile-menu-active');
+        if (isActive && !navWrapper.contains(e.target) && !toggleBtn.contains(e.target)) {
+          document.body.classList.remove('mobile-menu-active');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
+    /* ── Footer Newsletter ── */
+    function initFooterNewsletter() {
+      const footer = document.getElementById('site-footer');
+      if (!footer) return;
+      const form  = footer.querySelector('.footer-newsletter-form');
+      const input = footer.querySelector('.footer-email-input');
+      const btn   = footer.querySelector('.footer-join-btn');
+
+      if (form && input && btn) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!input.value.trim() || !emailRegex.test(input.value)) {
+            input.style.borderColor = '#f87171';
+            const origPh = input.placeholder;
+            input.placeholder = 'Enter a valid email first';
+            input.addEventListener('input', () => {
+              input.style.borderColor = '';
+              input.placeholder = origPh;
+            }, { once: true });
+            return;
+          }
+          btn.textContent = '✓';
+          btn.style.color = '#8EE3C2';
+          btn.style.pointerEvents = 'none';
+          if (typeof gsap !== 'undefined') {
+            gsap.fromTo(btn, { scale: 0.8 }, { scale: 1, duration: 0.4, ease: 'back.out(1.5)' });
+          }
+          setTimeout(() => { window.location.href = '404.html'; }, 800);
+        });
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stackly — My Dashboard</title>
+
+  <!-- Self-hosted Tailwind -->
+  <script src="libs/tailwind.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'slate-dark':  '#23353e',
+            'slate-hover': '#2e4553',
+            'mint':        '#a7e4c9',
+            'mint-dark':   '#48C39E',
+            'cream':       '#f8f7f3',
+          },
+          fontFamily: {
+            serif: ['Instrument Serif', 'serif'],
+            sans:  ['Plus Jakarta Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Self-hosted GSAP & ApexCharts -->
+  <script src="libs/gsap.min.js"></script>
+  <script src="libs/apexcharts.min.js"></script>
+
+  <style>
+    @font-face { font-family:'Instrument Serif'; src:url('libs/fonts/InstrumentSerif-Italic.ttf') format('truetype'); font-style:italic; font-display:swap; }
+    @font-face { font-family:'Plus Jakarta Sans'; src:url('libs/fonts/PlusJakartaSans-400.ttf') format('truetype'); font-weight:400; font-display:swap; }
+    @font-face { font-family:'Plus Jakarta Sans'; src:url('libs/fonts/PlusJakartaSans-600.ttf') format('truetype'); font-weight:600; font-display:swap; }
+    @font-face { font-family:'Plus Jakarta Sans'; src:url('libs/fonts/PlusJakartaSans-700.ttf') format('truetype'); font-weight:700; font-display:swap; }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; overflow: hidden; }
+
+    /* Sidebar nav active state */
+    .nav-item { border-left: 3px solid transparent; transition: all .2s; }
+    .nav-item.active { border-left-color: #a7e4c9; background: rgba(167,228,201,.12); color: #a7e4c9 !important; }
+
+    /* Smooth scrollbar */
+    #main-scroll::-webkit-scrollbar { width: 5px; }
+    #main-scroll::-webkit-scrollbar-track { background: #f1f5f9; }
+    #main-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+    /* Progress bar fill */
+    .prog-fill { transition: width 1.3s cubic-bezier(.25,1,.5,1); }
+
+    /* Badge glow on hover */
+    .badge-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(18,42,38,.12); }
+    .badge-card { transition: transform .3s, box-shadow .3s; }
+
+    /* Section tabs */
+    .section-tab.active { background: #23353e; color: #fff; }
+    .section-tab { cursor: pointer; }
+
+    /* Section panels */
+    .section-panel { display: none; }
+    .section-panel.active { display: block; }
+
+    /* Campaign image zoom */
+    .camp-img { transition: transform .5s ease; }
+    .camp-card:hover .camp-img { transform: scale(1.05); }
+
+    /* Badge grid */
+    .badge-grid img { filter: grayscale(30%); transition: filter .3s; }
+    .badge-grid img:hover { filter: grayscale(0%); }
+  </style>
+</head>
+
+<body class="bg-[#f8f7f3]">
+
+<!-- ── Mobile overlay ── -->
+<div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-30 hidden" onclick="closeSidebar()"></div>
+
+<div class="flex h-screen overflow-hidden">
+
+  <!-- ══════════════════════════
+       SIDEBAR
+  ══════════════════════════ -->
+  <aside id="sidebar"
+    class="fixed md:static inset-y-0 left-0 z-40 w-64 flex flex-col bg-[#23353e] text-white
+           transform -translate-x-full md:translate-x-0 transition-transform duration-300 flex-shrink-0">
+
+    <!-- Logo header -->
+    <div class="flex items-center justify-between px-5 py-5 border-b border-white/10">
+      <a href="user-dashboard.html" onclick="sessionStorage.removeItem('activeUserSection'); showSection('sec-overview'); return false;" class="flex items-center gap-3">
+        <img src="assets/logo.webp" alt="Stackly" class="h-8 w-auto brightness-200 object-contain">
+      </a>
+      <!-- Mobile close -->
+      <button class="md:hidden text-white/60 hover:text-white p-1 transition-colors" onclick="closeSidebar()" aria-label="Close menu">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- User mini profile -->
+    <div class="px-5 py-4 border-b border-white/10">
+      <div class="flex items-center gap-3">
+        <div id="user-sidebar-avatar" class="w-10 h-10 rounded-full bg-[#a7e4c9] flex items-center justify-center text-[#23353e] font-bold text-sm flex-shrink-0">JD</div>
+        <div>
+          <p id="user-profile-name" class="text-sm font-bold text-white">John Donor</p>
+          <p id="user-profile-email" class="text-[10px] text-[#a7e4c9] font-semibold">donor@stackly.com</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
+      <a href="#" data-section="sec-overview" onclick="showSection('sec-overview');return false;"
+         class="nav-item active flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold transition-all hover:bg-white/10">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        Dashboard Overview
+      </a>
+      <a href="#" data-section="sec-donations" onclick="showSection('sec-donations');return false;"
+         class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold text-white/70 transition-all hover:bg-white/10 hover:text-white">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        My Donations
+      </a>
+      <a href="#" data-section="sec-volunteer" onclick="showSection('sec-volunteer');return false;"
+         class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold text-white/70 transition-all hover:bg-white/10 hover:text-white">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        Volunteer Journey
+      </a>
+      <a href="#" data-section="sec-campaigns" onclick="showSection('sec-campaigns');return false;"
+         class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold text-white/70 transition-all hover:bg-white/10 hover:text-white">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
+        Saved Campaigns
+      </a>
+      <a href="#" data-section="sec-rewards" onclick="showSection('sec-rewards');return false;"
+         class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold text-white/70 transition-all hover:bg-white/10 hover:text-white">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+        Rewards &amp; Certificates
+      </a>
+    </nav>
+
+    <!-- Logout -->
+    <div class="px-3 py-4 border-t border-white/10">
+      <a href="login.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold text-white/60 hover:bg-red-500/20 hover:text-red-400 transition-all">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+        Logout
+      </a>
+    </div>
+  </aside>
+  <!-- /SIDEBAR -->
+
+  <!-- ══════════════════════════
+       MAIN CONTENT
+  ══════════════════════════ -->
+  <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+
+    <!-- Top Navbar -->
+    <header class="sticky top-0 z-20 bg-white border-b border-gray-200 h-16 flex items-center px-4 md:px-6 gap-4 flex-shrink-0 shadow-sm">
+      <!-- Mobile hamburger -->
+      <button class="md:hidden p-2 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors" onclick="openSidebar()" aria-label="Open menu">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+
+      <!-- Page title (updates with section) -->
+      <h1 id="page-title" class="flex-1 font-serif italic text-[#23353e] text-xl md:text-2xl truncate">
+        Welcome back, John 👋
+      </h1>
+
+      <!-- Notification bell -->
+      <a href="404.html" class="relative p-2 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+        <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-[#48C39E] rounded-full"></span>
+      </a>
+
+      <!-- User avatar -->
+      <div class="flex items-center gap-2">
+        <div class="hidden sm:block text-right">
+          <p id="user-nav-name" class="text-xs font-bold text-[#23353e]">John Donor</p>
+          <p class="text-[10px] text-[#48C39E] font-semibold">Gold Tier ★</p>
+        </div>
+        <div id="user-nav-avatar" class="w-9 h-9 rounded-full bg-[#a7e4c9] flex items-center justify-center text-[#23353e] font-bold text-sm">JD</div>
+      </div>
+    </header>
+
+    <!-- Scrollable sections -->
+    <div id="main-scroll" class="flex-1 overflow-y-auto">
+
+
+<!-- ╔══════════════════════════════════════════════════
+     SECTION 1 — DASHBOARD OVERVIEW
+╚══════════════════════════════════════════════════ -->
+<section id="sec-overview" class="section-panel active">
+
+  <!-- Hero greeting banner -->
+  <div class="bg-[#23353e] text-white px-6 py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div>
+      <p class="text-[#a7e4c9] text-[10px] font-bold tracking-widest uppercase mb-1">My Dashboard</p>
+      <h2 class="font-serif italic text-2xl md:text-3xl">Welcome back, <span id="user-banner-name">John</span> 👋</h2>
+      <p class="text-white/60 text-sm mt-1">Here's a summary of your impact this month.</p>
+    </div>
+    <a href="404.html" class="inline-flex items-center gap-2 bg-[#a7e4c9] text-[#23353e] font-bold text-sm px-5 py-2.5 rounded-full hover:bg-white transition-colors self-start sm:self-auto whitespace-nowrap">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+      Donate Now
+    </a>
+  </div>
+
+  <!-- ── SECTION 1: KPI Summary Cards ── -->
+  <div class="p-6">
+    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">Your Impact Summary</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="kpi-grid">
+
+      <!-- Card 1: Profile -->
+      <div class="kpi-card bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex items-start gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-[#a7e4c9]/20 flex items-center justify-center text-2xl flex-shrink-0">👤</div>
+        <div>
+          <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">My Profile</p>
+          <p class="text-xl font-bold text-[#23353e] mt-1">Active Donor</p>
+          <p class="text-xs text-[#48C39E] font-semibold mt-0.5">Member since Jan 2024</p>
+        </div>
+      </div>
+
+      <!-- Card 2: Total Donations -->
+      <div class="kpi-card bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex items-start gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-yellow-50 flex items-center justify-center text-2xl flex-shrink-0">💰</div>
+        <div>
+          <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Total Donations</p>
+          <p class="text-xl font-bold text-[#23353e] mt-1">$1,250</p>
+          <p class="text-xs text-green-500 font-semibold mt-0.5">↑ $150 this month</p>
+        </div>
+      </div>
+
+      <!-- Card 3: Campaigns Supported -->
+      <div class="kpi-card bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex items-start gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-red-50 flex items-center justify-center text-2xl flex-shrink-0">❤️</div>
+        <div>
+          <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Campaigns Supported</p>
+          <p class="text-xl font-bold text-[#23353e] mt-1">4 Campaigns</p>
+          <p class="text-xs text-gray-400 font-semibold mt-0.5">Education, Water, Health, Food</p>
+        </div>
+      </div>
+
+      <!-- Card 4: Volunteer Hours -->
+      <div class="kpi-card bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex items-start gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-2xl flex-shrink-0">🤝</div>
+        <div>
+          <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Volunteer Hours</p>
+          <p class="text-xl font-bold text-[#23353e] mt-1">32 Hours</p>
+          <p class="text-xs text-green-500 font-semibold mt-0.5">↑ 8 hrs this month</p>
+        </div>
+      </div>
+
+      <!-- Card 5: Upcoming Events -->
+      <div class="kpi-card bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex items-start gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center text-2xl flex-shrink-0">📅</div>
+        <div>
+          <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Upcoming Events</p>
+          <p class="text-xl font-bold text-[#23353e] mt-1">2 Events</p>
+          <p class="text-xs text-orange-500 font-semibold mt-0.5">Next: Food Drive, Aug 15</p>
+        </div>
+      </div>
+
+      <!-- Card 6: Rewards -->
+      <div class="kpi-card bg-[#23353e] rounded-2xl shadow-sm p-6 border border-[#23353e] flex items-start gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-[#a7e4c9]/20 flex items-center justify-center text-2xl flex-shrink-0">🎁</div>
+        <div>
+          <p class="text-[10px] text-[#a7e4c9] font-bold uppercase tracking-widest">Rewards</p>
+          <p class="text-xl font-bold text-white mt-1">Gold Tier Donor</p>
+          <p class="text-xs text-white/50 font-semibold mt-0.5">3 badges earned</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── SECTION 2: Donation Analytics Charts ── -->
+  <div class="px-6 pb-6 grid grid-cols-1 lg:grid-cols-2 gap-5">
+    <!-- Donation History Line Chart -->
+    <div class="chart-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <h4 class="font-bold text-[#23353e] text-sm">Donation History</h4>
+          <p class="text-xs text-gray-400 mt-0.5">Last 6 months</p>
+        </div>
+        <span class="text-[10px] font-bold text-[#a7e4c9] bg-[#23353e] px-3 py-1 rounded-full">2026</span>
+      </div>
+      <div style="position:relative;height:280px;width:100%"><div id="ov-chart-line"></div></div>
+    </div>
+
+    <!-- Donation Categories Pie Chart -->
+    <div class="chart-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+      <h4 class="font-bold text-[#23353e] text-sm mb-1">Donation Categories</h4>
+      <p class="text-xs text-gray-400 mb-3">Distribution across causes</p>
+      <div style="position:relative;height:280px;width:100%"><div id="ov-chart-pie"></div></div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 3: Volunteer Activity ── -->
+  <div class="px-6 pb-6">
+    <div class="chart-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <h4 class="font-bold text-[#23353e] text-sm">Volunteer Activity</h4>
+          <p class="text-xs text-gray-400 mt-0.5">Monthly hours logged this year</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-3 h-3 rounded-full bg-[#48C39E]"></div>
+          <span class="text-[10px] text-gray-500 font-semibold">Hours</span>
+        </div>
+      </div>
+      <div style="position:relative;height:260px;width:100%"><div id="ov-chart-bar"></div></div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 4: Active Campaign Progress ── -->
+  <div class="px-6 pb-6">
+    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">Campaigns You're Supporting</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <!-- Campaign 1 -->
+      <div class="camp-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+        <div class="h-40 overflow-hidden">
+          <img src="assets/home/050145712d268ce3d0fb581a46f14a460cc3a35f.webp" alt="Education" class="camp-img w-full h-full object-cover">
+        </div>
+        <div class="p-4">
+          <span class="text-[10px] font-bold text-blue-500 uppercase tracking-wider">Education</span>
+          <h5 class="font-bold text-[#23353e] text-sm mt-1 mb-2">Rural Education Drive</h5>
+          <div class="flex justify-between text-xs text-gray-500 mb-1">
+            <span>Raised: $7,500</span>
+            <span class="font-bold text-[#48C39E]">75%</span>
+          </div>
+          <div class="w-full bg-gray-100 rounded-full h-2 mb-1">
+            <div class="prog-fill h-2 rounded-full bg-[#48C39E]" style="width:0" data-width="75%"></div>
+          </div>
+          <p class="text-[10px] text-gray-400">Goal: $10,000 · 18 days left</p>
+          <a href="404.html" class="mt-3 block text-center text-[10px] font-bold text-[#48C39E] border border-[#48C39E] py-2 rounded-lg hover:bg-[#48C39E] hover:text-white transition-colors">Support More →</a>
+        </div>
+      </div>
+
+      <!-- Campaign 2 -->
+      <div class="camp-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+        <div class="h-40 overflow-hidden">
+          <img src="assets/home/fe2e0855b4bac8a5bc832afa98b18f4a6b06c50e.webp" alt="Water" class="camp-img w-full h-full object-cover">
+        </div>
+        <div class="p-4">
+          <span class="text-[10px] font-bold text-teal-500 uppercase tracking-wider">Clean Water</span>
+          <h5 class="font-bold text-[#23353e] text-sm mt-1 mb-2">Clean Water Initiative</h5>
+          <div class="flex justify-between text-xs text-gray-500 mb-1">
+            <span>Raised: $36,000</span>
+            <span class="font-bold text-[#48C39E]">72%</span>
+          </div>
+          <div class="w-full bg-gray-100 rounded-full h-2 mb-1">
+            <div class="prog-fill h-2 rounded-full bg-[#a7e4c9]" style="width:0" data-width="72%"></div>
+          </div>
+          <p class="text-[10px] text-gray-400">Goal: $50,000 · 12 days left</p>
+          <a href="404.html" class="mt-3 block text-center text-[10px] font-bold text-[#48C39E] border border-[#48C39E] py-2 rounded-lg hover:bg-[#48C39E] hover:text-white transition-colors">Support More →</a>
+        </div>
+      </div>
+
+      <!-- Campaign 3 -->
+      <div class="camp-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+        <div class="h-40 overflow-hidden">
+          <img src="assets/home/f7d62a2697b9a7eb753412e50b2d50a08d241d41.webp" alt="Food" class="camp-img w-full h-full object-cover">
+        </div>
+        <div class="p-4">
+          <span class="text-[10px] font-bold text-orange-500 uppercase tracking-wider">Food Drive</span>
+          <h5 class="font-bold text-[#23353e] text-sm mt-1 mb-2">Winter Food Drive</h5>
+          <div class="flex justify-between text-xs text-gray-500 mb-1">
+            <span>Raised: $32,500</span>
+            <span class="font-bold text-[#48C39E]">65%</span>
+          </div>
+          <div class="w-full bg-gray-100 rounded-full h-2 mb-1">
+            <div class="prog-fill h-2 rounded-full bg-[#48C39E]" style="width:0" data-width="65%"></div>
+          </div>
+          <p class="text-[10px] text-gray-400">Goal: $50,000 · 30 days left</p>
+          <a href="404.html" class="mt-3 block text-center text-[10px] font-bold text-[#48C39E] border border-[#48C39E] py-2 rounded-lg hover:bg-[#48C39E] hover:text-white transition-colors">Support More →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── SECTION 5: Achievements / Badges ── -->
+  <div class="px-6 pb-8">
+    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">Your Achievements</p>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 badge-grid">
+
+      <a href="404.html" class="badge-card bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col items-center gap-2 text-center cursor-pointer">
+        <div class="w-14 h-14 rounded-full bg-yellow-50 flex items-center justify-center text-3xl">🥇</div>
+        <p class="text-xs font-bold text-[#23353e]">Gold Donor</p>
+        <p class="text-[10px] text-gray-400">$1,000+ donated</p>
+      </a>
+
+      <a href="404.html" class="badge-card bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col items-center gap-2 text-center cursor-pointer">
+        <div class="w-14 h-14 rounded-full bg-[#a7e4c9]/20 flex items-center justify-center text-3xl">💧</div>
+        <p class="text-xs font-bold text-[#23353e]">Water Hero</p>
+        <p class="text-[10px] text-gray-400">Funded 2 wells</p>
+      </a>
+
+      <a href="404.html" class="badge-card bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col items-center gap-2 text-center cursor-pointer">
+        <div class="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center text-3xl">📚</div>
+        <p class="text-xs font-bold text-[#23353e]">Edu Champion</p>
+        <p class="text-[10px] text-gray-400">Sponsored 3 students</p>
+      </a>
+
+      <a href="404.html" class="badge-card bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col items-center gap-2 text-center cursor-pointer">
+        <div class="w-14 h-14 rounded-full bg-green-50 flex items-center justify-center text-3xl">🌱</div>
+        <p class="text-xs font-bold text-[#23353e]">Eco Warrior</p>
+        <p class="text-[10px] text-gray-400">10 trees planted</p>
+      </a>
+
+      <a href="404.html" class="badge-card bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col items-center gap-2 text-center cursor-pointer">
+        <div class="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center text-3xl">❤️</div>
+        <p class="text-xs font-bold text-[#23353e]">Care Giver</p>
+        <p class="text-[10px] text-gray-400">32 volunteer hrs</p>
+      </a>
+
+      <a href="404.html" class="badge-card bg-[#23353e] rounded-2xl border border-[#23353e] shadow-sm p-4 flex flex-col items-center gap-2 text-center cursor-pointer">
+        <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center text-3xl">🔓</div>
+        <p class="text-xs font-bold text-white">Next Badge</p>
+        <p class="text-[10px] text-white/40">$250 more to unlock</p>
+      </a>
+
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ╔══════════════════════════════════════════════════
+     SECTION 2 — MY DONATIONS
+╚══════════════════════════════════════════════════ -->
+<section id="sec-donations" class="section-panel">
+  <div class="bg-[#23353e] text-white px-6 py-5">
+    <h2 class="font-serif italic text-2xl">My Donations</h2>
+    <p class="text-white/50 text-xs mt-0.5">Full history of your contributions</p>
+  </div>
+  <div class="p-6 space-y-6">
+
+    <!-- KPIs -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="kpi-card bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center">
+        <p class="text-2xl font-bold text-[#23353e]">$1,250</p><p class="text-xs text-gray-400 mt-1 font-semibold">Total Donated</p>
+      </div>
+      <div class="kpi-card bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center">
+        <p class="text-2xl font-bold text-[#48C39E]">14</p><p class="text-xs text-gray-400 mt-1 font-semibold">Transactions</p>
+      </div>
+      <div class="kpi-card bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center">
+        <p class="text-2xl font-bold text-[#23353e]">$89</p><p class="text-xs text-gray-400 mt-1 font-semibold">Avg Per Donation</p>
+      </div>
+      <div class="kpi-card bg-[#23353e] rounded-2xl border border-[#23353e] shadow-sm p-5 text-center">
+        <p class="text-2xl font-bold text-white">$150</p><p class="text-xs text-[#a7e4c9] mt-1 font-semibold">This Month</p>
+      </div>
+    </div>
+
+    <!-- Donation trend chart -->
+    <div class="chart-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+      <h4 class="font-bold text-[#23353e] text-sm mb-1">Donation Trend</h4>
+      <p class="text-xs text-gray-400 mb-3">Monthly — last 12 months</p>
+      <div style="position:relative;height:280px;width:100%"><div id="don-chart-trend"></div></div>
+    </div>
+
+    <!-- Category donut + method pie -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      <div class="chart-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h4 class="font-bold text-[#23353e] text-sm mb-1">By Cause Category</h4>
+        <p class="text-xs text-gray-400 mb-3">Where your money goes</p>
+        <div style="position:relative;height:260px;width:100%"><div id="don-chart-pie"></div></div>
+      </div>
+      <div class="chart-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h4 class="font-bold text-[#23353e] text-sm mb-1">By Payment Method</h4>
+        <p class="text-xs text-gray-400 mb-3">How you give</p>
+        <div style="position:relative;height:260px;width:100%"><div id="don-chart-method"></div></div>
+      </div>
+    </div>
+
+    <!-- Donation history table -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+      <div class="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
+        <h4 class="font-bold text-[#23353e] text-sm">Donation History</h4>
+        <a href="404.html" class="text-xs font-bold text-[#48C39E] hover:underline">Download PDF →</a>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead class="bg-gray-50"><tr>
+            <th class="px-5 py-3 text-left text-[10px] font-bold text-gray-400 uppercase tracking-wider">Date</th>
+            <th class="px-5 py-3 text-left text-[10px] font-bold text-gray-400 uppercase tracking-wider">Campaign</th>
+            <th class="px-5 py-3 text-left text-[10px] font-bold text-gray-400 uppercase tracking-wider">Amount</th>
+            <th class="px-5 py-3 text-left text-[10px] font-bold text-gray-400 uppercase tracking-wider">Method</th>
+            <th class="px-5 py-3 text-left text-[10px] font-bold text-gray-400 uppercase tracking-wider">Status</th>
+          </tr></thead>
+          <tbody class="divide-y divide-gray-50">
+            <tr class="hover:bg-gray-50"><td class="px-5 py-3 text-gray-400 text-xs">Aug 3, 2026</td><td class="px-5 py-3 font-semibold text-[#23353e]">Education Drive</td><td class="px-5 py-3 font-bold text-[#23353e]">$150</td><td class="px-5 py-3 text-gray-500 text-xs">Credit Card</td><td class="px-5 py-3"><span class="bg-green-100 text-green-700 px-2 py-0.5 text-[10px] font-bold rounded-full">Completed</span></td></tr>
+            <tr class="hover:bg-gray-50"><td class="px-5 py-3 text-gray-400 text-xs">Jul 15, 2026</td><td class="px-5 py-3 font-semibold text-[#23353e]">Clean Water</td><td class="px-5 py-3 font-bold text-[#23353e]">$100</td><td class="px-5 py-3 text-gray-500 text-xs">PayPal</td><td class="px-5 py-3"><span class="bg-green-100 text-green-700 px-2 py-0.5 text-[10px] font-bold rounded-full">Completed</span></td></tr>
+            <tr class="hover:bg-gray-50"><td class="px-5 py-3 text-gray-400 text-xs">Jul 2, 2026</td><td class="px-5 py-3 font-semibold text-[#23353e]">Food Drive</td><td class="px-5 py-3 font-bold text-[#23353e]">$75</td><td class="px-5 py-3 text-gray-500 text-xs">Credit Card</td><td class="px-5 py-3"><span class="bg-green-100 text-green-700 px-2 py-0.5 text-[10px] font-bold rounded-full">Completed</span></td></tr>
+            <tr class="hover:bg-gray-50"><td class="px-5 py-3 text-gray-400 text-xs">Jun 20, 2026</td><td class="px-5 py-3 font-semibold text-[#23353e]">Medical Camp</td><td class="px-5 py-3 font-bold text-[#23353e]">$200</td><td class="px-5 py-3 text-gray-500 text-xs">Bank Transfer</td><td class="px-5 py-3"><span class="bg-green-100 text-green-700 px-2 py-0.5 text-[10px] font-bold rounded-full">Completed</span></td></tr>
+            <tr class="hover:bg-gray-50"><td class="px-5 py-3 text-gray-400 text-xs">Jun 5, 2026</td><td class="px-5 py-3 font-semibold text-[#23353e]">Education Drive</td><td class="px-5 py-3 font-bold text-[#23353e]">$120</td><td class="px-5 py-3 text-gray-500 text-xs">Credit Card</td><td class="px-5 py-3"><span class="bg-yellow-100 text-yellow-700 px-2 py-0.5 text-[10px] font-bold rounded-full">Processing</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Recurring donation setup card -->
+    <div class="bg-gradient-to-r from-[#23353e] to-[#2e4553] rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-white">
+      <div>
+        <p class="text-[#a7e4c9] text-[10px] font-bold uppercase tracking-widest mb-1">💡 Make More Impact</p>
+        <h4 class="font-serif italic text-xl">Set up a monthly donation</h4>
+        <p class="text-white/60 text-xs mt-1">Small recurring gifts create lasting change.</p>
+      </div>
+      <a href="404.html" class="bg-[#a7e4c9] text-[#23353e] font-bold text-sm px-6 py-3 rounded-full hover:bg-white transition-colors whitespace-nowrap self-start sm:self-auto">
+        Give Monthly →
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════
+     SECTION 3 — VOLUNTEER JOURNEY
+╚══════════════════════════════════════════════════ -->
+<section id="sec-volunteer" class="section-panel">
+  <div class="bg-[#23353e] text-white px-6 py-5">
+    <h2 class="font-serif italic text-2xl">Volunteer Journey</h2>
+    <p class="text-white/50 text-xs mt-0.5">Track your service and impact hours</p>
+  </div>
+  <div class="p-6 space-y-6">
+
+    <!-- KPIs -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="kpi-card bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center">
+        <p class="text-2xl font-bold text-[#23353e]">32</p><p class="text-xs text-gray-400 mt-1 font-semibold">Total Hours</p>
+      </div>
+      <div class="kpi-card bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center">
+        <p class="text-2xl font-bold text-[#48C39E]">5</p><p class="text-xs text-gray-400 mt-1 font-semibold">Events Attended</p>
+      </div>
+      <div class="kpi-card bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center">
+        <p class="text-2xl font-bold text-[#23353e]">★ 4.9</p><p class="text-xs text-gray-400 mt-1 font-semibold">Rating</p>
+      </div>
+      <div class="kpi-card bg-[#23353e] rounded-2xl border border-[#23353e] shadow-sm p-5 text-center">
+        <p class="text-2xl font-bold text-white">8 hrs</p><p class="text-xs text-[#a7e4c9] mt-1 font-semibold">This Month</p>
+      </div>
+    </div>
+
+    <!-- Activity area chart -->
+    <div class="chart-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+      <h4 class="font-bold text-[#23353e] text-sm mb-1">Monthly Volunteer Hours</h4>
+      <p class="text-xs text-gray-400 mb-3">Your activity across the year</p>
+      <div style="position:relative;height:280px;width:100%"><div id="vol-chart-area"></div></div>
+    </div>
+
+    <!-- Role distribution + upcoming events -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      <!-- Role donut -->
+      <div class="chart-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h4 class="font-bold text-[#23353e] text-sm mb-1">Hours by Activity Type</h4>
+        <p class="text-xs text-gray-400 mb-3">Breakdown of your volunteer roles</p>
+        <div style="position:relative;height:260px;width:100%"><div id="vol-chart-donut"></div></div>
+      </div>
+      <!-- Upcoming events -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h4 class="font-bold text-[#23353e] text-sm mb-4">Upcoming Events</h4>
+        <div class="space-y-3">
+          <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+            <div class="w-10 h-10 rounded-xl bg-[#a7e4c9]/20 text-[#48C39E] font-bold text-xs flex items-center justify-center flex-shrink-0">AUG<br>15</div>
+            <div><p class="text-xs font-bold text-[#23353e]">Food Distribution Day</p><p class="text-[10px] text-gray-400">Nairobi Centre · 8am–2pm</p></div>
+            <span class="ml-auto bg-green-100 text-green-700 px-2 py-0.5 text-[10px] font-bold rounded-full whitespace-nowrap">Registered</span>
+          </div>
+          <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+            <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-500 font-bold text-xs flex items-center justify-center flex-shrink-0">AUG<br>22</div>
+            <div><p class="text-xs font-bold text-[#23353e]">School Supplies Drive</p><p class="text-[10px] text-gray-400">Mumbai Schools · 9am–1pm</p></div>
+            <span class="ml-auto bg-yellow-100 text-yellow-700 px-2 py-0.5 text-[10px] font-bold rounded-full whitespace-nowrap">Pending</span>
+          </div>
+          <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+            <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-500 font-bold text-xs flex items-center justify-center flex-shrink-0">SEP<br>5</div>
+            <div><p class="text-xs font-bold text-[#23353e]">Well Digging Project</p><p class="text-[10px] text-gray-400">Accra, Ghana · Full day</p></div>
+            <a href="404.html" class="ml-auto bg-[#23353e] text-white px-2 py-0.5 text-[10px] font-bold rounded-full whitespace-nowrap hover:bg-[#48C39E] transition-colors">Join</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Volunteer history table -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+      <div class="px-5 py-4 border-b border-gray-100"><h4 class="font-bold text-[#23353e] text-sm">Service Log</h4></div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead class="bg-gray-50"><tr>
+            <th class="px-5 py-3 text-left text-[10px] font-bold text-gray-400 uppercase tracking-wider">Date</th>
+            <th class="px-5 py-3 text-left text-[10px] font-bold text-gray-400 uppercase tracking-wider">Event</th>
+            <th class="px-5 py-3 text-left text-[10px] font-bold text-gray-400 uppercase tracking-wider">Role</th>
+            <th class="px-5 py-3 text-left text-[10px] font-bold text-gray-400 uppercase tracking-wider">Hours</th>
+            <th class="px-5 py-3 text-left text-[10px] font-bold text-gray-400 uppercase tracking-wider">Rating</th>
+          </tr></thead>
+          <tbody class="divide-y divide-gray-50">
+            <tr class="hover:bg-gray-50"><td class="px-5 py-3 text-gray-400 text-xs">Jul 28</td><td class="px-5 py-3 font-semibold text-[#23353e]">Food Distribution</td><td class="px-5 py-3 text-gray-500 text-xs">Field Worker</td><td class="px-5 py-3 font-bold text-[#23353e]">8</td><td class="px-5 py-3 text-yellow-500 font-bold">★ 5.0</td></tr>
+            <tr class="hover:bg-gray-50"><td class="px-5 py-3 text-gray-400 text-xs">Jul 10</td><td class="px-5 py-3 font-semibold text-[#23353e]">Education Workshop</td><td class="px-5 py-3 text-gray-500 text-xs">Educator</td><td class="px-5 py-3 font-bold text-[#23353e]">6</td><td class="px-5 py-3 text-yellow-500 font-bold">★ 4.8</td></tr>
+            <tr class="hover:bg-gray-50"><td class="px-5 py-3 text-gray-400 text-xs">Jun 22</td><td class="px-5 py-3 font-semibold text-[#23353e]">Medical Camp</td><td class="px-5 py-3 text-gray-500 text-xs">Admin Support</td><td class="px-5 py-3 font-bold text-[#23353e]">10</td><td class="px-5 py-3 text-yellow-500 font-bold">★ 4.9</td></tr>
+            <tr class="hover:bg-gray-50"><td class="px-5 py-3 text-gray-400 text-xs">Jun 5</td><td class="px-5 py-3 font-semibold text-[#23353e]">Water Project Setup</td><td class="px-5 py-3 text-gray-500 text-xs">Field Worker</td><td class="px-5 py-3 font-bold text-[#23353e]">8</td><td class="px-5 py-3 text-yellow-500 font-bold">★ 5.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Impact statement -->
+    <div class="bg-gradient-to-br from-[#a7e4c9]/20 to-[#a7e4c9]/5 rounded-2xl p-6 border border-[#a7e4c9]/30">
+      <p class="text-[10px] font-bold text-[#48C39E] uppercase tracking-widest mb-2">🌍 Your Impact</p>
+      <p class="font-serif italic text-xl text-[#23353e]">"Your 32 volunteer hours helped feed 240 families, educate 18 children, and support 3 community wells."</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════
+     SECTION 4 — SAVED CAMPAIGNS
+╚══════════════════════════════════════════════════ -->
+<section id="sec-campaigns" class="section-panel">
+  <div class="bg-[#23353e] text-white px-6 py-5 flex items-center justify-between">
+    <div>
+      <h2 class="font-serif italic text-2xl">Saved Campaigns</h2>
+      <p class="text-white/50 text-xs mt-0.5">Causes you're following and supporting</p>
+    </div>
+    <a href="404.html" class="bg-[#a7e4c9] text-[#23353e] font-bold text-xs px-4 py-2 rounded-full hover:bg-white transition-colors">Browse More →</a>
+  </div>
+  <div class="p-6 space-y-6">
+
+    <!-- Stats bar -->
+    <div class="grid grid-cols-3 gap-4">
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 text-center"><p class="text-xl font-bold text-[#48C39E]">4</p><p class="text-xs text-gray-400 mt-1 font-semibold">Saved</p></div>
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 text-center"><p class="text-xl font-bold text-[#23353e]">2</p><p class="text-xs text-gray-400 mt-1 font-semibold">Active</p></div>
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 text-center"><p class="text-xl font-bold text-[#23353e]">$830</p><p class="text-xs text-gray-400 mt-1 font-semibold">Contributed</p></div>
+    </div>
+
+    <!-- Campaign cards grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+      <div class="camp-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+        <div class="h-44 overflow-hidden relative"><img src="assets/home/050145712d268ce3d0fb581a46f14a460cc3a35f.webp" alt="Education" class="camp-img w-full h-full object-cover">
+          <span class="absolute top-3 left-3 bg-blue-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Education</span></div>
+        <div class="p-4">
+          <h5 class="font-bold text-[#23353e] text-sm mb-2">Rural Education Drive</h5>
+          <div class="flex justify-between text-xs text-gray-500 mb-1"><span>$7,500 raised</span><span class="font-bold text-[#48C39E]">75%</span></div>
+          <div class="w-full bg-gray-100 rounded-full h-2 mb-3"><div class="prog-fill h-2 rounded-full bg-[#48C39E]" style="width:0" data-width="75%"></div></div>
+          <div class="flex gap-2">
+            <a href="404.html" class="flex-1 text-center bg-[#23353e] text-white text-xs font-bold py-2 rounded-lg hover:bg-[#2e4553] transition-colors">Donate</a>
+            <a href="404.html" class="flex-1 text-center border border-gray-200 text-gray-600 text-xs font-bold py-2 rounded-lg hover:bg-gray-50 transition-colors">View</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="camp-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+        <div class="h-44 overflow-hidden relative"><img src="assets/home/fe2e0855b4bac8a5bc832afa98b18f4a6b06c50e.webp" alt="Water" class="camp-img w-full h-full object-cover">
+          <span class="absolute top-3 left-3 bg-teal-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Water</span></div>
+        <div class="p-4">
+          <h5 class="font-bold text-[#23353e] text-sm mb-2">Clean Water Initiative</h5>
+          <div class="flex justify-between text-xs text-gray-500 mb-1"><span>$36,000 raised</span><span class="font-bold text-[#48C39E]">72%</span></div>
+          <div class="w-full bg-gray-100 rounded-full h-2 mb-3"><div class="prog-fill h-2 rounded-full bg-[#a7e4c9]" style="width:0" data-width="72%"></div></div>
+          <div class="flex gap-2">
+            <a href="404.html" class="flex-1 text-center bg-[#23353e] text-white text-xs font-bold py-2 rounded-lg hover:bg-[#2e4553] transition-colors">Donate</a>
+            <a href="404.html" class="flex-1 text-center border border-gray-200 text-gray-600 text-xs font-bold py-2 rounded-lg hover:bg-gray-50 transition-colors">View</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="camp-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+        <div class="h-44 overflow-hidden relative"><img src="assets/home/f7d62a2697b9a7eb753412e50b2d50a08d241d41.webp" alt="Food" class="camp-img w-full h-full object-cover">
+          <span class="absolute top-3 left-3 bg-orange-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Food</span></div>
+        <div class="p-4">
+          <h5 class="font-bold text-[#23353e] text-sm mb-2">Winter Food Drive</h5>
+          <div class="flex justify-between text-xs text-gray-500 mb-1"><span>$32,500 raised</span><span class="font-bold text-[#48C39E]">65%</span></div>
+          <div class="w-full bg-gray-100 rounded-full h-2 mb-3"><div class="prog-fill h-2 rounded-full bg-[#48C39E]" style="width:0" data-width="65%"></div></div>
+          <div class="flex gap-2">
+            <a href="404.html" class="flex-1 text-center bg-[#23353e] text-white text-xs font-bold py-2 rounded-lg hover:bg-[#2e4553] transition-colors">Donate</a>
+            <a href="404.html" class="flex-1 text-center border border-gray-200 text-gray-600 text-xs font-bold py-2 rounded-lg hover:bg-gray-50 transition-colors">View</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="camp-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+        <div class="h-44 overflow-hidden relative"><img src="assets/home/7e6fb4e611979bda6582c2bde6df831caacf73f3.webp" alt="Health" class="camp-img w-full h-full object-cover">
+          <span class="absolute top-3 left-3 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Health</span></div>
+        <div class="p-4">
+          <h5 class="font-bold text-[#23353e] text-sm mb-2">Community Health Camp</h5>
+          <div class="flex justify-between text-xs text-gray-500 mb-1"><span>$13,500 raised</span><span class="font-bold text-orange-400">45%</span></div>
+          <div class="w-full bg-gray-100 rounded-full h-2 mb-3"><div class="prog-fill h-2 rounded-full bg-orange-400" style="width:0" data-width="45%"></div></div>
+          <div class="flex gap-2">
+            <a href="404.html" class="flex-1 text-center bg-[#23353e] text-white text-xs font-bold py-2 rounded-lg hover:bg-[#2e4553] transition-colors">Donate</a>
+            <a href="404.html" class="flex-1 text-center border border-gray-200 text-gray-600 text-xs font-bold py-2 rounded-lg hover:bg-gray-50 transition-colors">View</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Recommended causes -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+      <h4 class="font-bold text-[#23353e] text-sm mb-4">Recommended for You</h4>
+      <div class="space-y-3">
+        <div class="flex items-center gap-4 p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors">
+          <img src="assets/home/1.webp" alt="" class="w-12 h-12 rounded-xl object-cover flex-shrink-0">
+          <div class="flex-1"><p class="text-xs font-bold text-[#23353e]">Women Empowerment Program</p><p class="text-[10px] text-gray-400">55% funded · $40,000 goal</p></div>
+          <a href="404.html" class="text-[10px] font-bold text-[#48C39E] hover:underline whitespace-nowrap">View →</a>
+        </div>
+        <div class="flex items-center gap-4 p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors">
+          <img src="assets/home/2.webp" alt="" class="w-12 h-12 rounded-xl object-cover flex-shrink-0">
+          <div class="flex-1"><p class="text-xs font-bold text-[#23353e]">Shelter for Families</p><p class="text-[10px] text-gray-400">93% funded · $60,000 goal</p></div>
+          <a href="404.html" class="text-[10px] font-bold text-[#48C39E] hover:underline whitespace-nowrap">View →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════
+     SECTION 5 — REWARDS & CERTIFICATES
+╚══════════════════════════════════════════════════ -->
+<section id="sec-rewards" class="section-panel">
+  <div class="bg-[#23353e] text-white px-6 py-5">
+    <h2 class="font-serif italic text-2xl">Rewards &amp; Certificates</h2>
+    <p class="text-white/50 text-xs mt-0.5">Your achievements and recognition</p>
+  </div>
+  <div class="p-6 space-y-6">
+
+    <!-- Tier progress -->
+    <div class="bg-gradient-to-r from-[#23353e] to-[#2e4553] rounded-2xl p-6 text-white">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5">
+        <div>
+          <p class="text-[#a7e4c9] text-[10px] font-bold uppercase tracking-widest mb-1">Current Tier</p>
+          <h3 class="font-serif italic text-2xl">🥇 Gold Donor</h3>
+          <p class="text-white/50 text-xs mt-0.5">$1,250 total donated · 32 volunteer hours</p>
+        </div>
+        <div class="text-right">
+          <p class="text-[10px] text-[#a7e4c9] font-semibold">Next: Platinum Tier</p>
+          <p class="text-white/60 text-xs">$250 more to unlock</p>
+        </div>
+      </div>
+      <div class="w-full bg-white/10 rounded-full h-3 mb-2">
+        <div class="prog-fill h-3 rounded-full bg-[#a7e4c9]" style="width:0" data-width="83%"></div>
+      </div>
+      <div class="flex justify-between text-[10px] text-white/50">
+        <span>Gold: $1,000</span><span class="font-bold text-[#a7e4c9]">83% to Platinum</span><span>Platinum: $1,500</span>
+      </div>
+    </div>
+
+    <!-- Rewards radial charts -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+      <div class="chart-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5 text-center">
+        <h4 class="font-bold text-[#23353e] text-sm mb-2">Donation Score</h4>
+        <div style="height:180px"><div id="rew-radial-donation"></div></div>
+      </div>
+      <div class="chart-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5 text-center">
+        <h4 class="font-bold text-[#23353e] text-sm mb-2">Volunteer Score</h4>
+        <div style="height:180px"><div id="rew-radial-volunteer"></div></div>
+      </div>
+      <div class="chart-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5 text-center">
+        <h4 class="font-bold text-[#23353e] text-sm mb-2">Impact Score</h4>
+        <div style="height:180px"><div id="rew-radial-impact"></div></div>
+      </div>
+    </div>
+
+    <!-- Badges earned -->
+    <div>
+      <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">Badges Earned</p>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 badge-grid">
+        <a href="404.html" class="badge-card bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center gap-2 text-center cursor-pointer">
+          <div class="w-16 h-16 rounded-full bg-yellow-50 flex items-center justify-center text-4xl">🥇</div>
+          <p class="text-xs font-bold text-[#23353e]">Gold Donor</p>
+          <p class="text-[10px] text-gray-400">Earned Aug 2026</p>
+          <span class="text-[10px] bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-bold">Unlocked</span>
+        </a>
+        <a href="404.html" class="badge-card bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center gap-2 text-center cursor-pointer">
+          <div class="w-16 h-16 rounded-full bg-[#a7e4c9]/20 flex items-center justify-center text-4xl">💧</div>
+          <p class="text-xs font-bold text-[#23353e]">Water Hero</p>
+          <p class="text-[10px] text-gray-400">Earned Jul 2026</p>
+          <span class="text-[10px] bg-teal-100 text-teal-700 px-2 py-0.5 rounded-full font-bold">Unlocked</span>
+        </a>
+        <a href="404.html" class="badge-card bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center gap-2 text-center cursor-pointer">
+          <div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center text-4xl">📚</div>
+          <p class="text-xs font-bold text-[#23353e]">Edu Champion</p>
+          <p class="text-[10px] text-gray-400">Earned Jun 2026</p>
+          <span class="text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-bold">Unlocked</span>
+        </a>
+        <a href="404.html" class="badge-card bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center gap-2 text-center cursor-pointer">
+          <div class="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center text-4xl">❤️</div>
+          <p class="text-xs font-bold text-[#23353e]">Care Giver</p>
+          <p class="text-[10px] text-gray-400">Earned Jun 2026</p>
+          <span class="text-[10px] bg-red-100 text-red-700 px-2 py-0.5 rounded-full font-bold">Unlocked</span>
+        </a>
+        <a href="404.html" class="badge-card bg-gray-50 rounded-2xl border border-dashed border-gray-200 shadow-sm p-5 flex flex-col items-center gap-2 text-center opacity-60 cursor-pointer">
+          <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center text-4xl">🔒</div>
+          <p class="text-xs font-bold text-gray-400">Platinum Donor</p>
+          <p class="text-[10px] text-gray-400">$250 more needed</p>
+          <span class="text-[10px] bg-gray-200 text-gray-500 px-2 py-0.5 rounded-full font-bold">Locked</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Certificates -->
+    <div>
+      <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">Certificates</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="bg-gradient-to-br from-[#23353e] to-[#2e4553] rounded-2xl p-5 text-white flex flex-col gap-3 hover:shadow-lg transition-shadow">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-[#a7e4c9]/20 flex items-center justify-center text-xl">🎓</div>
+            <div><p class="text-[10px] text-[#a7e4c9] font-semibold uppercase tracking-wider">Certificate</p><p class="text-sm font-bold">Volunteer Excellence</p></div>
+          </div>
+          <p class="text-xs text-white/60">Awarded for completing 30+ volunteer hours in 2026.</p>
+          <a href="404.html" class="mt-auto text-[10px] font-bold text-[#a7e4c9] hover:text-white transition-colors">Download PDF →</a>
+        </div>
+        <div class="bg-gradient-to-br from-[#23353e] to-[#2e4553] rounded-2xl p-5 text-white flex flex-col gap-3 hover:shadow-lg transition-shadow">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-yellow-400/20 flex items-center justify-center text-xl">⭐</div>
+            <div><p class="text-[10px] text-[#a7e4c9] font-semibold uppercase tracking-wider">Certificate</p><p class="text-sm font-bold">Gold Tier Donor</p></div>
+          </div>
+          <p class="text-xs text-white/60">Awarded for cumulative donations exceeding $1,000.</p>
+          <a href="404.html" class="mt-auto text-[10px] font-bold text-[#a7e4c9] hover:text-white transition-colors">Download PDF →</a>
+        </div>
+        <div class="bg-gray-100 rounded-2xl p-5 flex flex-col gap-3 opacity-60">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center text-xl">🔒</div>
+            <div><p class="text-[10px] text-gray-400 font-semibold uppercase tracking-wider">Certificate</p><p class="text-sm font-bold text-gray-500">Platinum Donor</p></div>
+          </div>
+          <p class="text-xs text-gray-400">Donate $250 more to unlock this certificate.</p>
+          <a href="404.html" class="mt-auto text-[10px] font-bold text-[#48C39E]">Unlock Now →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+    </div><!-- /main-scroll -->
+  </div><!-- /main area -->
+</div><!-- /layout wrapper -->
+
+<script>
+/* ════════════════════════════════════════════════════════
+   COLOUR TOKENS
+════════════════════════════════════════════════════════ */
+const MINT  = '#a7e4c9';
+const DARK  = '#48C39E';
+const SLATE = '#23353e';
+const GRAY  = '#64748b';
+const AMB   = '#f59e0b';
+const BLU   = '#3b82f6';
+const RED   = '#ef4444';
+const PUR   = '#8b5cf6';
+
+const base  = { toolbar:{show:false}, zoom:{enabled:false}, fontFamily:'Plus Jakarta Sans,sans-serif' };
+const grid  = { borderColor:'#f1f5f9', strokeDashArray:4 };
+
+/* ════════════════════════════════════════════════════════
+   SIDEBAR TOGGLE
+════════════════════════════════════════════════════════ */
+function openSidebar(){
+  document.getElementById('sidebar').classList.remove('-translate-x-full');
+  document.getElementById('sidebar').classList.add('translate-x-0');
+  document.getElementById('sidebar-overlay').classList.remove('hidden');
+  document.body.style.overflow='hidden';
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.add('-translate-x-full');
+  document.getElementById('sidebar').classList.remove('translate-x-0');
+  document.getElementById('sidebar-overlay').classList.add('hidden');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeSidebar(); });
+
+/* ════════════════════════════════════════════════════════
+   SECTION SWITCHING
+════════════════════════════════════════════════════════ */
+const TITLES = {
+  'sec-overview' : 'Welcome back, John 👋',
+  'sec-donations': 'My Donations',
+  'sec-volunteer': 'Volunteer Journey',
+  'sec-campaigns': 'Saved Campaigns',
+  'sec-rewards'  : 'Rewards & Certificates',
+};
+
+const rendered = {};
+
+function showSection(id){
+  sessionStorage.setItem('activeUserSection', id);
+  // panels
+  document.querySelectorAll('.section-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  // nav
+  document.querySelectorAll('.nav-item').forEach(l=>l.classList.remove('active'));
+  const lnk = document.querySelector(`[data-section="${id}"]`);
+  if(lnk) lnk.classList.add('active');
+  // title
+  document.getElementById('page-title').textContent = TITLES[id] || 'Dashboard';
+  // scroll top
+  document.getElementById('main-scroll').scrollTop = 0;
+  // lazy charts
+  initSection(id);
+  closeSidebar();
+}
+
+function initSection(id){
+  if(id==='sec-overview')  initOverviewCharts();
+  if(id==='sec-donations') initDonationCharts();
+  if(id==='sec-volunteer') initVolunteerCharts();
+  if(id==='sec-rewards')   initRewardCharts();
+}
+
+/* ════════════════════════════════════════════════════════
+   OVERVIEW CHARTS
+════════════════════════════════════════════════════════ */
+function initOverviewCharts(){
+  if(rendered.ov) return; rendered.ov=true;
+
+  /* Donation History — area line */
+  new ApexCharts(document.getElementById('ov-chart-line'),{
+    chart:{...base, type:'area', height:260},
+    series:[{ name:'Amount ($)', data:[80,120,60,200,150,150] }],
+    xaxis:{ categories:['Mar','Apr','May','Jun','Jul','Aug'] },
+    colors:[DARK],
+    stroke:{ curve:'smooth', width:2.5 },
+    fill:{ type:'gradient', gradient:{ opacityFrom:.35, opacityTo:.0 } },
+    grid,
+    dataLabels:{enabled:false},
+    tooltip:{ y:{ formatter:v=>'$'+v } },
+  }).render();
+
+  /* Donation Categories — pie */
+  new ApexCharts(document.getElementById('ov-chart-pie'),{
+    chart:{...base, type:'pie', height:260},
+    series:[35,25,20,12,8],
+    labels:['Education','Healthcare','Food','Water','Environment'],
+    colors:[DARK,SLATE,BLU,AMB,PUR],
+    legend:{ position:'bottom' },
+    dataLabels:{ formatter:v=>v.toFixed(1)+'%' },
+  }).render();
+
+  /* Volunteer Activity — bar */
+  new ApexCharts(document.getElementById('ov-chart-bar'),{
+    chart:{...base, type:'bar', height:240},
+    series:[{ name:'Hours', data:[0,4,6,8,0,10,0,8,6,0,0,0] }],
+    xaxis:{ categories:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'] },
+    colors:[DARK],
+    plotOptions:{ bar:{ borderRadius:5, columnWidth:'55%' } },
+    grid,
+    dataLabels:{enabled:false},
+    tooltip:{ y:{ formatter:v=>v+' hrs' } },
+  }).render();
+}
+
+/* ════════════════════════════════════════════════════════
+   DONATIONS SECTION CHARTS
+════════════════════════════════════════════════════════ */
+function initDonationCharts(){
+  if(rendered.don) return; rendered.don=true;
+
+  /* Trend — 12 months area */
+  new ApexCharts(document.getElementById('don-chart-trend'),{
+    chart:{...base, type:'area', height:260},
+    series:[{ name:'Donations ($)', data:[80,0,120,60,200,150,75,150,0,0,0,0] }],
+    xaxis:{ categories:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'] },
+    colors:[DARK],
+    stroke:{ curve:'smooth', width:2.5 },
+    fill:{ type:'gradient', gradient:{ opacityFrom:.3, opacityTo:.0 } },
+    grid,
+    dataLabels:{enabled:false},
+    tooltip:{ y:{ formatter:v=>'$'+v } },
+  }).render();
+
+  /* By Category — donut */
+  new ApexCharts(document.getElementById('don-chart-pie'),{
+    chart:{...base, type:'donut', height:240},
+    series:[35,25,20,12,8],
+    labels:['Education','Healthcare','Food','Water','Environment'],
+    colors:[DARK,SLATE,BLU,AMB,PUR],
+    legend:{ position:'bottom' },
+    plotOptions:{ pie:{ donut:{ size:'65%' } } },
+    dataLabels:{enabled:false},
+  }).render();
+
+  /* By Payment Method — pie */
+  new ApexCharts(document.getElementById('don-chart-method'),{
+    chart:{...base, type:'pie', height:240},
+    series:[45,30,15,10],
+    labels:['Credit Card','PayPal','Bank Transfer','Crypto'],
+    colors:[BLU,DARK,SLATE,AMB],
+    legend:{ position:'bottom' },
+    dataLabels:{ formatter:v=>v.toFixed(1)+'%' },
+  }).render();
+}
+
+/* ════════════════════════════════════════════════════════
+   VOLUNTEER SECTION CHARTS
+════════════════════════════════════════════════════════ */
+function initVolunteerCharts(){
+  if(rendered.vol) return; rendered.vol=true;
+
+  /* Monthly hours — area */
+  new ApexCharts(document.getElementById('vol-chart-area'),{
+    chart:{...base, type:'area', height:260},
+    series:[{ name:'Hours', data:[0,4,6,8,0,10,0,8,0,0,0,0] }],
+    xaxis:{ categories:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'] },
+    colors:[DARK],
+    stroke:{ curve:'smooth', width:2.5 },
+    fill:{ type:'gradient', gradient:{ opacityFrom:.3, opacityTo:.0 } },
+    grid,
+    dataLabels:{enabled:false},
+    tooltip:{ y:{ formatter:v=>v+' hrs' } },
+  }).render();
+
+  /* Hours by activity — donut */
+  new ApexCharts(document.getElementById('vol-chart-donut'),{
+    chart:{...base, type:'donut', height:240},
+    series:[12,8,6,6],
+    labels:['Field Work','Education','Admin','Medical'],
+    colors:[DARK,BLU,SLATE,AMB],
+    legend:{ position:'bottom' },
+    plotOptions:{ pie:{ donut:{ size:'65%' } } },
+    dataLabels:{enabled:false},
+  }).render();
+}
+
+/* ════════════════════════════════════════════════════════
+   REWARDS SECTION CHARTS
+════════════════════════════════════════════════════════ */
+function initRewardCharts(){
+  if(rendered.rew) return; rendered.rew=true;
+
+  const radialCfg = (el, val, lbl, color) => new ApexCharts(document.getElementById(el),{
+    chart:{...base, type:'radialBar', height:180},
+    series:[val],
+    colors:[color],
+    labels:[lbl],
+    plotOptions:{ radialBar:{
+      hollow:{ size:'60%' },
+      dataLabels:{ name:{ show:true, fontSize:'11px' }, value:{ fontSize:'18px', fontWeight:700 } }
+    }},
+  }).render();
+
+  radialCfg('rew-radial-donation', 83, 'Donation', DARK);
+  radialCfg('rew-radial-volunteer', 65, 'Volunteer', BLU);
+  radialCfg('rew-radial-impact',   74, 'Impact',   AMB);
+}
+
+/* ════════════════════════════════════════════════════════
+   GSAP ENTRANCE ANIMATIONS
+════════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', ()=>{
+  // Dynamic user profile updates from session
+  const userEmail = sessionStorage.getItem('loggedInUserEmail') || 'donor@stackly.com';
+  let userName = '';
+  if (userEmail.includes('@')) {
+    const namePart = userEmail.split('@')[0];
+    userName = namePart.split(/[._\-+]/).map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
+  } else {
+    userName = userEmail;
+  }
+  const initials = userName.split(' ').map(p => p.charAt(0)).join('').substring(0, 2).toUpperCase() || 'U';
+
+  // Update DOM
+  document.getElementById('user-profile-name').textContent = userName;
+  document.getElementById('user-profile-email').textContent = userEmail;
+  document.getElementById('user-nav-name').textContent = userName;
+  document.getElementById('user-nav-avatar').textContent = initials;
+  document.getElementById('user-sidebar-avatar').textContent = initials;
+  document.getElementById('user-banner-name').textContent = userName;
+
+  // Update TITLES object for dynamic page title updates
+  if (typeof TITLES !== 'undefined') {
+    TITLES['sec-overview'] = 'Welcome back, ' + userName + ' 👋';
+  }
+
+  /* KPI cards stagger in */
+  gsap.from('.kpi-card',{
+    y:22, opacity:0,
+    stagger:.08, duration:.7,
+    ease:'power3.out', delay:.15
+  });
+
+  /* Chart cards fade in */
+  gsap.from('.chart-card',{
+    y:18, opacity:0,
+    stagger:.09, duration:.8,
+    ease:'power3.out', delay:.5
+  });
+
+  /* Campaign cards slide up */
+  gsap.from('.camp-card',{
+    y:20, opacity:0,
+    stagger:.1, duration:.75,
+    ease:'power3.out', delay:.6
+  });
+
+  /* Badge cards pop */
+  gsap.from('.badge-card',{
+    scale:.9, opacity:0,
+    stagger:.06, duration:.5,
+    ease:'back.out(1.5)', delay:.7
+  });
+
+  /* Progress bars */
+  setTimeout(()=>{
+    document.querySelectorAll('.prog-fill').forEach(b=>{
+      b.style.width = b.dataset.width;
+    });
+  }, 850);
+
+  /* Restore active section if saved, otherwise default to overview */
+  const savedSection = sessionStorage.getItem('activeUserSection');
+  if (savedSection && document.getElementById(savedSection)) {
+    showSection(savedSection);
+  } else {
+    showSection('sec-overview');
+  }
+});
+</script>
+</body>
+</html>

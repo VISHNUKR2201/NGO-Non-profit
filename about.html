@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STACKLY — About Us</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Stackly is a global nonprofit standing beside communities on the front line of poverty — funding schools, wells and clinics that families run themselves.">
+  <meta name="keywords" content="nonprofit, charity, global poverty, donate, schools, clean water, mobile clinics, about us">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="libs/tailwind.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'cream-bg': '#FAF8F3',
+            'primary-dark': '#122A26',
+            'primary-dark-hover': '#1b3d37',
+            'mint-green': '#8EE3C2',
+            'mint-green-dark': '#48C39E',
+            'text-muted': '#5C6667',
+          },
+          fontFamily: {
+            serif: ['Instrument Serif', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Global Stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=1.3.2">
+  
+  <!-- Inline overrides for Page Frame and 3D Reveal -->
+  <style>
+    body {
+      background-color: #FAF8F3;
+      color: #122A26;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* 3D Word wrapper reveal */
+    .word-wrap {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: bottom;
+      padding-bottom: 0.05em;
+      margin-right: 0.22em;
+    }
+    
+    .word-inner {
+      display: inline-block;
+      transform-origin: 50% 100%;
+    }
+
+    /* Signature Master Framed Container */
+    .master-frame {
+      border: 1px solid rgba(18, 42, 38, 0.14);
+      max-width: 1440px;
+      margin: 24px auto;
+      background-color: #FAF8F3;
+      position: relative;
+      box-sizing: border-box;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(18, 42, 38, 0.03);
+    }
+
+    @media (max-width: 768px) {
+      .master-frame {
+        margin: 12px;
+        border-radius: 8px;
+      }
+    }
+
+    /* Active row styles for timeline */
+    .timeline-row.active {
+      opacity: 1 !important;
+      background-color: rgba(18, 42, 38, 0.03);
+    }
+    .timeline-row.active .timeline-row-year {
+      color: #122A26 !important;
+      font-weight: bold;
+    }
+    .timeline-row.active .timeline-row-desc {
+      color: #122A26 !important;
+      font-weight: 500;
+    }
+
+    /* Grayscale to color card hover transitions */
+    .empower-card img,
+    .action-card img,
+    .trusted-parallax-container img {
+      filter: grayscale(100%) !important;
+      transition: filter 0.5s ease-in-out !important;
+    }
+    .empower-card:hover img,
+    .action-card:hover img,
+    .trusted-parallax-container:hover img {
+      filter: grayscale(0%) !important;
+    }
+
+    /* Zoom transforms for non-parallax cards */
+    .empower-card img,
+    .action-card img {
+      transition: filter 0.5s ease-in-out, transform 0.5s ease-in-out !important;
+    }
+    .empower-card:hover img,
+    .action-card:hover img {
+      transform: scale(1.05) !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Premium Cinematic Preloader -->
+  <div id="preloader" aria-label="Loading STACKLY" aria-live="polite">
+
+    <!-- 3-Panel curtains for cinematic wipe exit -->
+    <div class="preloader-curtain curtain-left"></div>
+    <div class="preloader-curtain curtain-center"></div>
+    <div class="preloader-curtain curtain-right"></div>
+
+    <!-- Animated background particle dots -->
+    <div class="preloader-particles" aria-hidden="true">
+      <span class="pl-dot"></span><span class="pl-dot"></span><span class="pl-dot"></span>
+      <span class="pl-dot"></span><span class="pl-dot"></span><span class="pl-dot"></span>
+      <span class="pl-dot"></span><span class="pl-dot"></span><span class="pl-dot"></span>
+    </div>
+
+    <!-- Floating NGO image collage -->
+    <div class="preloader-collage" aria-hidden="true">
+      <div class="pl-img-card pl-img-1">
+        <img src="assets/home/f7d62a2697b9a7eb753412e50b2d50a08d241d41.webp" alt="" loading="eager">
+        <div class="pl-img-label">Education</div>
+      </div>
+      <div class="pl-img-card pl-img-2">
+        <img src="assets/home/water.webp" alt="" loading="eager">
+        <div class="pl-img-label">Clean Water</div>
+      </div>
+      <div class="pl-img-card pl-img-3">
+        <img src="assets/home/clinic.webp" alt="" loading="eager">
+        <div class="pl-img-label">Healthcare</div>
+      </div>
+      <div class="pl-ring"></div>
+    </div>
+
+    <!-- Central Brand + Progress content -->
+    <div class="preloader-content">
+      <div class="preloader-logo-wrapper">
+        <img src="assets/logo.webp" alt="STACKLY" class="preloader-logo-img">
+      </div>
+      <div class="preloader-brand-name" aria-hidden="true">
+        <span class="pl-letter">S</span><span class="pl-letter">T</span><span class="pl-letter">A</span><span class="pl-letter">C</span><span class="pl-letter">K</span><span class="pl-letter">L</span><span class="pl-letter">Y</span>
+      </div>
+      <div class="preloader-tagline">
+        <span class="pl-tagline-text">Small hands. Big hope.</span>
+      </div>
+      <div class="preloader-progress-container">
+        <div class="preloader-progress-fill">
+          <span class="pl-progress-glow"></span>
+        </div>
+      </div>
+      <div class="preloader-status-wrapper">
+        <div class="preloader-status-text">Sowing seeds of hope...</div>
+        <div class="preloader-counter">00<span class="pl-percent">%</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Signature Master Framed Container -->
+
+  <div class="master-frame min-h-screen flex flex-col justify-between">
+
+    <!-- Header Section -->
+    <header class="site-header">
+      <div class="header-container">
+        <!-- Logo -->
+        <a href="index.html" class="logo-wrapper" id="header-logo-link">
+          <img src="assets/logo.webp" alt="STACKLY logo">
+        </a>
+        
+        <!-- Navigation Menu -->
+        <nav class="nav-menu-wrapper" aria-label="Main Navigation">
+          <ul class="nav-menu">
+            <!-- Spotlight background element -->
+            <div class="nav-spotlight"></div>
+            <li class="nav-item"><a href="index.html" class="nav-link" id="nav-home">Home</a></li>
+            <li class="nav-item"><a href="about.html" class="nav-link active" id="nav-about">About</a></li>
+            <li class="nav-item"><a href="causes.html" class="nav-link" id="nav-causes">Causes</a></li>
+            <li class="nav-item"><a href="impact.html" class="nav-link" id="nav-impact">Impact</a></li>
+            <li class="nav-item"><a href="donate.html" class="nav-link" id="nav-donate">Donate</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link" id="nav-contact">Contact</a></li>
+          </ul>
+          <!-- Mobile actions inside the drawer -->
+          <div class="mobile-actions">
+            <a href="login.html" class="login-btn" id="btn-login-mobile">Log in</a>
+            <a href="404.html" class="donate-btn-header" id="btn-donate-header-mobile">Donate now</a>
+          </div>
+        </nav>
+
+        <!-- Hamburger Menu Button -->
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+        
+        <!-- Actions -->
+        <div class="header-actions">
+          <a href="login.html" class="login-btn" id="btn-login">Log in</a>
+          <a href="404.html" class="donate-btn-header" id="btn-donate-header">Donate now</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+      
+      <!-- HERO SECTION -->
+      <section class="w-full pt-24 px-8 md:px-16 pb-24 flex flex-col items-center md:items-start max-w-[1280px] mx-auto" aria-label="About Us Intro">
+        <!-- Tag / Overline -->
+        <div class="flex items-center gap-3 mb-6 text-xs font-bold tracking-[0.2em] text-[#5C6667] uppercase opacity-0" id="about-hero-overline">
+          <span class="w-8 h-[1.5px] bg-[#5C6667]/60"></span>
+          <span>ABOUT US</span>
+        </div>
+        
+        <!-- Main Heading (H1) -->
+        <h1 class="font-serif text-5xl md:text-7xl font-normal leading-[1.1] text-[#122A26] mb-8 perspective-1000 select-none text-left" id="about-hero-title">
+          <span class="word-wrap"><span class="word-inner">Change</span></span>
+          <span class="word-wrap"><span class="word-inner">moves</span></span>
+          <span class="word-wrap"><span class="word-inner">at</span></span>
+          <span class="word-wrap"><span class="word-inner">the</span></span>
+          <span class="word-wrap"><span class="word-inner text-[#48C39E] italic">speed</span></span>
+          <span class="word-wrap"><span class="word-inner text-[#48C39E] italic">of</span></span>
+          <span class="word-wrap"><span class="word-inner text-[#48C39E] italic">trust.</span></span>
+        </h1>
+        
+        <!-- Description Block -->
+        <p class="text-base md:text-lg text-[#5C6667] leading-relaxed max-w-2xl font-sans mb-12 text-left opacity-0" id="about-hero-desc">
+          Stackly Foundation was founded in 2011 by a group of teachers, nurses and neighbors who believed that lasting change is co-authored, not delivered. We fund the people already doing the work.
+        </p>
+        
+        <!-- Landscape Image Container -->
+        <div class="w-full overflow-hidden rounded-2xl max-w-[1088px] mx-auto h-[520px] shadow-lg relative" id="about-image-container">
+          <img src="assets/about/f7d62a2697b9a7eb753412e50b2d50a08d241d41.webp" alt="Volunteers loading boxes with items for distribution" class="w-full h-full object-cover object-center scale-95 grayscale opacity-0" id="about-hero-img">
+        </div>
+      </section>
+
+      <!-- MISSION & CORE VALUES SECTION -->
+      <div class="section-frame-wrapper">
+        <!-- Left Side Camouflage Pattern Strip -->
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+        
+        <!-- Content Area -->
+        <div class="section-frame-content">
+          <div class="py-24 px-8 md:px-16 max-w-[1280px] mx-auto">
+            
+            <!-- 2-Column Mission Split -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start" id="about-mission-section">
+              <!-- Left Column: Overline + Title -->
+              <div>
+                <div class="flex items-center gap-3 mb-6 text-xs font-bold tracking-[0.2em] text-[#5C6667] uppercase opacity-0" id="about-mission-overline">
+                  <span class="w-8 h-[1.5px] bg-[#5C6667]/60"></span>
+                  <span>MISSION</span>
+                </div>
+                <h2 class="font-serif text-4xl md:text-5xl font-normal leading-[1.15] text-[#122A26] perspective-1000 select-none text-left" id="about-mission-title">
+                  <span class="word-wrap"><span class="word-inner">Fund</span></span>
+                  <span class="word-wrap"><span class="word-inner">the</span></span>
+                  <span class="word-wrap"><span class="word-inner">people</span></span>
+                  <span class="word-wrap"><span class="word-inner text-[#48C39E] italic">closest</span></span>
+                  <span class="word-wrap"><span class="word-inner">to</span></span>
+                  <span class="word-wrap"><span class="word-inner">the</span></span>
+                  <span class="word-wrap"><span class="word-inner">problem.</span></span>
+                </h2>
+              </div>
+              
+              <!-- Right Column: Paragraph -->
+              <div class="flex items-center h-full pt-4 md:pt-12">
+                <p class="text-base md:text-lg text-[#5C6667] leading-relaxed font-sans opacity-0" id="about-mission-desc">
+                  We move flexible capital, tools and networks to grassroots leaders in 37 countries. We don't parachute in. We stay long enough to become useful, then quiet enough to be forgotten.
+                </p>
+              </div>
+            </div><!-- /2-column-split -->
+            
+            <!-- Divider Line -->
+            <div class="w-full border-b border-gray-300/60 my-16"></div>
+            
+            <!-- Core Values 3-Column Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 pt-4" id="about-values-grid">
+              <!-- Col 1 -->
+              <div class="value-card opacity-0">
+                <h3 class="font-serif text-2xl md:text-3xl font-normal text-[#122A26] mb-4">Partnership</h3>
+                <p class="text-sm md:text-base text-[#5C6667] leading-relaxed font-sans">
+                  We don't design programs. We resource the ones already working.
+                </p>
+              </div>
+              <!-- Col 2 -->
+              <div class="value-card opacity-0">
+                <h3 class="font-serif text-2xl md:text-3xl font-normal text-[#122A26] mb-4">Transparency</h3>
+                <p class="text-sm md:text-base text-[#5C6667] leading-relaxed font-sans">
+                  Every dollar is trackable. Annual reports are public and plain-language.
+                </p>
+              </div>
+              <!-- Col 3 -->
+              <div class="value-card opacity-0">
+                <h3 class="font-serif text-2xl md:text-3xl font-normal text-[#122A26] mb-4">Patience</h3>
+                <p class="text-sm md:text-base text-[#5C6667] leading-relaxed font-sans">
+                  No 90-day pilots. We commit for 5-10 years or we don't commit at all.
+                </p>
+              </div>
+            </div><!-- /values-grid -->
+            
+          </div>
+        </div><!-- /section-frame-content -->
+      </div><!-- /section-frame-wrapper -->
+
+      <!-- OUR TEAM SECTION -->
+      <div class="section-frame-wrapper" style="border-top: none;">
+        <!-- Left Side Camouflage Pattern Strip -->
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+        
+        <!-- Content Area -->
+        <div class="section-frame-content">
+          <div class="py-24 px-8 md:px-16 max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center" id="about-team-section">
+            <!-- Left Column: Portrait Image -->
+            <div class="w-full h-[480px] md:h-[600px] overflow-hidden rounded-2xl relative shadow-lg" id="about-team-image-container">
+              <img src="assets/home/050145712d268ce3d0fb581a46f14a460cc3a35f.webp" alt="Local volunteer community leader" class="w-full h-full object-cover object-center scale-110" id="about-team-img">
+            </div>
+            
+            <!-- Right Column: Content -->
+            <div class="flex flex-col justify-center items-start">
+              <!-- Tag / Overline -->
+              <div class="flex items-center gap-3 mb-6 text-xs font-bold tracking-[0.2em] text-[#5C6667] uppercase opacity-0" id="about-team-overline">
+                <span class="w-8 h-[1.5px] bg-[#5C6667]/60"></span>
+                <span>OUR TEAM</span>
+              </div>
+              
+              <!-- Title (H2) -->
+              <h2 class="font-serif text-4xl md:text-5xl font-normal leading-[1.15] text-[#122A26] mb-6 perspective-1000 select-none text-left" id="about-team-title">
+                <span class="word-wrap"><span class="word-inner">42</span></span>
+                <span class="word-wrap"><span class="word-inner">staff.</span></span>
+                <span class="word-wrap"><span class="word-inner">214</span></span>
+                <span class="word-wrap"><span class="word-inner">partners.</span></span>
+                <br>
+                <span class="word-wrap"><span class="word-inner text-[#48C39E] italic">One</span></span>
+                <span class="word-wrap"><span class="word-inner text-[#48C39E] italic">shared</span></span>
+                <span class="word-wrap"><span class="word-inner text-[#48C39E] italic">table.</span></span>
+              </h2>
+              
+              <!-- Description Paragraph -->
+              <p class="text-base md:text-lg text-[#5C6667] leading-relaxed font-sans mb-8 text-left opacity-0" id="about-team-desc">
+                Our team is spread across nine countries and led locally in every region we work. We are teachers, midwives, engineers, artists, and — most importantly — neighbors.
+              </p>
+              
+              <!-- Button -->
+              <div class="opacity-0" id="about-team-cta">
+                <a href="404.html" class="inline-flex items-center justify-center px-8 py-4 bg-[#122A26] text-white font-bold font-sans rounded-full transition-colors duration-300 hover:bg-[#1b3d37] shadow-md hover:shadow-lg">
+                  Join the team
+                </a>
+              </div>
+            </div>
+          </div>
+        </div><!-- /section-frame-content -->
+      </div><!-- /section-frame-wrapper -->
+
+      <!-- TIMELINE / INTERACTIVE HISTORY SECTION -->
+      <div class="section-frame-wrapper" style="border-top: none;">
+        <!-- Left Side Camouflage Pattern Strip -->
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+        
+        <!-- Content Area -->
+        <div class="section-frame-content">
+          <div class="py-24 px-8 md:px-16 max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center" id="about-timeline-section">
+            
+            <!-- Left Column: Sticky Image Stage -->
+            <div class="w-full aspect-[4/3] overflow-hidden rounded-2xl relative shadow-xl bg-gray-100" id="about-timeline-stage" style="perspective: 1200px;">
+              <!-- Image 2011 (Active by default) -->
+              <img src="assets/home/01.webp" alt="Classroom in Nairobi, 2011" class="timeline-img w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-500 opacity-100 scale-100" data-year="2011" style="z-index: 2;">
+              <!-- Image 2014 -->
+              <img src="assets/home/water.webp" alt="Clean water pump, 2014" class="timeline-img w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-500 opacity-0 scale-105" data-year="2014" style="z-index: 1;">
+              <!-- Image 2017 -->
+              <img src="assets/home/clinic.webp" alt="Mobile medical clinic, 2017" class="timeline-img w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-500 opacity-0 scale-105" data-year="2017" style="z-index: 1;">
+              <!-- Image 2021 -->
+              <img src="assets/home/education.webp" alt="Students studying, 2021" class="timeline-img w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-500 opacity-0 scale-105" data-year="2021" style="z-index: 1;">
+              <!-- Image 2026 -->
+              <img src="assets/home/7e6fb4e611979bda6582c2bde6df831caacf73f3.webp" alt="Grassroots community partners, 2026" class="timeline-img w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-500 opacity-0 scale-105" data-year="2026" style="z-index: 1;">
+            </div>
+
+            <!-- Right Column: Interactive List -->
+            <div class="flex flex-col justify-center">
+              
+              <!-- Tag / Overline -->
+              <div class="flex items-center gap-3 mb-6 text-xs font-bold tracking-[0.2em] text-[#5C6667] uppercase opacity-0" id="about-timeline-overline">
+                <span class="w-8 h-[1.5px] bg-[#5C6667]/60"></span>
+                <span>TIMELINE</span>
+              </div>
+              
+              <!-- Title (H2) -->
+              <h2 class="font-serif text-4xl md:text-5xl font-normal leading-[1.15] text-[#122A26] mb-8 perspective-1000 select-none text-left" id="about-timeline-title">
+                <span class="word-wrap"><span class="word-inner">A</span></span>
+                <span class="word-wrap"><span class="word-inner">brief</span></span>
+                <span class="word-wrap"><span class="word-inner text-[#48C39E] italic">history.</span></span>
+              </h2>
+              
+              <!-- Timeline Rows -->
+              <div class="flex flex-col border-b border-gray-300/60" id="about-timeline-rows">
+                
+                <!-- Row 2011 -->
+                <div class="timeline-row group flex flex-col md:flex-row md:items-center py-6 px-4 border-t border-gray-300/60 cursor-pointer transition-all duration-300 hover:bg-black/[0.01] active" data-year="2011">
+                  <div class="timeline-row-year font-serif text-3xl md:text-4xl text-[#122A26] font-normal transition-colors duration-300 w-24 flex-shrink-0 group-hover:text-[#48C39E]">2011</div>
+                  <div class="timeline-row-desc font-sans text-sm md:text-base text-[#122A26]/80 font-medium transition-all duration-300 leading-relaxed mt-2 md:mt-0">
+                    One classroom in Nairobi. Twelve children. A borrowed chalkboard.
+                  </div>
+                </div>
+
+                <!-- Row 2014 -->
+                <div class="timeline-row group flex flex-col md:flex-row md:items-center py-6 px-4 border-t border-gray-300/60 cursor-pointer transition-all duration-300 hover:bg-black/[0.01]" data-year="2014" style="opacity: 0.6;">
+                  <div class="timeline-row-year font-serif text-3xl md:text-4xl text-[#122A26]/50 font-normal transition-colors duration-300 w-24 flex-shrink-0 group-hover:text-[#48C39E]">2014</div>
+                  <div class="timeline-row-desc font-sans text-sm md:text-base text-[#5C6667] transition-all duration-300 leading-relaxed mt-2 md:mt-0">
+                    First clean water partnership in rural Malawi.
+                  </div>
+                </div>
+
+                <!-- Row 2017 -->
+                <div class="timeline-row group flex flex-col md:flex-row md:items-center py-6 px-4 border-t border-gray-300/60 cursor-pointer transition-all duration-300 hover:bg-black/[0.01]" data-year="2017" style="opacity: 0.6;">
+                  <div class="timeline-row-year font-serif text-3xl md:text-4xl text-[#122A26]/50 font-normal transition-colors duration-300 w-24 flex-shrink-0 group-hover:text-[#48C39E]">2017</div>
+                  <div class="timeline-row-desc font-sans text-sm md:text-base text-[#5C6667] transition-all duration-300 leading-relaxed mt-2 md:mt-0">
+                    Expanded to Southeast Asia. First mobile clinic in Cambodia.
+                  </div>
+                </div>
+
+                <!-- Row 2021 -->
+                <div class="timeline-row group flex flex-col md:flex-row md:items-center py-6 px-4 border-t border-gray-300/60 cursor-pointer transition-all duration-300 hover:bg-black/[0.01]" data-year="2021" style="opacity: 0.6;">
+                  <div class="timeline-row-year font-serif text-3xl md:text-4xl text-[#122A26]/50 font-normal transition-colors duration-300 w-24 flex-shrink-0 group-hover:text-[#48C39E]">2021</div>
+                  <div class="timeline-row-desc font-sans text-sm md:text-base text-[#5C6667] transition-all duration-300 leading-relaxed mt-2 md:mt-0">
+                    Reached 100,000 lives touched across four continents.
+                  </div>
+                </div>
+
+                <!-- Row 2026 -->
+                <div class="timeline-row group flex flex-col md:flex-row md:items-center py-6 px-4 border-t border-gray-300/60 cursor-pointer transition-all duration-300 hover:bg-black/[0.01]" data-year="2026" style="opacity: 0.6;">
+                  <div class="timeline-row-year font-serif text-3xl md:text-4xl text-[#122A26]/50 font-normal transition-colors duration-300 w-24 flex-shrink-0 group-hover:text-[#48C39E]">2026</div>
+                  <div class="timeline-row-desc font-sans text-sm md:text-base text-[#5C6667] transition-all duration-300 leading-relaxed mt-2 md:mt-0">
+                    214 grassroots partners. Still counting.
+                  </div>
+                </div>
+
+              </div><!-- /interactive-list -->
+            </div>
+            
+          </div>
+        </div><!-- /section-frame-content -->
+      </div><!-- /section-frame-wrapper -->
+
+      <!-- EMPOWERING COMMUNITIES SECTION -->
+      <div class="section-frame-wrapper" style="border-top: none;">
+        <!-- Left Side Camouflage Pattern Strip -->
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+        
+        <!-- Content Area -->
+        <div class="section-frame-content flex flex-col">
+          <!-- Top Horizontal Decorative Banner -->
+          <div class="about-top-banner">
+            <img src="assets/home/banner.webp" alt="STACKLY decorative pattern banner">
+          </div>
+          
+          <div class="py-24 px-8 md:px-16 max-w-[1280px] mx-auto w-full">
+            
+            <!-- Header Area (Center Aligned) -->
+            <div class="flex flex-col items-center text-center mb-20">
+              <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-[1.15] text-[#122A26] max-w-2xl select-none" id="about-empower-title" style="filter: blur(10px); opacity: 0; transform: translateY(30px);">
+                Empowering Communities<br>Through Giving
+              </h2>
+            </div>
+            
+            <!-- Staggered 2-Column Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20" id="about-empower-grid">
+              
+              <!-- Left Column -->
+              <div class="flex flex-col gap-12 md:gap-20">
+                <!-- Card 1 -->
+                <div class="empower-card group flex flex-col cursor-pointer opacity-0" style="transform: translateY(50px);">
+                  <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-md relative bg-gray-100 mb-6">
+                    <img src="assets/about/1.webp" alt="Healthcare Access Initiative" class="w-full h-full object-cover object-center grayscale transition-all duration-500 ease-in-out group-hover:grayscale-0 group-hover:scale-105">
+                  </div>
+                  <h3 class="font-serif text-2xl md:text-3xl font-normal text-[#122A26] mb-3">Healthcare Access Initiative</h3>
+                  <p class="text-sm md:text-base text-[#5C6667] leading-relaxed font-sans mb-4">
+                    Providing essential medical care, preventive services, and health education to underserved communities.
+                  </p>
+                  <div class="flex flex-wrap gap-2">
+                    <a href="404.html" class="px-3 py-1 text-xs border border-gray-300/80 rounded-full text-[#5C6667] font-sans">Education</a>
+                    <a href="404.html" class="px-3 py-1 text-xs border border-gray-300/80 rounded-full text-[#5C6667] font-sans">Healthcare</a>
+                  </div>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="empower-card group flex flex-col cursor-pointer opacity-0" style="transform: translateY(50px);">
+                  <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-md relative bg-gray-100 mb-6">
+                    <img src="assets/about/3.webp" alt="Bringing Smiles, Creating Change" class="w-full h-full object-cover object-center grayscale transition-all duration-500 ease-in-out group-hover:grayscale-0 group-hover:scale-105">
+                  </div>
+                  <h3 class="font-serif text-2xl md:text-3xl font-normal text-[#122A26] mb-3">Bringing Smiles, Creating Change</h3>
+                  <p class="text-sm md:text-base text-[#5C6667] leading-relaxed font-sans mb-4">
+                    Every act of giving has the power to bring joy and hope. These projects focus on meeting immediate.
+                  </p>
+                  <div class="flex flex-wrap gap-2">
+                    <a href="404.html" class="px-3 py-1 text-xs border border-gray-300/80 rounded-full text-[#5C6667] font-sans">Smile</a>
+                    <a href="404.html" class="px-3 py-1 text-xs border border-gray-300/80 rounded-full text-[#5C6667] font-sans">Hope</a>
+                    <a href="404.html" class="px-3 py-1 text-xs border border-gray-300/80 rounded-full text-[#5C6667] font-sans">Immediate</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Column (Staggered Down) -->
+              <div class="flex flex-col gap-12 md:gap-20 md:mt-24">
+                <!-- Card 2 -->
+                <div class="empower-card group flex flex-col cursor-pointer opacity-0" style="transform: translateY(50px);">
+                  <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-md relative bg-gray-100 mb-6">
+                    <img src="assets/about/2.webp" alt="Changing Lives, One Step at a Time" class="w-full h-full object-cover object-center grayscale transition-all duration-500 ease-in-out group-hover:grayscale-0 group-hover:scale-105">
+                  </div>
+                  <h3 class="font-serif text-2xl md:text-3xl font-normal text-[#122A26] mb-3">Changing Lives, One Step at a Time</h3>
+                  <p class="text-sm md:text-base text-[#5C6667] leading-relaxed font-sans mb-4">
+                    Discover how our projects are making a real difference in communities.
+                  </p>
+                  <div class="flex flex-wrap gap-2">
+                    <a href="404.html" class="px-3 py-1 text-xs border border-gray-300/80 rounded-full text-[#5C6667] font-sans">Lives</a>
+                    <a href="404.html" class="px-3 py-1 text-xs border border-gray-300/80 rounded-full text-[#5C6667] font-sans">Changing</a>
+                    <a href="404.html" class="px-3 py-1 text-xs border border-gray-300/80 rounded-full text-[#5C6667] font-sans">One Step</a>
+                  </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="empower-card group flex flex-col cursor-pointer opacity-0" style="transform: translateY(50px);">
+                  <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-md relative bg-gray-100 mb-6">
+                    <img src="assets/about/4.webp" alt="Raising Hope, One Donation at a Time" class="w-full h-full object-cover object-center grayscale transition-all duration-500 ease-in-out group-hover:grayscale-0 group-hover:scale-105">
+                  </div>
+                  <h3 class="font-serif text-2xl md:text-3xl font-normal text-[#122A26] mb-3">Raising Hope, One Donation at a Time</h3>
+                  <p class="text-sm md:text-base text-[#5C6667] leading-relaxed font-sans mb-4">
+                    Every donation tells a story of hope and possibility. By contributing to our fundraising initiatives.
+                  </p>
+                  <div class="flex flex-wrap gap-2">
+                    <a href="404.html" class="px-3 py-1 text-xs border border-gray-300/80 rounded-full text-[#5C6667] font-sans">Raising</a>
+                    <a href="404.html" class="px-3 py-1 text-xs border border-gray-300/80 rounded-full text-[#5C6667] font-sans">Donation</a>
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- /staggered-grid -->
+          </div>
+        </div><!-- /section-frame-content -->
+      </div><!-- /section-frame-wrapper -->
+
+      <!-- PROGRAMS & IMPACT: SECTION A (3-Column Action Grid) & SECTION B (Trusted Organization Split-Screen) -->
+      <div class="section-frame-wrapper" style="border-top: none;">
+        <!-- Left Side Camouflage Pattern Strip -->
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+        
+        <!-- Content Area -->
+        <div class="section-frame-content flex flex-col">
+          
+          <!-- Top Horizontal Decorative Banner -->
+          <div class="about-top-banner">
+            <img src="assets/home/banner.webp" alt="STACKLY decorative pattern banner">
+          </div>
+          
+          <div class="py-24 px-8 md:px-16 max-w-[1280px] mx-auto w-full">
+            
+            <!-- SECTION A: 3-Column Action Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32" id="about-programs-grid">
+              
+              <!-- Card 1: Treatment Support -->
+              <div class="action-card group flex flex-col bg-[#FDFBF7] border border-gray-300/40 rounded-2xl overflow-hidden shadow-sm cursor-pointer opacity-0" style="transform: translateY(50px);">
+                <div class="w-full aspect-[16/10] overflow-hidden relative bg-gray-100">
+                  <img src="assets/about/5.webp" alt="Treatment Support" class="w-full h-full object-cover object-center transition-all duration-500 ease-in-out">
+                </div>
+                <div class="p-8 flex flex-col flex-grow">
+                  <h3 class="font-serif text-2xl md:text-3xl font-normal text-[#122A26] mb-3">Treatment Support</h3>
+                  <p class="text-sm md:text-base text-[#5C6667] leading-relaxed font-sans">
+                    Providing essential clinical medical aid, local treatment clinics, and access to doctors for remote communities.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Card 2: Food Support -->
+              <div class="action-card group flex flex-col bg-[#FDFBF7] border border-gray-300/40 rounded-2xl overflow-hidden shadow-sm cursor-pointer opacity-0" style="transform: translateY(50px);">
+                <div class="w-full aspect-[16/10] overflow-hidden relative bg-gray-100">
+                  <img src="assets/about/6.webp" alt="Food Support" class="w-full h-full object-cover object-center transition-all duration-500 ease-in-out">
+                </div>
+                <div class="p-8 flex flex-col flex-grow">
+                  <h3 class="font-serif text-2xl md:text-3xl font-normal text-[#122A26] mb-3">Food Support</h3>
+                  <p class="text-sm md:text-base text-[#5C6667] leading-relaxed font-sans">
+                    Establishing sustainable agriculture projects, hot meal distribution programs, and food security resources.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Card 3: CTA Card -->
+              <div class="action-card group flex flex-col bg-[#23353e] rounded-2xl overflow-hidden shadow-md p-8 justify-between text-white opacity-0" style="transform: translateY(50px);">
+                <div class="flex flex-col">
+                  <!-- Custom overline badge -->
+                  <div class="text-xs font-bold tracking-[0.2em] text-[#8EE3C2] uppercase mb-4">Contribute</div>
+                  <h3 class="font-serif text-3xl md:text-4xl font-normal leading-[1.2] mb-4 text-[#F8F7F3]" id="about-contrib-title" style="filter: blur(10px); opacity: 0; transform: translateY(20px);">
+                    Contribute Today To Make A Difference
+                  </h3>
+                  <p class="text-sm md:text-base text-[#FAF8F3]/80 leading-relaxed font-sans mb-8">
+                    Your direct donation funds field kits, medical transport, and nutritious meals on the ground.
+                  </p>
+                </div>
+                <div>
+                  <a href="404.html" class="inline-block px-8 py-4 bg-[#8EE3C2] text-[#122A26] font-sans font-bold text-sm tracking-wider uppercase rounded-full hover:bg-white hover:text-[#122A26] transition-all duration-300 w-full text-center">Join Us Now!
+                  </a>
+                </div>
+              </div>
+
+            </div><!-- /SECTION A -->
+
+            <!-- SECTION B: Trusted Organization Split-Screen -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center" id="about-trusted-section">
+              
+              <!-- Left Column: Portrait image with parallax zoom wrapper -->
+              <div class="w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-lg relative bg-gray-100 trusted-parallax-container group">
+                <div class="w-full h-full overflow-hidden transition-transform duration-500 ease-in-out group-hover:scale-105 relative">
+                  <img src="assets/about/7.webp" alt="A Trusted Non-Profit Charity Organization" class="w-full h-full object-cover object-center absolute inset-0 scale-125" id="about-trusted-img">
+                </div>
+              </div>
+
+              <!-- Right Column: Welcoming Content -->
+              <div class="flex flex-col justify-center text-left" id="about-trusted-content">
+                <!-- Tag Overline -->
+                <div class="flex items-center gap-3 mb-6 text-xs font-bold tracking-[0.2em] text-[#5C6667] uppercase opacity-0" id="about-trusted-overline">
+                  <span class="w-8 h-[1.5px] bg-[#5C6667]/60"></span>
+                  <span>WELCOME, LET'S MAKE A DIFFERENCE!</span>
+                </div>
+
+                <!-- Title (H2) -->
+                <h2 class="font-serif text-4xl md:text-5xl font-normal leading-[1.15] text-[#122A26] mb-8 select-none text-left perspective-1000" id="about-trusted-title">
+                  <span class="word-wrap"><span class="word-inner">A</span></span>
+                  <span class="word-wrap"><span class="word-inner">Trusted</span></span>
+                  <span class="word-wrap"><span class="word-inner text-[#48C39E] italic">Non-Profit</span></span>
+                  <span class="word-wrap"><span class="word-inner">Charity</span></span>
+                  <span class="word-wrap"><span class="word-inner">Organization</span></span>
+                </h2>
+
+                <!-- Paragraph description -->
+                <p class="text-sm md:text-base text-[#5C6667] leading-relaxed font-sans mb-8 opacity-0" id="about-trusted-desc">
+                  For over a decade, we have partnered with local leaders, community organizers, and global advocates to establish verified, transparent channels of care.
+                </p>
+
+                <!-- Features checklist -->
+                <ul class="flex flex-col gap-5 mb-8" id="about-trusted-list">
+                  <!-- Item 1 -->
+                  <li class="flex items-start gap-4 opacity-0" style="transform: translateY(15px);">
+                    <div class="flex-shrink-0 w-6 h-6 rounded-full bg-[#8EE3C2]/20 flex items-center justify-center text-[#48C39E] mt-0.5">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 class="font-sans font-bold text-[#122A26] text-sm md:text-base mb-1">Providing essential resources</h4>
+                      <p class="font-sans text-xs md:text-sm text-[#5C6667]">Distributing targeted emergency survival kits, medical boxes, and nutrition packets directly into families' hands.</p>
+                    </div>
+                  </li>
+                  <!-- Item 2 -->
+                  <li class="flex items-start gap-4 opacity-0" style="transform: translateY(15px);">
+                    <div class="flex-shrink-0 w-6 h-6 rounded-full bg-[#8EE3C2]/20 flex items-center justify-center text-[#48C39E] mt-0.5">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 class="font-sans font-bold text-[#122A26] text-sm md:text-base mb-1">Offering support through education</h4>
+                      <p class="font-sans text-xs md:text-sm text-[#5C6667]">Building primary academies, mentoring youth leaders, and sponsoring educational scholarships.</p>
+                    </div>
+                  </li>
+                </ul>
+
+                <!-- CTA Button -->
+                <div class="opacity-0" id="about-trusted-cta">
+                  <a href="404.html" class="inline-block px-10 py-4 bg-[#122A26] text-[#FAF8F3] font-sans font-bold text-sm tracking-wider uppercase rounded-full hover:bg-[#8EE3C2] hover:text-[#122A26] transition-all duration-300">Support Now
+                  </a>
+                </div>
+              </div>
+
+            </div><!-- /SECTION B -->
+
+          </div>
+        </div><!-- /section-frame-content -->
+      </div><!-- /section-frame-wrapper -->
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="site-footer" id="site-footer" aria-label="Site Footer">
+      <div class="section-frame-wrapper" style="border-top: none;">
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+        <div class="section-frame-content">
+          <!-- Mint accent top bar -->
+          <div class="footer-top-accent" aria-hidden="true"></div>
+
+          <!-- Main footer body -->
+          <div class="footer-inner">
+
+            <!-- ── Upper: 5-Column Grid ── -->
+            <div class="footer-grid">
+
+              <!-- Col 1: Brand + Socials -->
+              <div class="footer-col footer-col--brand" id="footer-col-1">
+                <a href="index.html" class="footer-logo-link" aria-label="Stackly home">
+                  <img src="assets/logo.webp" alt="STACKLY" class="footer-logo-img">
+                </a>
+                <p class="footer-brand-desc">
+                  A nonprofit lifting communities through education, clean water and healthcare — one hand, one life at a time.
+                </p>
+                <!-- Social Row -->
+                <div class="footer-socials">
+                  <a href="404.html" class="footer-social-btn" aria-label="Facebook" id="social-fb">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                  </a>
+                  <a href="404.html" class="footer-social-btn" aria-label="Instagram" id="social-ig">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                  </a>
+                  <a href="404.html" class="footer-social-btn" aria-label="Twitter/X" id="social-tw">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  </a>
+                  <a href="404.html" class="footer-social-btn" aria-label="YouTube" id="social-yt">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12z"/></svg>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Col 2: Explore -->
+              <div class="footer-col" id="footer-col-2">
+                <h4 class="footer-col-heading">EXPLORE</h4>
+                <ul class="footer-link-list">
+                  <li><a href="index.html" class="footer-link"><span>Home</span></a></li>
+                  <li><a href="about.html" class="footer-link"><span>About</span></a></li>
+                  <li><a href="causes.html" class="footer-link"><span>Causes</span></a></li>
+                  <li><a href="impact.html" class="footer-link"><span>Impact</span></a></li>
+                  <li><a href="donate.html" class="footer-link"><span>Donate</span></a></li>
+                  <li><a href="contact.html" class="footer-link"><span>Contact</span></a></li>
+                  <li><a href="404.html" class="footer-link footer-link--highlight"><span>Donate now ↗</span></a></li>
+                </ul>
+              </div>
+
+              <!-- Col 3: Get Involved -->
+              <div class="footer-col" id="footer-col-3">
+                <h4 class="footer-col-heading">GET INVOLVED</h4>
+                <ul class="footer-link-list">
+                  <li><a href="404.html" class="footer-link"><span>Volunteer</span></a></li>
+                  <li><a href="404.html" class="footer-link"><span>Partner with us</span></a></li>
+                  <li><a href="404.html" class="footer-link"><span>Fundraise</span></a></li>
+                  <li><a href="404.html" class="footer-link"><span>Contact us</span></a></li>
+                </ul>
+              </div>
+
+              <!-- Col 4: Account -->
+              <div class="footer-col" id="footer-col-4">
+                <h4 class="footer-col-heading">ACCOUNT</h4>
+                <ul class="footer-link-list">
+                  <li><a href="login.html" class="footer-link"><span>Log in</span></a></li>
+                  <li><a href="login.html#signup" class="footer-link"><span>Sign up</span></a></li>
+                </ul>
+                <!-- Mini impact stat -->
+                <div class="footer-stat-chip">
+                  <span class="footer-stat-num">10K+</span>
+                  <span class="footer-stat-lbl">Meals served</span>
+                </div>
+              </div>
+
+              <!-- Col 5: Newsletter -->
+              <div class="footer-col footer-col--newsletter" id="footer-col-5">
+                <h4 class="footer-col-heading">NEWSLETTER</h4>
+                <p class="footer-newsletter-desc">Stories from the field, delivered once a month.</p>
+                <form class="footer-newsletter-form" onsubmit="return false;" aria-label="Newsletter signup">
+                  <div class="footer-newsletter-field">
+                    <svg class="footer-input-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <input type="email" id="footer-email-input" class="footer-email-input" placeholder="your@email.com" aria-label="Your email">
+                    <button type="submit" class="footer-join-btn" id="footer-join-btn" aria-label="Subscribe">Join →</button>
+                  </div>
+                </form>
+                <p class="footer-privacy-note">No spam. Unsubscribe anytime.</p>
+              </div>
+
+            </div><!-- /footer-grid -->
+
+            <!-- ── Divider ── -->
+            <div class="footer-divider" aria-hidden="true"></div>
+
+            <!-- ── Bottom copyright bar ── -->
+            <div class="footer-bottom" id="footer-bottom">
+              <div class="footer-bottom-left">
+                <span class="footer-copyright">© 2026 Stackly Foundation. All rights reserved.</span>
+              </div>
+              <div class="footer-bottom-center">
+                <a href="404.html" class="footer-bottom-link">Privacy</a>
+                <span class="footer-bottom-sep">·</span>
+                <a href="404.html" class="footer-bottom-link">Terms</a>
+                <span class="footer-bottom-sep">·</span>
+                <a href="404.html" class="footer-bottom-link">Cookies</a>
+              </div>
+              <div class="footer-bottom-right">
+                <span class="footer-ein">Registered nonprofit · EIN 00-0000000</span>
+              </div>
+            </div>
+
+          </div><!-- /footer-inner -->
+        </div><!-- /section-frame-content -->
+      </div><!-- /section-frame-wrapper -->
+    </footer><!-- /site-footer -->
+
+  </div><!-- /master-frame -->
+
+  <!-- JS Libraries (self-hosted) -->
+  <script src="libs/gsap.min.js"></script>
+  <script src="libs/ScrollTrigger.min.js"></script>
+  <script src="libs/lenis.min.js"></script>
+  <script src="js/preloader.js?v=1.3.2"></script>
+
+  <!-- Custom Page Scripts & Animations -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check for preloader overlay
+      const preloader = document.getElementById('preloader');
+      const hasPreloader = preloader !== null;
+
+      if (hasPreloader) {
+        document.body.style.overflow = 'hidden';
+      }
+
+      // 1. Initialize Lenis Smooth Scrolling
+      let lenis;
+      if (typeof Lenis !== 'undefined') {
+        lenis = new Lenis({
+          duration: 1.4,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          direction: 'vertical',
+          gestureDirection: 'vertical',
+          smooth: true,
+          mouseMultiplier: 1.0,
+          smoothTouch: false,
+          touchMultiplier: 2,
+          infinite: false,
+        });
+
+        lenis.on('scroll', () => {
+          if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.update();
+          }
+        });
+
+        gsap.ticker.add((time) => {
+          lenis.raf(time * 1000);
+        });
+
+        gsap.ticker.lagSmoothing(0);
+
+        if (hasPreloader) {
+          lenis.stop();
+        }
+      }
+
+      if (typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+      }
+
+      // 2. Header spotlight, mobile menu toggle, sticky header, newsletter
+      initNavSpotlight();
+      initStickyHeader();
+      initMobileMenu();
+      initFooterNewsletter();
+
+      // 3. GSAP About Page Hero Entrance Animations
+      const tl = gsap.timeline({
+        paused: hasPreloader,
+        defaults: { ease: 'power4.out', duration: 1.2 }
+      });
+
+      // Run preloader if present
+      if (hasPreloader) {
+        runPreloader(preloader, tl, lenis);
+      }
+
+      // Header fades in first
+      tl.from('header.site-header', { y: -30, opacity: 0, duration: 1.0, ease: 'power3.out' });
+
+      // Heading 3D word reveal
+      tl.from('#about-hero-title .word-inner', {
+        rotationX: -45,
+        y: 50,
+        opacity: 0,
+        stagger: 0.08,
+        duration: 1.2,
+        ease: 'power3.out'
+      }, '-=0.6');
+
+      // Paragraph and Overline fade in slightly after
+      tl.to('#about-hero-overline', {
+        opacity: 1,
+        y: 0,
+        duration: 1.0,
+        ease: 'power3.out'
+      }, '-=0.9');
+
+      tl.to('#about-hero-desc', {
+        opacity: 1,
+        y: 0,
+        duration: 1.0,
+        ease: 'power3.out'
+      }, '-=0.9');
+
+      // Main Hero Image entrance reveal
+      tl.fromTo('#about-hero-img', {
+        scale: 0.9,
+        filter: 'grayscale(100%)',
+        opacity: 0,
+        clipPath: 'inset(10% 10% 10% 10%)'
+      }, {
+        scale: 1,
+        filter: 'grayscale(0%)',
+        opacity: 1,
+        clipPath: 'inset(0% 0% 0% 0%)',
+        duration: 1.5,
+        ease: 'power4.out'
+      }, '-=1.0');
+
+      // 4. GSAP Scroll Parallax on Hero Image
+      gsap.fromTo('#about-hero-img', {
+        yPercent: 10
+      }, {
+        yPercent: -10,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#about-image-container',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+
+      // Wrap middle section animations in a gsap.context() for scoping/stability
+      const ctx = gsap.context(() => {
+        // 5. GSAP Mission Section Entrance Animation
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: '#about-mission-section',
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+          }
+        })
+        .fromTo('#about-mission-overline', {
+          opacity: 0,
+          y: 20
+        }, {
+          opacity: 1,
+          y: 0,
+          duration: 1.0,
+          ease: 'power3.out'
+        })
+        .from('#about-mission-title .word-inner', {
+          rotationX: -40,
+          y: 30,
+          opacity: 0,
+          stagger: 0.08,
+          duration: 1.2,
+          ease: 'power3.out'
+        }, '-=0.8')
+        .fromTo('#about-mission-desc', {
+          opacity: 0,
+          y: 20
+        }, {
+          opacity: 1,
+          y: 0,
+          duration: 1.0,
+          ease: 'power3.out'
+        }, '-=0.8');
+
+        // 6. GSAP Core Values Grid Stagger Animation
+        gsap.fromTo('#about-values-grid .value-card', {
+          y: 35,
+          opacity: 0
+        }, {
+          y: 0,
+          opacity: 1,
+          stagger: 0.2,
+          duration: 1.0,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '#about-values-grid',
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          }
+        });
+
+        // 7. GSAP Our Team Image Scroll Zoom & Parallax
+        gsap.fromTo('#about-team-img', {
+          scale: 1.15,
+          yPercent: 8
+        }, {
+          scale: 1.0,
+          yPercent: -8,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#about-team-image-container',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+
+        // 8. GSAP Our Team Content Entrance Animation
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: '#about-team-section',
+            start: 'top 75%',
+            toggleActions: 'play none none none'
+          }
+        })
+        .fromTo('#about-team-overline', {
+          opacity: 0,
+          y: 20
+        }, {
+          opacity: 1,
+          y: 0,
+          duration: 1.0,
+          ease: 'power3.out'
+        })
+        .from('#about-team-title .word-inner', {
+          rotationX: -40,
+          y: 30,
+          opacity: 0,
+          stagger: 0.08,
+          duration: 1.2,
+          ease: 'power3.out'
+        }, '-=0.8')
+        .fromTo('#about-team-desc', {
+          opacity: 0,
+          y: 20
+        }, {
+          opacity: 1,
+          y: 0,
+          duration: 1.0,
+          ease: 'power3.out'
+        }, '-=0.8')
+        .fromTo('#about-team-cta', {
+          opacity: 0,
+          y: 20
+        }, {
+          opacity: 1,
+          y: 0,
+          duration: 1.0,
+          ease: 'power3.out'
+        }, '-=0.9');
+
+        // 9. GSAP Timeline Section Entrance Animation
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: '#about-timeline-section',
+            start: 'top 75%',
+            toggleActions: 'play none none none'
+          }
+        })
+        .fromTo('#about-timeline-overline', {
+          opacity: 0,
+          y: 20
+        }, {
+          opacity: 1,
+          y: 0,
+          duration: 1.0,
+          ease: 'power3.out'
+        })
+        .from('#about-timeline-title .word-inner', {
+          rotationX: -40,
+          y: 30,
+          opacity: 0,
+          stagger: 0.08,
+          duration: 1.2,
+          ease: 'power3.out'
+        }, '-=0.8')
+        .fromTo('#about-timeline-stage', {
+          opacity: 0,
+          scale: 0.9
+        }, {
+          opacity: 1,
+          scale: 1,
+          duration: 1.2,
+          ease: 'power3.out'
+        }, '-=1.0')
+        .fromTo('#about-timeline-rows .timeline-row', {
+          opacity: 0,
+          x: 30
+        }, {
+          opacity: (idx, el) => el.classList.contains('active') ? 1 : 0.6,
+          x: 0,
+          stagger: 0.15,
+          duration: 1.0,
+          ease: 'power3.out'
+        }, '-=1.0');
+
+        // 10. Interactive Timeline Image Swap Logic
+        const rows = document.querySelectorAll('.timeline-row');
+        const imgs = document.querySelectorAll('.timeline-img');
+        let currentYear = '2011';
+
+        rows.forEach(row => {
+          row.addEventListener('click', () => {
+            const targetYear = row.getAttribute('data-year');
+            if (targetYear === currentYear) return;
+
+            // Update row active state
+            rows.forEach(r => {
+              r.classList.remove('active');
+              gsap.to(r, { opacity: 0.6, duration: 0.3 });
+            });
+            row.classList.add('active');
+            gsap.to(row, { opacity: 1, duration: 0.3 });
+
+            // Swap images with 3D transition
+            const oldImg = document.querySelector(`.timeline-img[data-year="${currentYear}"]`);
+            const newImg = document.querySelector(`.timeline-img[data-year="${targetYear}"]`);
+
+            if (oldImg && newImg) {
+              // Bring new image to top in z-index before animating
+              imgs.forEach(img => img.style.zIndex = 1);
+              newImg.style.zIndex = 2;
+              oldImg.style.zIndex = 1;
+
+              gsap.to(oldImg, {
+                opacity: 0,
+                scale: 0.95,
+                rotationY: 15,
+                duration: 0.6,
+                ease: 'power2.inOut'
+              });
+
+              gsap.fromTo(newImg, {
+                opacity: 0,
+                scale: 1.05,
+                rotationY: -15
+              }, {
+                opacity: 1,
+                scale: 1,
+                rotationY: 0,
+                duration: 0.8,
+                ease: 'power3.out'
+              });
+            }
+
+            currentYear = targetYear;
+          });
+        });
+
+        // 11. GSAP Blur Reveal entrance for Empowering Communities Title
+        gsap.to('#about-empower-title', {
+          filter: 'blur(0px)',
+          opacity: 1,
+          y: 0,
+          duration: 1.5,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '#about-empower-title',
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          }
+        });
+
+        // 12. GSAP Staggered Entrance for Empower Cards
+        gsap.fromTo('#about-empower-grid .empower-card', {
+          opacity: 0,
+          y: 50
+        }, {
+          opacity: 1,
+          y: 0,
+          stagger: 0.2,
+          duration: 1.2,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '#about-empower-grid',
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          }
+        });
+
+        // 13. GSAP Staggered Entrance for Section A Action Grid Cards
+        gsap.fromTo('#about-programs-grid .action-card', {
+          opacity: 0,
+          y: 50
+        }, {
+          opacity: 1,
+          y: 0,
+          stagger: 0.2,
+          duration: 1.2,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '#about-programs-grid',
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          }
+        });
+
+        // 14. GSAP Blur Reveal for Card 3 Title
+        gsap.to('#about-contrib-title', {
+          filter: 'blur(0px)',
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '#about-contrib-title',
+            start: 'top 90%',
+            toggleActions: 'play none none none'
+          }
+        });
+
+        // 15. GSAP Scroll Parallax on Split-Screen Left Image
+        gsap.fromTo('#about-trusted-img', {
+          yPercent: -15
+        }, {
+          yPercent: 15,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#about-trusted-section',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+
+        // 16. GSAP Cascade Entrance for Split-Screen Right Content
+        const trustedTL = gsap.timeline({
+          scrollTrigger: {
+            trigger: '#about-trusted-section',
+            start: 'top 75%',
+            toggleActions: 'play none none none'
+          }
+        });
+
+        trustedTL
+          .fromTo('#about-trusted-overline', {
+            opacity: 0,
+            y: 20
+          }, {
+            opacity: 1,
+            y: 0,
+            duration: 1.0,
+            ease: 'power3.out'
+          })
+          .from('#about-trusted-title .word-inner', {
+            rotationX: -40,
+            y: 35,
+            opacity: 0,
+            stagger: 0.08,
+            duration: 1.2,
+            ease: 'power3.out'
+          }, '-=0.8')
+          .fromTo('#about-trusted-desc', {
+            opacity: 0,
+            y: 20
+          }, {
+            opacity: 1,
+            y: 0,
+            duration: 1.0,
+            ease: 'power3.out'
+          }, '-=0.8')
+          .fromTo('#about-trusted-list li', {
+            opacity: 0,
+            y: 20
+          }, {
+            opacity: 1,
+            y: 0,
+            stagger: 0.15,
+            duration: 1.0,
+            ease: 'power3.out'
+          }, '-=0.8')
+          .fromTo('#about-trusted-cta', {
+            opacity: 0,
+            y: 20
+          }, {
+            opacity: 1,
+            y: 0,
+            duration: 1.0,
+            ease: 'power3.out'
+          }, '-=0.8');
+      });
+    });
+
+    /* ── Header Nav Spotlight Effect ── */
+    function initNavSpotlight() {
+      const navMenu  = document.querySelector('.nav-menu');
+      const navLinks = document.querySelectorAll('.nav-link');
+      const spotlight = document.querySelector('.nav-spotlight');
+      if (!navMenu || !spotlight) return;
+
+      navLinks.forEach(link => {
+        link.addEventListener('mouseenter', e => {
+          const linkRect = e.target.getBoundingClientRect();
+          const menuRect = navMenu.getBoundingClientRect();
+          spotlight.style.width   = `${linkRect.width}px`;
+          spotlight.style.left    = `${linkRect.left - menuRect.left}px`;
+          spotlight.style.opacity = '1';
+        });
+      });
+      navMenu.addEventListener('mouseleave', () => { spotlight.style.opacity = '0'; });
+    }
+
+    /* ── Sticky Header Effect ── */
+    function initStickyHeader() {
+      const header = document.querySelector('header.site-header');
+      if (!header) return;
+      const handle = () => header.classList.toggle('scrolled', window.scrollY > 40);
+      window.addEventListener('scroll', handle);
+      handle();
+    }
+
+    /* ── Mobile Menu Toggle ── */
+    function initMobileMenu() {
+      const toggleBtn = document.getElementById('mobile-nav-toggle');
+      const navWrapper = document.querySelector('.nav-menu-wrapper');
+      
+      if (!toggleBtn || !navWrapper) return;
+      
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isActive = document.body.classList.contains('mobile-menu-active');
+        if (isActive) {
+          document.body.classList.remove('mobile-menu-active');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        } else {
+          document.body.classList.add('mobile-menu-active');
+          toggleBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
+
+      const navLinks = navWrapper.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          document.body.classList.remove('mobile-menu-active');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        const isActive = document.body.classList.contains('mobile-menu-active');
+        if (isActive && !navWrapper.contains(e.target) && !toggleBtn.contains(e.target)) {
+          document.body.classList.remove('mobile-menu-active');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
+    /* ── Footer Newsletter ── */
+    function initFooterNewsletter() {
+      const footer = document.getElementById('site-footer');
+      if (!footer) return;
+      const form  = footer.querySelector('.footer-newsletter-form');
+      const input = footer.querySelector('.footer-email-input');
+      const btn   = footer.querySelector('.footer-join-btn');
+
+      if (form && input && btn) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!input.value.trim() || !emailRegex.test(input.value)) {
+            input.style.borderColor = '#f87171';
+            const origPh = input.placeholder;
+            input.placeholder = 'Enter a valid email first';
+            input.addEventListener('input', () => {
+              input.style.borderColor = '';
+              input.placeholder = origPh;
+            }, { once: true });
+            return;
+          }
+          btn.textContent = '✓';
+          btn.style.color = '#8EE3C2';
+          btn.style.pointerEvents = 'none';
+          if (typeof gsap !== 'undefined') {
+            gsap.fromTo(btn, { scale: 0.8 }, { scale: 1, duration: 0.4, ease: 'back.out(1.5)' });
+          }
+          setTimeout(() => { window.location.href = '404.html'; }, 800);
+        });
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STACKLY — Donate</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Your gift, stacked with theirs. Support community-led projects directly with a one-time or monthly donation.">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="libs/tailwind.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'cream-bg': '#FAF8F3',
+            'primary-dark': '#122A26',
+            'primary-dark-hover': '#1b3d37',
+            'mint-green': '#8EE3C2',
+            'mint-green-dark': '#48C39E',
+            'text-muted': '#5C6667',
+          },
+          fontFamily: {
+            serif: ['Instrument Serif', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Global Stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=1.3.2">
+
+  <!-- Inline Stylesheet overrides for Page Frame and Animations -->
+  <style>
+    body {
+      background-color: #FAF8F3;
+      color: #122A26;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 3D Word wrapper reveal */
+    .word-wrap {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: bottom;
+      padding-bottom: 0.05em;
+      margin-right: 0.22em;
+    }
+    
+    .word-inner {
+      display: inline-block;
+      transform-origin: 50% 100%;
+    }
+    
+    /* Remove number input arrows */
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    /* Flip Card 3D Setup */
+    .flip-card {
+      perspective: 1000px;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+    .flip-card:hover .flip-card-inner, .flip-card.active .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 1rem;
+    }
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+    
+    /* Accordion overflow */
+    .accordion-content {
+      overflow: hidden;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Premium Cinematic Preloader -->
+  <div id="preloader" aria-label="Loading STACKLY" aria-live="polite">
+
+    <!-- 3-Panel curtains for cinematic wipe exit -->
+    <div class="preloader-curtain curtain-left"></div>
+    <div class="preloader-curtain curtain-center"></div>
+    <div class="preloader-curtain curtain-right"></div>
+
+    <!-- Animated background particle dots -->
+    <div class="preloader-particles" aria-hidden="true">
+      <span class="pl-dot"></span><span class="pl-dot"></span><span class="pl-dot"></span>
+      <span class="pl-dot"></span><span class="pl-dot"></span><span class="pl-dot"></span>
+      <span class="pl-dot"></span><span class="pl-dot"></span><span class="pl-dot"></span>
+    </div>
+
+    <!-- Floating NGO image collage -->
+    <div class="preloader-collage" aria-hidden="true">
+      <div class="pl-img-card pl-img-1">
+        <img src="assets/home/f7d62a2697b9a7eb753412e50b2d50a08d241d41.webp" alt="" loading="eager">
+        <div class="pl-img-label">Education</div>
+      </div>
+      <div class="pl-img-card pl-img-2">
+        <img src="assets/home/water.webp" alt="" loading="eager">
+        <div class="pl-img-label">Clean Water</div>
+      </div>
+      <div class="pl-img-card pl-img-3">
+        <img src="assets/home/clinic.webp" alt="" loading="eager">
+        <div class="pl-img-label">Healthcare</div>
+      </div>
+      <div class="pl-ring"></div>
+    </div>
+
+    <!-- Central Brand + Progress content -->
+    <div class="preloader-content">
+      <div class="preloader-logo-wrapper">
+        <img src="assets/logo.webp" alt="STACKLY" class="preloader-logo-img">
+      </div>
+      <div class="preloader-brand-name" aria-hidden="true">
+        <span class="pl-letter">S</span><span class="pl-letter">T</span><span class="pl-letter">A</span><span class="pl-letter">C</span><span class="pl-letter">K</span><span class="pl-letter">L</span><span class="pl-letter">Y</span>
+      </div>
+      <div class="preloader-tagline">
+        <span class="pl-tagline-text">Small hands. Big hope.</span>
+      </div>
+      <div class="preloader-progress-container">
+        <div class="preloader-progress-fill">
+          <span class="pl-progress-glow"></span>
+        </div>
+      </div>
+      <div class="preloader-status-wrapper">
+        <div class="preloader-status-text">Sowing seeds of hope...</div>
+        <div class="preloader-counter">00<span class="pl-percent">%</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Signature Master Framed Container -->
+
+  <div class="master-frame min-h-screen flex flex-col justify-between">
+
+    <!-- Header Section -->
+    <header class="site-header">
+      <div class="header-container">
+        <!-- Logo -->
+        <a href="index.html" class="logo-wrapper" id="header-logo-link">
+          <img src="assets/logo.webp" alt="STACKLY logo">
+        </a>
+        
+        <!-- Navigation Menu -->
+        <nav class="nav-menu-wrapper" aria-label="Main Navigation">
+          <ul class="nav-menu">
+            <div class="nav-spotlight"></div>
+            <li class="nav-item"><a href="index.html" class="nav-link" id="nav-home">Home</a></li>
+            <li class="nav-item"><a href="about.html" class="nav-link" id="nav-about">About</a></li>
+            <li class="nav-item"><a href="causes.html" class="nav-link" id="nav-causes">Causes</a></li>
+            <li class="nav-item"><a href="impact.html" class="nav-link" id="nav-impact">Impact</a></li>
+            <li class="nav-item"><a href="donate.html" class="nav-link active" id="nav-donate">Donate</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link" id="nav-contact">Contact</a></li>
+          </ul>
+          <!-- Mobile actions -->
+          <div class="mobile-actions">
+            <a href="login.html" class="login-btn" id="btn-login-mobile">Log in</a>
+            <a href="404.html" class="donate-btn-header" id="btn-donate-header-mobile">Donate now</a>
+          </div>
+        </nav>
+
+        <!-- Hamburger Menu Button -->
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+        
+        <!-- Actions -->
+        <div class="header-actions">
+          <a href="login.html" class="login-btn" id="btn-login">Log in</a>
+          <a href="404.html" class="donate-btn-header" id="btn-donate-header">Donate now</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Body -->
+    <main class="flex-grow">
+      <section class="section-frame-wrapper border-b border-[#122A26]/10 relative" id="donate-hero-section">
+        <!-- Left Side Strip -->
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+        
+        <div class="section-frame-content bg-[#FAF8F3]">
+          
+          <!-- Hero Text Section (Top) -->
+          <div class="pt-32 px-4 md:px-12 max-w-4xl" id="hero-text-container">
+            <span class="text-[10px] font-bold text-[#5C6667]/70 uppercase tracking-widest font-sans mb-4 block">— GIVE</span>
+            <h1 class="font-serif text-5xl md:text-7xl font-normal text-[#122A26] leading-none mb-6 tracking-tight reveal-title" id="donate-hero-title">
+              <span class="word-wrap"><span class="word-inner">Your</span></span>
+              <span class="word-wrap"><span class="word-inner">gift,</span></span>
+              <span class="word-wrap"><span class="word-inner text-[#8EE3C2]">stacked</span></span>
+              <span class="word-wrap"><span class="word-inner">with</span></span>
+              <span class="word-wrap"><span class="word-inner">theirs.</span></span>
+            </h1>
+            <p class="font-sans text-lg md:text-xl text-[#5C6667] mb-12 max-w-2xl leading-relaxed">
+              Every dollar you give is directed to a specific community-led project. You'll receive quarterly updates showing exactly where it went.
+            </p>
+          </div>
+
+          <!-- Interactive Donation Form (Split Layout) -->
+          <div class="mt-8 mb-24 px-4 md:px-12 pb-24 border-b border-[#122A26]/10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start form-split-container">
+              
+              <!-- Left Column: The Form Card (7 cols) -->
+              <div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-10 form-card relative z-10">
+                
+                <!-- Frequency Toggle -->
+                <div class="mb-8">
+                  <span class="text-xs font-bold text-[#5C6667] uppercase tracking-widest font-sans mb-3 block">FREQUENCY</span>
+                  <div class="flex bg-[#FAF8F3] rounded-full p-1 border border-gray-200 shadow-inner">
+                    <button class="flex-1 py-3 px-4 rounded-full text-sm md:text-base font-bold transition-all duration-300 freq-btn active bg-[#122A26] text-white shadow-md" data-freq="monthly">Monthly (Recommended)</button>
+                    <button class="flex-1 py-3 px-4 rounded-full text-sm md:text-base font-bold transition-all duration-300 freq-btn text-[#5C6667] bg-transparent hover:bg-gray-100" data-freq="onetime">One-Time</button>
+                  </div>
+                </div>
+
+                <!-- Amount Grid -->
+                <div class="mb-8">
+                  <span class="text-xs font-bold text-[#5C6667] uppercase tracking-widest font-sans mb-3 block">AMOUNT (USD)</span>
+                  <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <button class="py-4 md:py-5 rounded-xl text-xl font-serif transition-colors duration-300 amount-btn bg-[#FAF8F3] text-[#122A26] border border-gray-200 hover:border-[#8EE3C2]" data-amount="30">$30</button>
+                    <button class="py-4 md:py-5 rounded-xl text-xl font-serif transition-colors duration-300 amount-btn active bg-[#122A26] text-white border border-[#122A26]" data-amount="60">$60</button>
+                    <button class="py-4 md:py-5 rounded-xl text-xl font-serif transition-colors duration-300 amount-btn bg-[#FAF8F3] text-[#122A26] border border-gray-200 hover:border-[#8EE3C2]" data-amount="120">$120</button>
+                    <button class="py-4 md:py-5 rounded-xl text-xl font-serif transition-colors duration-300 amount-btn bg-[#FAF8F3] text-[#122A26] border border-gray-200 hover:border-[#8EE3C2]" data-amount="250">$250</button>
+                  </div>
+                </div>
+                
+                <!-- Custom Amount -->
+                <div class="mb-10">
+                  <div class="relative">
+                    <span class="absolute left-5 top-1/2 -translate-y-1/2 text-[#5C6667] font-serif text-2xl mt-[2px]">$</span>
+                    <input type="number" id="custom-amount" placeholder="Other amount" class="w-full bg-[#FAF8F3] border border-gray-200 rounded-xl py-5 pl-12 pr-4 text-[#122A26] text-lg font-sans outline-none focus:border-[#8EE3C2] transition-colors appearance-none">
+                  </div>
+                </div>
+
+                <!-- Personal Info -->
+                <div class="mb-10 pt-8 border-t border-gray-100">
+                   <span class="text-xs font-bold text-[#5C6667] uppercase tracking-widest font-sans mb-4 block">YOUR DETAILS</span>
+                   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                     <input type="text" placeholder="Full name (e.g., Jane Appleseed)" class="w-full bg-[#FAF8F3] border border-gray-200 rounded-xl py-4 px-5 text-[#122A26] font-sans outline-none focus:border-[#8EE3C2] transition-colors" required>
+                     <input type="email" placeholder="Email (jane@example.com)" class="w-full bg-[#FAF8F3] border border-gray-200 rounded-xl py-4 px-5 text-[#122A26] font-sans outline-none focus:border-[#8EE3C2] transition-colors" required>
+                   </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button id="submit-donation-btn" class="w-full bg-[#122A26] text-[#8EE3C2] hover:bg-[#1b3d37] hover:text-white transition-all duration-300 font-sans font-bold py-5 rounded-xl shadow-lg text-lg flex justify-center items-center gap-2 transform hover:-translate-y-1">
+                  ♡ Give $60 /month
+                </button>
+                
+                <p class="text-center text-xs text-[#5C6667] mt-5 font-sans font-medium flex justify-center items-center gap-2">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                  Secure checkout · Tax-deductible in the US · Cancel anytime.
+                </p>
+              </div>
+
+              <!-- Right Column: Impact Cards (5 cols) -->
+              <div class="lg:col-span-5 flex flex-col gap-6 info-cards">
+                
+                <!-- Top Card: What it does -->
+                <div class="bg-[#dcf3e1] rounded-2xl p-8 relative overflow-hidden h-full flex flex-col justify-center min-h-[220px]">
+                  <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle, #122A26 1.5px, transparent 1.5px); background-size: 20px 20px;"></div>
+                  <div class="relative z-10 impact-content-wrapper">
+                    <h3 class="font-serif text-3xl text-[#122A26] mb-6" id="impact-heading">What $60 /month does</h3>
+                    <ul class="flex flex-col gap-4 font-sans text-[15px] leading-relaxed text-[#122A26]" id="impact-list">
+                      <li class="flex gap-3 items-start">
+                        <span class="text-[#48C39E] font-bold text-lg mt-[-2px]">✓</span>
+                        <span>Feeds one child at school for two months.</span>
+                      </li>
+                      <li class="flex gap-3 items-start">
+                        <span class="text-[#48C39E] font-bold text-lg mt-[-2px]">✓</span>
+                        <span>Vaccinates 12 children.</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Bottom Card: Where it goes -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                  <span class="text-[10px] font-bold text-[#5C6667] uppercase tracking-widest font-sans mb-6 block">WHERE IT GOES</span>
+                  
+                  <div class="flex flex-col gap-5">
+                    <div class="flex flex-col gap-2">
+                      <div class="flex justify-between text-sm font-bold text-[#122A26]"><span>Programs</span><span>92%</span></div>
+                      <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-[#122A26] rounded-full" style="width: 92%;"></div></div>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                      <div class="flex justify-between text-sm font-bold text-[#122A26]"><span>Community operations</span><span>6%</span></div>
+                      <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-[#122A26] rounded-full" style="width: 6%;"></div></div>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                      <div class="flex justify-between text-sm font-bold text-[#122A26]"><span>Administration</span><span>2%</span></div>
+                      <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-[#122A26] rounded-full" style="width: 2%;"></div></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── EXTENDED DONATE SECTIONS ── -->
+      <section class="section-frame-wrapper" style="border-top: none;" id="donate-extended-sections">
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+        <div class="section-frame-content bg-[#FAF8F3]">
+          
+          <!-- Section 1: Tangible Impact (Interactive Flip Cards) -->
+          <div class="py-24 px-4 md:px-12 advanced-section">
+            <div class="text-center mb-16 max-w-2xl mx-auto">
+              <span class="text-[9px] font-bold text-[#5C6667]/60 uppercase tracking-widest font-sans mb-4 block">— YOUR REACH</span>
+              <h2 class="font-serif text-4xl md:text-5xl font-normal text-[#122A26] mb-6 reveal-title">
+                <span class="word-wrap"><span class="word-inner">What</span></span>
+                <span class="word-wrap"><span class="word-inner">Your</span></span>
+                <span class="word-wrap"><span class="word-inner">Gift</span></span>
+                <span class="word-wrap"><span class="word-inner">Achieves</span></span>
+              </h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              
+              <!-- Card 1 ($50) -->
+              <div class="flip-card h-80 group cursor-pointer" onclick="this.classList.toggle('active')">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front bg-[#23353e] flex flex-col items-center justify-center p-8 relative overflow-hidden shadow-lg border border-gray-800">
+                    <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle, #8EE3C2 1px, transparent 1px); background-size: 16px 16px;"></div>
+                    <svg class="w-12 h-12 text-[#8EE3C2] mb-6 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <h3 class="font-serif text-6xl text-white relative z-10">$50</h3>
+                  </div>
+                  <div class="flip-card-back bg-white p-8 flex flex-col justify-end overflow-hidden border border-gray-200 shadow-lg">
+                    <img src="assets/home/1.webp" alt="Impact" class="absolute inset-0 w-full h-full object-cover opacity-20">
+                    <div class="relative z-10">
+                      <span class="text-[10px] font-bold text-[#48C39E] uppercase tracking-widest font-sans block mb-3">IMPACT</span>
+                      <p class="font-sans text-lg text-[#122A26] font-medium leading-tight">Provides clean water for a family of four for one year.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 2 ($150) -->
+              <div class="flip-card h-80 group cursor-pointer" onclick="this.classList.toggle('active')">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front bg-[#23353e] flex flex-col items-center justify-center p-8 relative overflow-hidden shadow-lg border border-gray-800">
+                    <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle, #8EE3C2 1px, transparent 1px); background-size: 16px 16px;"></div>
+                    <svg class="w-12 h-12 text-[#8EE3C2] mb-6 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                    <h3 class="font-serif text-6xl text-white relative z-10">$150</h3>
+                  </div>
+                  <div class="flip-card-back bg-white p-8 flex flex-col justify-end overflow-hidden border border-gray-200 shadow-lg">
+                    <img src="assets/home/2.webp" alt="Impact" class="absolute inset-0 w-full h-full object-cover opacity-20">
+                    <div class="relative z-10">
+                      <span class="text-[10px] font-bold text-[#48C39E] uppercase tracking-widest font-sans block mb-3">IMPACT</span>
+                      <p class="font-sans text-lg text-[#122A26] font-medium leading-tight">Funds comprehensive educational materials for an entire classroom.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 3 ($500) -->
+              <div class="flip-card h-80 group cursor-pointer" onclick="this.classList.toggle('active')">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front bg-[#23353e] flex flex-col items-center justify-center p-8 relative overflow-hidden shadow-lg border border-gray-800">
+                    <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle, #8EE3C2 1px, transparent 1px); background-size: 16px 16px;"></div>
+                    <svg class="w-12 h-12 text-[#8EE3C2] mb-6 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
+                    <h3 class="font-serif text-6xl text-white relative z-10">$500</h3>
+                  </div>
+                  <div class="flip-card-back bg-white p-8 flex flex-col justify-end overflow-hidden border border-gray-200 shadow-lg">
+                    <img src="assets/home/3.webp" alt="Impact" class="absolute inset-0 w-full h-full object-cover opacity-20">
+                    <div class="relative z-10">
+                      <span class="text-[10px] font-bold text-[#48C39E] uppercase tracking-widest font-sans block mb-3">IMPACT</span>
+                      <p class="font-sans text-lg text-[#122A26] font-medium leading-tight">Equips a rural medical clinic with emergency life-saving supplies.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Section 2: Our Focus Areas — Premium Icon Card Grid -->
+          <div class="w-full border-y border-[#122A26]/10 advanced-section bg-[#FAF8F3] overflow-hidden" id="impact-gallery-section">
+
+            <!-- Section Header -->
+            <div class="py-20 px-4 md:px-12">
+              <div class="max-w-7xl mx-auto">
+
+                <!-- Top: Title row -->
+                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16">
+                  <div class="max-w-xl">
+                    <span class="text-[9px] font-bold text-[#5C6667]/60 uppercase tracking-widest font-sans mb-4 block">— OUR FOCUS AREAS</span>
+                    <h2 class="font-serif text-4xl md:text-5xl font-normal text-[#122A26] leading-tight reveal-title">
+                      <span class="word-wrap"><span class="word-inner">Five Ways</span></span>
+                      <span class="word-wrap"><span class="word-inner">Your Gift</span></span>
+                      <span class="word-wrap"><span class="word-inner text-[#48C39E]">Creates</span></span>
+                      <span class="word-wrap"><span class="word-inner">Change.</span></span>
+                    </h2>
+                  </div>
+                  <p class="font-sans text-base text-[#5C6667] leading-relaxed max-w-sm lg:text-right">
+                    Every donation is channeled directly into one of these five high-impact programs — all community-owned and community-run.
+                  </p>
+                </div>
+
+                <!-- Bento Grid: 5 icon cards + 1 stat card -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 collage-grid">
+
+                  <!-- Card 1: Community (full-height tall card) — hands circle icon -->
+                  <a href="404.html" class="collage-card group relative bg-white rounded-3xl border border-gray-100 shadow-sm p-8 flex flex-col gap-5 hover:-translate-y-2 hover:shadow-xl transition-all duration-500 overflow-hidden sm:col-span-2 lg:col-span-1 lg:row-span-2" style="min-height:460px">
+                    <div class="absolute -top-6 -right-6 w-32 h-32 rounded-full bg-[#8EE3C2]/10 transition-all duration-700 group-hover:scale-[3] pointer-events-none"></div>
+                    <!-- Image box: fixed height, centred, padded -->
+                    <div class="relative w-full rounded-2xl bg-[#F0FAF6] border border-[#48C39E]/10 flex items-center justify-center overflow-hidden" style="height:220px; padding:28px;">
+                      <img src="images/aa8835678e30bd978ed6bbea248e76ba.webp" alt="Community" style="width:100%;height:100%;object-fit:contain;transition:transform .7s ease;">
+                    </div>
+                    <div class="relative z-10 flex flex-col flex-1">
+                      <span class="text-[9px] font-bold text-[#48C39E] uppercase tracking-widest font-sans mb-1">Community</span>
+                      <h3 class="font-serif text-2xl text-[#122A26] font-normal leading-tight mb-2">Uniting Communities Across Borders</h3>
+                      <p class="font-sans text-sm text-[#5C6667] leading-relaxed flex-1">Strengthening local bonds and cross-cultural partnerships to build resilient, self-sustaining communities worldwide.</p>
+                      <span class="mt-4 inline-flex items-center gap-1 text-xs font-bold text-[#122A26] group-hover:text-[#48C39E] transition-colors">Explore →</span>
+                    </div>
+                  </a>
+
+                  <!-- Card 2: Education -->
+                  <a href="404.html" class="collage-card group relative bg-white rounded-3xl border border-gray-100 shadow-sm p-7 flex flex-col gap-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-500 overflow-hidden" style="min-height:200px">
+                    <div class="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-orange-100/50 transition-all duration-700 group-hover:scale-[3] pointer-events-none"></div>
+                    <div class="relative w-full rounded-2xl bg-[#FFF8EE] border border-orange-100 flex items-center justify-center overflow-hidden" style="height:150px; padding:20px;">
+                      <img src="images/1ba12c25dc71a6045a0823abb765646e.webp" alt="Education" style="width:100%;height:100%;object-fit:contain;transition:transform .7s ease;">
+                    </div>
+                    <div class="relative z-10">
+                      <span class="text-[9px] font-bold text-orange-400 uppercase tracking-widest font-sans mb-1 block">Education</span>
+                      <h3 class="font-serif text-xl text-[#122A26] font-normal leading-tight mb-1">Be the Change</h3>
+                      <p class="font-sans text-xs text-[#5C6667] leading-relaxed">Every child deserves access to quality learning. We fund schools, teachers, and materials.</p>
+                      <span class="mt-3 inline-flex items-center gap-1 text-xs font-bold text-[#122A26] group-hover:text-orange-400 transition-colors">Learn more →</span>
+                    </div>
+                  </a>
+
+                  <!-- Card 3: Nutrition -->
+                  <a href="404.html" class="collage-card group relative bg-white rounded-3xl border border-gray-100 shadow-sm p-7 flex flex-col gap-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-500 overflow-hidden" style="min-height:200px">
+                    <div class="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-amber-100/50 transition-all duration-700 group-hover:scale-[3] pointer-events-none"></div>
+                    <div class="relative w-full rounded-2xl bg-[#FDF6ED] border border-amber-100 flex items-center justify-center overflow-hidden" style="height:150px; padding:20px;">
+                      <img src="images/e9bc681a23f8d68324a16cb35ec1d1be.webp" alt="Nutrition" style="width:100%;height:100%;object-fit:contain;transition:transform .7s ease;">
+                    </div>
+                    <div class="relative z-10">
+                      <span class="text-[9px] font-bold text-amber-500 uppercase tracking-widest font-sans mb-1 block">Nutrition</span>
+                      <h3 class="font-serif text-xl text-[#122A26] font-normal leading-tight mb-1">Nourishing Futures</h3>
+                      <p class="font-sans text-xs text-[#5C6667] leading-relaxed">Farming support, seed programs, and food security for underserved regions across the globe.</p>
+                      <span class="mt-3 inline-flex items-center gap-1 text-xs font-bold text-[#122A26] group-hover:text-amber-500 transition-colors">Learn more →</span>
+                    </div>
+                  </a>
+
+                  <!-- Card 4: Healthcare -->
+                  <a href="404.html" class="collage-card group relative bg-white rounded-3xl border border-gray-100 shadow-sm p-7 flex flex-col gap-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-500 overflow-hidden" style="min-height:200px">
+                    <div class="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-pink-100/50 transition-all duration-700 group-hover:scale-[3] pointer-events-none"></div>
+                    <div class="relative w-full rounded-2xl bg-[#FFF0F5] border border-pink-100 flex items-center justify-center overflow-hidden" style="height:150px; padding:20px;">
+                      <img src="images/e311bafe03fccb2c1069334d39b56d45.webp" alt="Healthcare" style="width:100%;height:100%;object-fit:contain;transition:transform .7s ease;">
+                    </div>
+                    <div class="relative z-10">
+                      <span class="text-[9px] font-bold text-pink-400 uppercase tracking-widest font-sans mb-1 block">Healthcare</span>
+                      <h3 class="font-serif text-xl text-[#122A26] font-normal leading-tight mb-1">Life-Saving Access</h3>
+                      <p class="font-sans text-xs text-[#5C6667] leading-relaxed">Mobile clinics, vaccinations, and maternal care programs for remote communities.</p>
+                      <span class="mt-3 inline-flex items-center gap-1 text-xs font-bold text-[#122A26] group-hover:text-pink-400 transition-colors">Learn more →</span>
+                    </div>
+                  </a>
+
+                  <!-- Card 5: Water -->
+                  <a href="404.html" class="collage-card group relative bg-white rounded-3xl border border-gray-100 shadow-sm p-7 flex flex-col gap-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-500 overflow-hidden" style="min-height:200px">
+                    <div class="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-sky-100/50 transition-all duration-700 group-hover:scale-[3] pointer-events-none"></div>
+                    <div class="relative w-full rounded-2xl bg-[#EEF8FF] border border-sky-100 flex items-center justify-center overflow-hidden" style="height:150px; padding:20px;">
+                      <img src="images/a9e9c1b4f68d890fed8821cb3fa0e215.webp" alt="Water" style="width:100%;height:100%;object-fit:contain;transition:transform .7s ease;">
+                    </div>
+                    <div class="relative z-10">
+                      <span class="text-[9px] font-bold text-sky-400 uppercase tracking-widest font-sans mb-1 block">Water</span>
+                      <h3 class="font-serif text-xl text-[#122A26] font-normal leading-tight mb-1">Clean Water for All</h3>
+                      <p class="font-sans text-xs text-[#5C6667] leading-relaxed">Wells, filtration systems, and sanitation infrastructure for children and families.</p>
+                      <span class="mt-3 inline-flex items-center gap-1 text-xs font-bold text-[#122A26] group-hover:text-sky-400 transition-colors">Learn more →</span>
+                    </div>
+                  </a>
+
+                  <!-- Stat/CTA Card -->
+                  <div class="collage-card bg-[#122A26] rounded-3xl p-8 flex flex-col justify-between border border-[#122A26] shadow-sm hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 overflow-hidden relative" style="min-height:200px">
+                    <div class="absolute -bottom-8 -right-8 w-40 h-40 rounded-full bg-[#8EE3C2]/10 pointer-events-none"></div>
+                    <div class="relative z-10">
+                      <div class="text-[9px] font-bold text-[#8EE3C2] uppercase tracking-widest font-sans mb-4">Direct Funding</div>
+                      <div class="font-serif text-6xl text-white font-normal leading-none mb-2">100%</div>
+                      <p class="font-sans text-sm text-white/60 leading-relaxed mb-6">Every dollar goes directly to community-led programs. Zero overhead waste.</p>
+                    </div>
+                    <a href="404.html" class="relative z-10 inline-flex items-center gap-2 bg-[#8EE3C2] text-[#122A26] font-bold font-sans text-sm py-3.5 px-6 rounded-full hover:bg-white transition-colors duration-300 w-fit">
+                      Support Our Projects →
+                    </a>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Section 3: Community of Givers (Hover Masonry) -->
+          <div class="py-24 px-4 md:px-12 advanced-section">
+            <div class="mb-16">
+              <span class="text-[9px] font-bold text-[#5C6667]/60 uppercase tracking-widest font-sans mb-4 block">— OUR COMMUNITY</span>
+              <h2 class="font-serif text-4xl md:text-5xl font-normal text-[#122A26] reveal-title">
+                <span class="word-wrap"><span class="word-inner">A</span></span>
+                <span class="word-wrap"><span class="word-inner">Community</span></span>
+                <span class="word-wrap"><span class="word-inner">of</span></span>
+                <span class="word-wrap"><span class="word-inner">Givers</span></span>
+              </h2>
+            </div>
+            
+            <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+              
+              <!-- Image 1 -->
+              <div class="relative overflow-hidden rounded-2xl group break-inside-avoid">
+                <img src="assets/home/fe2e0855b4bac8a5bc832afa98b18f4a6b06c50e.webp" alt="Donor Community" class="w-full h-auto object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-105">
+                <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md rounded-xl p-6 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out shadow-lg border border-gray-100">
+                  <p class="font-serif text-[22px] text-[#122A26] leading-tight mb-3">"I give because I've seen the results firsthand. The transparency is unmatched."</p>
+                  <p class="font-sans text-[10px] font-bold text-[#5C6667] uppercase tracking-widest">— Sarah J.</p>
+                </div>
+              </div>
+              
+              <!-- Image 2 -->
+              <div class="relative overflow-hidden rounded-2xl group break-inside-avoid">
+                <img src="assets/about/2.webp" alt="Donor Community" class="w-full h-auto object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-105">
+                <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md rounded-xl p-6 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out shadow-lg border border-gray-100">
+                  <p class="font-serif text-[22px] text-[#122A26] leading-tight mb-3">"Knowing my monthly gift provides clean water to an entire village brings me joy."</p>
+                  <p class="font-sans text-[10px] font-bold text-[#5C6667] uppercase tracking-widest">— Michael T.</p>
+                </div>
+              </div>
+
+              <!-- Image 3 -->
+              <div class="relative overflow-hidden rounded-2xl group break-inside-avoid hidden lg:block">
+                <img src="assets/about/f7d62a2697b9a7eb753412e50b2d50a08d241d41.webp" alt="Donor Community" class="w-full h-auto object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-105">
+                <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md rounded-xl p-6 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out shadow-lg border border-gray-100">
+                  <p class="font-serif text-[22px] text-[#122A26] leading-tight mb-3">"This organization doesn't just build infrastructure, they empower locals to maintain it."</p>
+                  <p class="font-sans text-[10px] font-bold text-[#5C6667] uppercase tracking-widest">— Elena R.</p>
+                </div>
+              </div>
+
+              <!-- Image 4 -->
+              <div class="relative overflow-hidden rounded-2xl group break-inside-avoid">
+                <img src="assets/about/7.webp" alt="Donor Community" class="w-full h-auto object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-105">
+                <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md rounded-xl p-6 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out shadow-lg border border-gray-100">
+                  <p class="font-serif text-[22px] text-[#122A26] leading-tight mb-3">"The quarterly updates show exactly how my corporate match was utilized."</p>
+                  <p class="font-sans text-[10px] font-bold text-[#5C6667] uppercase tracking-widest">— David K.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Section 4: Donor FAQ (GSAP Accordion) -->
+          <div class="border-t border-[#122A26]/10 bg-white py-24 px-4 md:px-12 advanced-section rounded-b-3xl">
+            <div class="max-w-3xl mx-auto">
+              <div class="text-center mb-16">
+                <span class="text-[9px] font-bold text-[#5C6667]/60 uppercase tracking-widest font-sans mb-4 block">— FAQ</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-normal text-[#122A26] reveal-title">
+                  <span class="word-wrap"><span class="word-inner">Common</span></span>
+                  <span class="word-wrap"><span class="word-inner">Questions</span></span>
+                </h2>
+              </div>
+              
+              <div class="accordion-container flex flex-col border-t border-gray-200">
+                
+                <!-- FAQ Item 1 -->
+                <div class="accordion-item border-b border-gray-200 group">
+                  <button class="accordion-header w-full py-6 flex justify-between items-center text-left focus:outline-none">
+                    <span class="font-serif text-2xl text-[#122A26] group-hover:text-[#8EE3C2] transition-colors">Is my donation tax-deductible?</span>
+                    <div class="accordion-icon w-6 h-6 flex items-center justify-center flex-shrink-0 text-[#122A26]">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                    </div>
+                  </button>
+                  <div class="accordion-content h-0">
+                    <p class="pb-8 font-sans text-[#5C6667] text-base leading-relaxed">
+                      Yes. Stackly Foundation is a registered 501(c)(3) nonprofit organization in the United States. All donations are fully tax-deductible to the extent allowed by law. You will receive an automated email receipt immediately after your donation.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="accordion-item border-b border-gray-200 group">
+                  <button class="accordion-header w-full py-6 flex justify-between items-center text-left focus:outline-none">
+                    <span class="font-serif text-2xl text-[#122A26] group-hover:text-[#8EE3C2] transition-colors">Can I cancel a recurring donation?</span>
+                    <div class="accordion-icon w-6 h-6 flex items-center justify-center flex-shrink-0 text-[#122A26]">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                    </div>
+                  </button>
+                  <div class="accordion-content h-0">
+                    <p class="pb-8 font-sans text-[#5C6667] text-base leading-relaxed">
+                      Absolutely. You have full control over your giving. You can pause, modify, or cancel your monthly donation at any time through our secure donor portal, which you will gain access to upon making your first gift.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="accordion-item border-b border-gray-200 group">
+                  <button class="accordion-header w-full py-6 flex justify-between items-center text-left focus:outline-none">
+                    <span class="font-serif text-2xl text-[#122A26] group-hover:text-[#8EE3C2] transition-colors">How much goes directly to programs?</span>
+                    <div class="accordion-icon w-6 h-6 flex items-center justify-center flex-shrink-0 text-[#122A26]">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                    </div>
+                  </button>
+                  <div class="accordion-content h-0">
+                    <p class="pb-8 font-sans text-[#5C6667] text-base leading-relaxed">
+                      We are proud to report that 92% of every dollar donated goes directly into funding on-the-ground programs. The remaining 8% covers essential community operations and rigorous financial auditing to ensure transparency.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="accordion-item border-b border-gray-200 group">
+                  <button class="accordion-header w-full py-6 flex justify-between items-center text-left focus:outline-none">
+                    <span class="font-serif text-2xl text-[#122A26] group-hover:text-[#8EE3C2] transition-colors">Can I donate via wire transfer?</span>
+                    <div class="accordion-icon w-6 h-6 flex items-center justify-center flex-shrink-0 text-[#122A26]">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                    </div>
+                  </button>
+                  <div class="accordion-content h-0">
+                    <p class="pb-8 font-sans text-[#5C6667] text-base leading-relaxed">
+                      Yes, we accept wire transfers, stock donations, and crypto-currency for major gifts. Please contact our partnerships team directly at giving@stackly.org for routing instructions and tax documentation.
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+    </main>
+    <!-- Footer Section -->
+    <footer class="site-footer" id="site-footer" aria-label="Site Footer">
+      <div class="section-frame-wrapper" style="border-top: none;">
+        <div class="section-side-strip" aria-hidden="true">
+          <img src="assets/home/banner.webp" alt="">
+        </div>
+        <div class="section-frame-content">
+          <div class="footer-top-accent" aria-hidden="true"></div>
+          <div class="footer-inner">
+            <div class="footer-grid">
+              <div class="footer-col footer-col--brand" id="footer-col-1">
+                <a href="index.html" class="footer-logo-link" aria-label="Stackly home">
+                  <img src="assets/logo.webp" alt="STACKLY" class="footer-logo-img">
+                </a>
+                <p class="footer-brand-desc">A nonprofit lifting communities through education, clean water and healthcare — one hand, one life at a time.</p>
+                <div class="footer-socials">
+                  <a href="404.html" class="footer-social-btn" aria-label="Facebook" id="social-fb"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                  <a href="404.html" class="footer-social-btn" aria-label="Instagram" id="social-ig"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+                  <a href="404.html" class="footer-social-btn" aria-label="Twitter/X" id="social-tw"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                  <a href="404.html" class="footer-social-btn" aria-label="YouTube" id="social-yt"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12z"/></svg></a>
+                </div>
+              </div>
+              <div class="footer-col" id="footer-col-2">
+                <h4 class="footer-col-heading">EXPLORE</h4>
+                <ul class="footer-link-list">
+                  <li><a href="index.html" class="footer-link"><span>Home</span></a></li>
+                  <li><a href="about.html" class="footer-link"><span>About</span></a></li>
+                  <li><a href="causes.html" class="footer-link"><span>Causes</span></a></li>
+                  <li><a href="impact.html" class="footer-link"><span>Impact</span></a></li>
+                  <li><a href="donate.html" class="footer-link"><span>Donate</span></a></li>
+                  <li><a href="contact.html" class="footer-link"><span>Contact</span></a></li>
+                  <li><a href="404.html" class="footer-link footer-link--highlight"><span>Donate now &#x2197;</span></a></li>
+                </ul>
+              </div>
+              <div class="footer-col" id="footer-col-3">
+                <h4 class="footer-col-heading">GET INVOLVED</h4>
+                <ul class="footer-link-list">
+                  <li><a href="404.html" class="footer-link"><span>Volunteer</span></a></li>
+                  <li><a href="404.html" class="footer-link"><span>Partner with us</span></a></li>
+                  <li><a href="404.html" class="footer-link"><span>Fundraise</span></a></li>
+                  <li><a href="404.html" class="footer-link"><span>Contact us</span></a></li>
+                </ul>
+              </div>
+              <div class="footer-col" id="footer-col-4">
+                <h4 class="footer-col-heading">ACCOUNT</h4>
+                <ul class="footer-link-list">
+                  <li><a href="login.html" class="footer-link"><span>Log in</span></a></li>
+                  <li><a href="login.html#signup" class="footer-link"><span>Sign up</span></a></li>
+                </ul>
+                <div class="footer-stat-chip">
+                  <span class="footer-stat-num">10K+</span>
+                  <span class="footer-stat-lbl">Meals served</span>
+                </div>
+              </div>
+              <div class="footer-col footer-col--newsletter" id="footer-col-5">
+                <h4 class="footer-col-heading">NEWSLETTER</h4>
+                <p class="footer-newsletter-desc">Stories from the field, delivered once a month.</p>
+                <form class="footer-newsletter-form" onsubmit="return false;" aria-label="Newsletter signup">
+                  <div class="footer-newsletter-field">
+                    <svg class="footer-input-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <input type="email" id="footer-email-input" class="footer-email-input" placeholder="your@email.com" aria-label="Your email">
+                    <button type="submit" class="footer-join-btn" id="footer-join-btn" aria-label="Subscribe">Join &#x2192;</button>
+                  </div>
+                </form>
+                <p class="footer-privacy-note">No spam. Unsubscribe anytime.</p>
+              </div>
+            </div>
+            <div class="footer-divider" aria-hidden="true"></div>
+            <div class="footer-bottom" id="footer-bottom">
+              <div class="footer-bottom-left"><span class="footer-copyright">&#169; 2026 Stackly Foundation. All rights reserved.</span></div>
+              <div class="footer-bottom-center">
+                <a href="404.html" class="footer-bottom-link">Privacy</a><span class="footer-bottom-sep">&#183;</span>
+                <a href="404.html" class="footer-bottom-link">Terms</a><span class="footer-bottom-sep">&#183;</span>
+                <a href="404.html" class="footer-bottom-link">Cookies</a>
+              </div>
+              <div class="footer-bottom-right"><span class="footer-ein">Registered nonprofit &#183; EIN 00-0000000</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- JS Libraries (self-hosted) -->
+  <script src="libs/gsap.min.js"></script>
+  <script src="libs/ScrollTrigger.min.js"></script>
+  <script src="libs/lenis.min.js"></script>
+  <script src="js/preloader.js?v=1.3.2"></script>
+
+  <!-- Custom Page Scripts & Animations -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check for preloader overlay
+      const preloader = document.getElementById('preloader');
+      const hasPreloader = preloader !== null;
+
+      if (hasPreloader) {
+        document.body.style.overflow = 'hidden';
+      }
+
+      // 1. Initialize Lenis Smooth Scrolling
+      let lenis;
+      if (typeof Lenis !== 'undefined') {
+        lenis = new Lenis({
+          duration: 1.4,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          direction: 'vertical',
+          gestureDirection: 'vertical',
+          smooth: true,
+          mouseMultiplier: 1.0,
+          smoothTouch: false,
+          touchMultiplier: 2,
+          infinite: false,
+        });
+        lenis.on('scroll', () => { if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.update(); });
+        gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+        gsap.ticker.lagSmoothing(0);
+
+        if (hasPreloader) {
+          lenis.stop();
+        }
+      }
+      if (typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+      }
+
+      // 2. Global Header/Footer Functions
+      initNavSpotlight();
+      initStickyHeader();
+      initMobileMenu();
+      initFooterNewsletter();
+
+      // Wrap animations in a gsap.context()
+      const ctx = gsap.context(() => {
+        
+        // 3. GSAP Hero Entrance Animations
+        const tl = gsap.timeline({
+          paused: hasPreloader,
+          defaults: { ease: 'power4.out', duration: 1.2 }
+        });
+
+        // Run preloader if present
+        if (hasPreloader) {
+          runPreloader(preloader, tl, lenis);
+        }
+
+        tl.from('header.site-header', { y: -30, opacity: 0, duration: 1.0, ease: 'power3.out' });
+        tl.from('#donate-hero-title .word-inner', {
+          rotationX: -45, y: 50, opacity: 0, stagger: 0.08, duration: 1.2, ease: 'power3.out'
+        }, '-=0.6');
+        tl.from('#hero-text-container p, #hero-text-container > span', {
+          y: 20, opacity: 0, stagger: 0.1, duration: 1.0, ease: 'power3.out'
+        }, '-=0.8');
+
+        // 4. Form and Impact Cards Reveal on Scroll
+        const formTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".form-split-container",
+            start: "top 80%"
+          }
+        });
+        formTl.from(".form-card", { y: 60, opacity: 0, duration: 1.0, ease: "power3.out" })
+              .from(".info-cards > div", { y: 60, opacity: 0, stagger: 0.2, duration: 1.0, ease: "power3.out" }, "-=0.7");
+
+
+        // 5. Interactive Form Logic
+        const state = { frequency: 'monthly', amount: 60 };
+        const impactData = {
+          monthly: {
+            30: ["Provides 2 weeks of clean water to a family.", "Supports a child's school meals for a week."],
+            60: ["Feeds one child at school for two months.", "Vaccinates 12 children."],
+            120: ["Funds a community well operation for a month.", "Supplies textbooks for an entire classroom."],
+            250: ["Trains 5 new community health workers.", "Equips a rural clinic with essential medicines for a month."],
+            custom: ["Empowers community-led initiatives where it's needed most.", "Provides flexible funding for urgent global projects."]
+          },
+          onetime: {
+            30: ["Provides 2 days of emergency rations for a family.", "Supplies a basic hygiene kit."],
+            60: ["Buys seeds and tools for a family farm.", "Provides safe birth kits for 3 mothers."],
+            120: ["Installs a family-sized water filter.", "Funds a semester of education for one child."],
+            250: ["Purchases a wheelchair for a community member.", "Builds a sanitary latrine for a household."],
+            custom: ["Directly impacts our most urgent global needs.", "Allocated 100% to on-the-ground project execution."]
+          }
+        };
+
+        const freqBtns = document.querySelectorAll('.freq-btn');
+        const amountBtns = document.querySelectorAll('.amount-btn');
+        const customInput = document.getElementById('custom-amount');
+        const submitBtn = document.getElementById('submit-donation-btn');
+        const impactHeading = document.getElementById('impact-heading');
+        const impactList = document.getElementById('impact-list');
+        const impactWrapper = document.querySelector('.impact-content-wrapper');
+
+        function updateUI() {
+          // Update frequency toggle buttons
+          freqBtns.forEach(btn => {
+            if (btn.dataset.freq === state.frequency) {
+              btn.classList.add('bg-[#122A26]', 'text-white', 'active', 'shadow-md');
+              btn.classList.remove('text-[#5C6667]', 'bg-transparent', 'hover:bg-gray-100');
+            } else {
+              btn.classList.remove('bg-[#122A26]', 'text-white', 'active', 'shadow-md');
+              btn.classList.add('text-[#5C6667]', 'bg-transparent', 'hover:bg-gray-100');
+            }
+          });
+
+          // Update amount grid buttons
+          amountBtns.forEach(btn => {
+            if (parseInt(btn.dataset.amount) === state.amount && !customInput.value) {
+              btn.classList.add('bg-[#122A26]', 'text-white', 'border-[#122A26]', 'active');
+              btn.classList.remove('bg-[#FAF8F3]', 'text-[#122A26]', 'border-gray-200');
+            } else {
+              btn.classList.remove('bg-[#122A26]', 'text-white', 'border-[#122A26]', 'active');
+              btn.classList.add('bg-[#FAF8F3]', 'text-[#122A26]', 'border-gray-200');
+            }
+          });
+
+          // Update Submit Button text dynamically
+          const freqText = state.frequency === 'monthly' ? '/month' : 'once';
+          const displayAmount = customInput.value ? customInput.value : state.amount;
+          submitBtn.innerHTML = `♡ Give $${displayAmount} ${freqText}`;
+
+          // Fetch dynamic impact content
+          let currentKey = [30, 60, 120, 250].includes(parseInt(displayAmount)) && !customInput.value ? displayAmount : 'custom';
+          const statements = impactData[state.frequency][currentKey];
+          const newHeading = state.frequency === 'monthly' ? `What $${displayAmount} /month does` : `What a one-time $${displayAmount} gift does`;
+
+          // GSAP cross-fade update for the impact text to prevent jarring layout shifts
+          gsap.to(impactWrapper, {
+            opacity: 0,
+            y: -8,
+            duration: 0.2,
+            onComplete: () => {
+              impactHeading.textContent = newHeading;
+              impactList.innerHTML = statements.map(str => `
+                <li class="flex gap-3 items-start">
+                  <span class="text-[#48C39E] font-bold text-lg mt-[-2px]">✓</span>
+                  <span>${str}</span>
+                </li>
+              `).join('');
+              gsap.to(impactWrapper, { opacity: 1, y: 0, duration: 0.3 });
+            }
+          });
+        }
+
+        // Attach event listeners
+        freqBtns.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            state.frequency = btn.dataset.freq;
+            updateUI();
+          });
+        });
+
+        amountBtns.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            state.amount = parseInt(btn.dataset.amount);
+            customInput.value = ''; // clear custom
+            updateUI();
+          });
+        });
+
+        customInput.addEventListener('input', (e) => {
+          if (e.target.value) {
+            state.amount = parseInt(e.target.value);
+          } else {
+            state.amount = 60; // fallback to default if empty
+          }
+          updateUI();
+        });
+
+        submitBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+
+          // Validate required personal detail fields
+          const formCard    = submitBtn.closest('.form-card');
+          const nameInput   = formCard.querySelector('input[type="text"]');
+          const emailInput  = formCard.querySelector('input[type="email"]');
+          const emailRegex  = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          let valid = true;
+
+          [nameInput, emailInput].forEach(inp => {
+            if (!inp) return;
+            const bad = !inp.value.trim() || (inp.type === 'email' && !emailRegex.test(inp.value));
+            if (bad) {
+              inp.classList.add('border-red-400', 'bg-red-50');
+              inp.addEventListener('input', () => inp.classList.remove('border-red-400', 'bg-red-50'), { once: true });
+              valid = false;
+            }
+          });
+
+          if (!valid) {
+            const orig = submitBtn.innerHTML;
+            submitBtn.innerHTML = '&#x26A0; Please fill all fields';
+            submitBtn.classList.add('bg-red-500');
+            submitBtn.classList.remove('bg-[#122A26]');
+            setTimeout(() => {
+              submitBtn.innerHTML = orig;
+              submitBtn.classList.remove('bg-red-500');
+              submitBtn.classList.add('bg-[#122A26]');
+            }, 2200);
+            return;
+          }
+
+          // All valid — show processing then redirect to 404
+          submitBtn.innerHTML = '<span class="opacity-50">Processing...</span>';
+          submitBtn.style.pointerEvents = 'none';
+          setTimeout(() => {
+            submitBtn.innerHTML = '&#x2713; Thank you! Redirecting...';
+            submitBtn.classList.replace('bg-[#122A26]', 'bg-[#48C39E]');
+            setTimeout(() => { window.location.href = '404.html'; }, 1000);
+          }, 800);
+        });
+
+        // 6. GSAP Infinite Marquee
+        const marqueeWrappers = document.querySelectorAll('.marquee-wrapper');
+        marqueeWrappers.forEach(wrapper => {
+          const contents = wrapper.querySelectorAll('.marquee-content');
+          gsap.to(contents, {
+            xPercent: -100,
+            repeat: -1,
+            duration: 18,
+            ease: "none",
+          });
+        });
+
+        // 7. Advanced Sections Entrance & Text Animations
+        gsap.utils.toArray('#donate-extended-sections .reveal-title').forEach((title) => {
+          gsap.from(title.querySelectorAll('.word-inner'), {
+            rotationX: -45,
+            y: 30,
+            opacity: 0,
+            stagger: 0.08,
+            duration: 1.0,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 85%'
+            }
+          });
+        });
+
+        gsap.utils.toArray('#donate-extended-sections .advanced-section').forEach((section) => {
+          // Skip the focus areas gallery — cards have individual animations
+          if (section.id === 'impact-gallery-section') return;
+          gsap.from(section, {
+            y: 50,
+            opacity: 0,
+            duration: 1.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 85%'
+            }
+          });
+        });
+
+        // Collage grid cards — each card gets its own ScrollTrigger
+        // so cards never get stuck at opacity:0 because they were off-screen
+        document.querySelectorAll('.collage-card').forEach((card, i) => {
+          gsap.set(card, { opacity: 1, y: 0, scale: 1 }); // ensure visible by default
+          gsap.from(card, {
+            scale: 0.93,
+            y: 36,
+            opacity: 0,
+            duration: 0.85,
+            delay: i * 0.04,
+            ease: 'back.out(1.3)',
+            clearProps: 'all',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 92%',
+              once: true,
+            }
+          });
+        });
+
+        // 8. GSAP Accordion Logic
+        const accordionItems = document.querySelectorAll('.accordion-item');
+        accordionItems.forEach(item => {
+          const header = item.querySelector('.accordion-header');
+          const content = item.querySelector('.accordion-content');
+          const icon = item.querySelector('.accordion-icon');
+          
+          header.addEventListener('click', () => {
+            const isOpen = item.classList.contains('is-open');
+            
+            // Close all other items
+            accordionItems.forEach(otherItem => {
+              if (otherItem !== item && otherItem.classList.contains('is-open')) {
+                otherItem.classList.remove('is-open');
+                const otherContent = otherItem.querySelector('.accordion-content');
+                const otherIcon = otherItem.querySelector('.accordion-icon');
+                gsap.to(otherContent, { height: 0, duration: 0.4, ease: "power3.out" });
+                gsap.to(otherIcon, { rotation: 0, duration: 0.4, ease: "power3.out" });
+              }
+            });
+            
+            // Toggle current item
+            if (!isOpen) {
+              item.classList.add('is-open');
+              // Auto height hack in GSAP
+              gsap.set(content, { height: "auto" });
+              const fullHeight = content.clientHeight;
+              gsap.set(content, { height: 0 });
+              gsap.to(content, { height: fullHeight, duration: 0.4, ease: "power3.out", onComplete: () => gsap.set(content, { height: "auto" }) });
+              gsap.to(icon, { rotation: 45, duration: 0.4, ease: "power3.out" });
+            } else {
+              item.classList.remove('is-open');
+              gsap.to(content, { height: 0, duration: 0.4, ease: "power3.out" });
+              gsap.to(icon, { rotation: 0, duration: 0.4, ease: "power3.out" });
+            }
+          });
+        });
+
+      });
+    });
+
+    /* ── Utilities from index.html ── */
+    function initNavSpotlight() {
+      const navMenu  = document.querySelector('.nav-menu');
+      const navLinks = document.querySelectorAll('.nav-link');
+      const spotlight = document.querySelector('.nav-spotlight');
+      if (!navMenu || !navLinks.length || !spotlight) return;
+      navLinks.forEach(link => {
+        link.addEventListener('mouseenter', (e) => {
+          const linkRect = e.target.getBoundingClientRect();
+          const menuRect = navMenu.getBoundingClientRect();
+          spotlight.style.width   = `${linkRect.width}px`;
+          spotlight.style.left    = `${linkRect.left - menuRect.left}px`;
+          spotlight.style.opacity = '1';
+        });
+      });
+      navMenu.addEventListener('mouseleave', () => { spotlight.style.opacity = '0'; });
+    }
+
+    function initStickyHeader() {
+      const header = document.querySelector('header.site-header');
+      if (!header) return;
+      const handle = () => header.classList.toggle('scrolled', window.scrollY > 40);
+      window.addEventListener('scroll', handle);
+      handle();
+    }
+
+    function initMobileMenu() {
+      const toggleBtn = document.getElementById('mobile-nav-toggle');
+      const navWrapper = document.querySelector('.nav-menu-wrapper');
+      if (!toggleBtn || !navWrapper) return;
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isActive = document.body.classList.contains('mobile-menu-active');
+        if (isActive) {
+          document.body.classList.remove('mobile-menu-active');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        } else {
+          document.body.classList.add('mobile-menu-active');
+          toggleBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
+      document.addEventListener('click', (e) => {
+        const isActive = document.body.classList.contains('mobile-menu-active');
+        if (isActive && !navWrapper.contains(e.target) && !toggleBtn.contains(e.target)) {
+          document.body.classList.remove('mobile-menu-active');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
+    function initFooterNewsletter() {
+      const footer = document.getElementById('site-footer');
+      if (!footer) return;
+      const form  = footer.querySelector('.footer-newsletter-form');
+      const input = footer.querySelector('.footer-email-input');
+      const btn   = footer.querySelector('.footer-join-btn');
+      if (form && input && btn) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!input.value.trim() || !emailRegex.test(input.value)) {
+            input.style.borderColor = '#f87171';
+            const origPh = input.placeholder;
+            input.placeholder = 'Enter a valid email first';
+            input.addEventListener('input', () => {
+              input.style.borderColor = '';
+              input.placeholder = origPh;
+            }, { once: true });
+            return;
+          }
+          btn.textContent = '✓';
+          btn.style.color = '#8EE3C2';
+          btn.style.pointerEvents = 'none';
+          if (typeof gsap !== 'undefined') {
+            gsap.fromTo(btn, { scale: 0.8 }, { scale: 1, duration: 0.4, ease: 'back.out(1.5)' });
+          }
+          setTimeout(() => { window.location.href = '404.html'; }, 800);
+        });
+      }
+    }
+  </script>
+</body>
+</html>

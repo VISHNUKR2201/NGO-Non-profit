@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Page Not Found</title>
+  <!-- Fonts loaded via style.css -->
+  <link rel="stylesheet" href="css/style.css?v=1.3.2">
+  
+  <style>
+    :root {
+      --bg-color: #FAF8F3;
+      --primary-dark: #122A26;
+      --primary-dark-hover: #1b3d37;
+      --mint-green: #8EE3C2;
+      --mint-green-dark: #48C39E;
+      --text-muted: #5C6667;
+      --white: #ffffff;
+      --font-serif: 'Instrument Serif', serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--primary-dark);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Background decorative element */
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(18, 42, 38, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+      z-index: 1;
+    }
+
+    /* Framed layout to match website */
+    .frame-border {
+      position: absolute;
+      inset: 24px;
+      border: 1px solid rgba(18, 42, 38, 0.1);
+      pointer-events: none;
+      z-index: 10;
+    }
+    
+    .frame-corner {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--primary-dark);
+      pointer-events: none;
+      z-index: 11;
+    }
+    .corner-tl { top: 22px; left: 22px; border-right: none; border-bottom: none; }
+    .corner-tr { top: 22px; right: 22px; border-left: none; border-bottom: none; }
+    .corner-bl { bottom: 22px; left: 22px; border-right: none; border-top: none; }
+    .corner-br { bottom: 22px; right: 22px; border-left: none; border-top: none; }
+
+    /* Centered Content Card */
+    .error-container {
+      width: 100%;
+      max-width: 580px;
+      padding: 40px 24px;
+      text-align: center;
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* 3D Scene Wrapper */
+    .scene-wrapper {
+      position: relative;
+      width: 320px;
+      height: 280px;
+      perspective: 1000px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    /* Tilt element */
+    .tilt-card {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    /* Backdrop circle matching hero */
+    .backdrop-circle {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      background-color: var(--mint-green);
+      border-radius: 50%;
+      opacity: 0.88;
+      z-index: 1;
+      transform: translateZ(-20px);
+      filter: blur(8px);
+      animation: floatCircle 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatCircle {
+      0% { transform: translateZ(-20px) translateY(-10px) scale(0.95); }
+      100% { transform: translateZ(-20px) translateY(10px) scale(1.05); }
+    }
+
+    /* Huge 404 Text */
+    .huge-404 {
+      font-family: var(--font-serif);
+      font-size: 10rem;
+      font-weight: 400;
+      color: var(--primary-dark);
+      line-height: 1;
+      z-index: 2;
+      transform: translateZ(50px);
+      user-select: none;
+      filter: drop-shadow(0 20px 30px rgba(18, 42, 38, 0.15));
+      position: relative;
+    }
+
+    /* Glassmorphism card floating over 404 */
+    .floating-badge {
+      position: absolute;
+      bottom: 20px;
+      right: 0px;
+      z-index: 3;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      padding: 12px 20px;
+      border-radius: 16px;
+      box-shadow: 0 16px 32px rgba(18, 42, 38, 0.08);
+      transform: translateZ(80px);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .badge-icon {
+      width: 32px;
+      height: 32px;
+      background-color: var(--mint-green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .badge-text {
+      text-align: left;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      letter-spacing: 0.05em;
+    }
+
+    /* Text info */
+    .error-title {
+      font-family: var(--font-serif);
+      font-size: 2.8rem;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      font-weight: 400;
+    }
+
+    .error-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 440px;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    /* Buttons block */
+    .error-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .btn {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 16px 28px;
+      border-radius: 50px;
+      transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-dark);
+      color: var(--white);
+      border: 1px solid var(--primary-dark);
+      box-shadow: 0 10px 20px rgba(18, 42, 38, 0.15);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 25px rgba(18, 42, 38, 0.2);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary-dark);
+      border: 1px solid rgba(18, 42, 38, 0.2);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary-dark);
+      background-color: rgba(18, 42, 38, 0.03);
+      transform: translateY(-3px);
+    }
+
+    .arrow-icon {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .btn:hover .arrow-icon {
+      transform: translateX(3px);
+    }
+    
+    .btn-back-arrow {
+      transform: rotate(180deg);
+    }
+    .btn:hover .btn-back-arrow {
+      transform: rotate(180deg) translateX(3px);
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .frame-border {
+        inset: 12px;
+      }
+      .corner-tl { top: 10px; left: 10px; }
+      .corner-tr { top: 10px; right: 10px; }
+      .corner-bl { bottom: 10px; left: 10px; }
+      .corner-br { bottom: 10px; right: 10px; }
+      
+      .huge-404 {
+        font-size: 8rem;
+      }
+      .scene-wrapper {
+        width: 280px;
+        height: 240px;
+      }
+      .error-title {
+        font-size: 2.2rem;
+      }
+      .error-actions {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Pattern -->
+  <div class="bg-grid"></div>
+
+  <!-- Framed Border -->
+  <div class="frame-border"></div>
+  <div class="frame-corner corner-tl"></div>
+  <div class="frame-corner corner-tr"></div>
+  <div class="frame-corner corner-bl"></div>
+  <div class="frame-corner corner-br"></div>
+
+  <div class="error-container">
+    
+    <!-- 3D Interactive Scene -->
+    <div class="scene-wrapper" id="scene-container">
+      <div class="tilt-card" id="3d-tilt-card">
+        
+        <!-- Backdrop Circle -->
+        <div class="backdrop-circle" id="card-backdrop"></div>
+        
+        <!-- Huge 404 Text -->
+        <h1 class="huge-404" id="text-404">404</h1>
+        
+        <!-- Floating Glass Badge -->
+        <div class="floating-badge" id="card-badge">
+          <div class="badge-icon">📍</div>
+          <div class="badge-text">
+            ROUTE LOST<br>
+            <strong>CODE 404</strong>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Error Messaging -->
+    <h2 class="error-title">Small Path, Lost Direction</h2>
+    <p class="error-desc">
+      The community page you are looking for has taken another route or does not exist. But hope is never lost.
+    </p>
+
+    <!-- Buttons -->
+    <div class="error-actions">
+      <button class="btn btn-outline" id="go-back-btn">
+        <svg class="arrow-icon btn-back-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+        Go Back
+      </button>
+      <a href="index.html" class="btn btn-primary">
+        Back to Home
+        <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- GSAP Animation (self-hosted) -->
+  <script src="libs/gsap.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Entrance Animations using GSAP
+      const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.2 } });
+      
+      tl.from('.frame-border', { opacity: 0, scale: 0.98, duration: 1.5 });
+      tl.from('.frame-corner', { opacity: 0, stagger: 0.1, duration: 0.8 }, '-=1.2');
+      tl.from('#text-404', { y: 80, opacity: 0, scale: 0.8, duration: 1.4 }, '-=1.0');
+      tl.from('#card-backdrop', { scale: 0.2, opacity: 0, duration: 1.2, ease: 'back.out(1.7)' }, '-=1.2');
+      tl.from('#card-badge', { x: 50, opacity: 0, scale: 0.9, duration: 1.2 }, '-=0.9');
+      tl.from('.error-title', { y: 30, opacity: 0, duration: 1.0 }, '-=0.8');
+      tl.from('.error-desc', { y: 20, opacity: 0, duration: 1.0 }, '-=0.8');
+      tl.from('.error-actions', { y: 20, opacity: 0, duration: 1.0 }, '-=0.8');
+
+      // 2. Go Back → returns to exact section/scroll position on the previous page
+      const goBackBtn = document.getElementById('go-back-btn');
+      if (goBackBtn) {
+        goBackBtn.addEventListener('click', () => {
+          history.back();
+        });
+      }
+
+      // 3. 3D Mouse Parallax Tilt
+      const sceneContainer = document.getElementById('scene-container');
+      const tiltCard = document.getElementById('3d-tilt-card');
+      const text404 = document.getElementById('text-404');
+      const cardBackdrop = document.getElementById('card-backdrop');
+      const cardBadge = document.getElementById('card-badge');
+
+      if (sceneContainer && tiltCard) {
+        // Only run tilt animation on desktop/tablet to prevent touch layout bugs
+        if (window.innerWidth >= 1024) {
+          sceneContainer.addEventListener('mousemove', (e) => {
+            const rect = sceneContainer.getBoundingClientRect();
+            const normX = (e.clientX - rect.left) / rect.width - 0.5;
+            const normY = (e.clientY - rect.top) / rect.height - 0.5;
+            
+            const rotateX = -normY * 20; // 3D rotation angle
+            const rotateY = normX * 24;
+
+            gsap.to(tiltCard, {
+              rotateX: rotateX,
+              rotateY: rotateY,
+              duration: 0.5,
+              ease: 'power2.out',
+              overwrite: 'auto'
+            });
+
+            gsap.to(text404, {
+              x: normX * 15,
+              y: normY * 15,
+              duration: 0.5,
+              ease: 'power2.out',
+              overwrite: 'auto'
+            });
+
+            gsap.to(cardBackdrop, {
+              x: -normX * 10,
+              y: -normY * 10,
+              duration: 0.5,
+              ease: 'power2.out',
+              overwrite: 'auto'
+            });
+
+            gsap.to(cardBadge, {
+              x: normX * 35,
+              y: normY * 35,
+              duration: 0.5,
+              ease: 'power2.out',
+              overwrite: 'auto'
+            });
+          });
+
+          // Reset positions when mouse leaves
+          sceneContainer.addEventListener('mouseleave', () => {
+            gsap.to(tiltCard, {
+              rotateX: 0,
+              rotateY: 0,
+              duration: 0.8,
+              ease: 'power3.out',
+              overwrite: 'auto'
+            });
+
+            gsap.to([text404, cardBackdrop, cardBadge], {
+              x: 0,
+              y: 0,
+              duration: 0.8,
+              ease: 'power3.out',
+              overwrite: 'auto'
+            });
+          });
+        }
+      }
+    });
+  </script>
+</body>
+</html>
