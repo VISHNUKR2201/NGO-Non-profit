@@ -865,7 +865,6 @@ header.site-header.scrolled .header-container {
   overflow: hidden;
   vertical-align: bottom;
   padding-bottom: 0.05em; /* prevents descender clip */
-  margin-right: 0.2em;
 }
 
 .what-we-do-heading .word-inner {
@@ -1411,7 +1410,6 @@ header.site-header.scrolled .header-container {
   overflow: hidden;
   vertical-align: bottom;
   padding-bottom: 0.06em;
-  margin-right: 0.18em;
 }
 
 .story-heading .word-inner {
@@ -2016,7 +2014,8 @@ header.site-header.scrolled .header-container {
   vertical-align: bottom;
   perspective: 1000px;
   padding: 0 6px;
-  margin: 0 -2px;
+  margin-left: -6px;
+  margin-right: -6px;
   text-indent: 0;
 }
 
@@ -3985,7 +3984,12 @@ img:not(.logo-wrapper img):not(.section-side-strip img):not(.action-img):hover,
     gap: 8px;
     padding: 20px 0 28px 0;
   }
-  .footer-bottom-right { justify-content: flex-start; }
+  .footer-bottom-left,
+  .footer-bottom-center,
+  .footer-bottom-right {
+    justify-content: flex-start;
+    text-align: left;
+  }
 }
 
 @media (max-width: 600px) {
@@ -4000,6 +4004,48 @@ img:not(.logo-wrapper img):not(.section-side-strip img):not(.action-img):hover,
     gap: 36px;
   }
   .footer-col--brand { flex-direction: column; }
+
+  /* ── Ensure every element is left-aligned on mobile ── */
+  .footer-col {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .footer-col-heading {
+    text-align: left;
+  }
+  .footer-link-list {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .footer-brand-desc {
+    text-align: left;
+    max-width: 100%;
+  }
+  .footer-socials {
+    justify-content: flex-start;
+  }
+  .footer-stat-chip {
+    align-self: flex-start;
+  }
+  .footer-newsletter-desc {
+    text-align: left;
+  }
+  .footer-privacy-note {
+    text-align: left;
+  }
+  /* Bottom bar: stack left-aligned */
+  .footer-bottom {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 20px 0 28px 0;
+    text-align: left;
+  }
+  .footer-bottom-left,
+  .footer-bottom-center,
+  .footer-bottom-right {
+    justify-content: flex-start;
+    text-align: left;
+  }
 }
 
 
@@ -4130,7 +4176,7 @@ img:not(.logo-wrapper img):not(.section-side-strip img):not(.action-img):hover,
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 100px 24px 60px 24px;
+    padding: 72px 24px 36px 24px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-20px);
@@ -4160,8 +4206,8 @@ img:not(.logo-wrapper img):not(.section-side-strip img):not(.action-img):hover,
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
-    margin: 0 0 40px 0 !important;
-    gap: 20px !important;
+    margin: 0 0 24px 0 !important;
+    gap: 10px !important;
     align-items: center;
     width: 100%;
   }
@@ -4188,11 +4234,12 @@ img:not(.logo-wrapper img):not(.section-side-strip img):not(.action-img):hover,
   .mobile-menu-active .nav-item:nth-child(7) { transition-delay: 0.35s; }
 
   .nav-link {
-    font-size: 1.6rem !important;
+    font-size: 1.35rem !important;
     font-family: var(--font-serif) !important;
     color: var(--primary-dark) !important;
-    padding: 6px 16px !important;
-    transition: color 0.3s ease !important;
+    padding: 4px 12px !important;
+    transition: all 0.3s ease !important;
+    letter-spacing: 0.02em;
   }
 
   .nav-link:hover {
@@ -4208,7 +4255,7 @@ img:not(.logo-wrapper img):not(.section-side-strip img):not(.action-img):hover,
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 10px;
     width: 100%;
     max-width: 280px;
     opacity: 0;
@@ -4223,11 +4270,11 @@ img:not(.logo-wrapper img):not(.section-side-strip img):not(.action-img):hover,
   }
 
   .mobile-actions .login-btn {
-    font-size: 1.1rem;
+    font-size: 1.0rem;
     font-weight: 500;
     color: var(--primary-dark);
     text-decoration: none;
-    padding: 8px 0;
+    padding: 4px 0;
     transition: opacity 0.3s ease;
   }
 
@@ -4238,8 +4285,8 @@ img:not(.logo-wrapper img):not(.section-side-strip img):not(.action-img):hover,
   .mobile-actions .donate-btn-header {
     width: 100%;
     text-align: center;
-    padding: 14px 28px;
-    font-size: 1rem;
+    padding: 10px 24px;
+    font-size: 0.9rem;
     box-sizing: border-box;
   }
 

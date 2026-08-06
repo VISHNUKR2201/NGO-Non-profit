@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stackly — My Dashboard</title>
 
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <!-- Self-hosted Tailwind -->
   <script src="libs/tailwind.min.js"></script>
   <script>
@@ -167,7 +170,7 @@
 
       <!-- Page title (updates with section) -->
       <h1 id="page-title" class="flex-1 font-serif italic text-[#23353e] text-xl md:text-2xl truncate">
-        Welcome back, John 👋
+        Welcome back, John
       </h1>
 
       <!-- Notification bell -->
@@ -180,7 +183,7 @@
       <div class="flex items-center gap-2">
         <div class="hidden sm:block text-right">
           <p id="user-nav-name" class="text-xs font-bold text-[#23353e]">John Donor</p>
-          <p class="text-[10px] text-[#48C39E] font-semibold">Gold Tier ★</p>
+          <p class="text-[10px] text-[#48C39E] font-semibold">Gold Tier <i class="fa-solid fa-star text-[8px] align-middle"></i></p>
         </div>
         <div id="user-nav-avatar" class="w-9 h-9 rounded-full bg-[#a7e4c9] flex items-center justify-center text-[#23353e] font-bold text-sm">JD</div>
       </div>
@@ -199,7 +202,7 @@
   <div class="bg-[#23353e] text-white px-6 py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
     <div>
       <p class="text-[#a7e4c9] text-[10px] font-bold tracking-widest uppercase mb-1">My Dashboard</p>
-      <h2 class="font-serif italic text-2xl md:text-3xl">Welcome back, <span id="user-banner-name">John</span> 👋</h2>
+      <h2 class="font-serif italic text-2xl md:text-3xl">Welcome back, <span id="user-banner-name">John</span></h2>
       <p class="text-white/60 text-sm mt-1">Here's a summary of your impact this month.</p>
     </div>
     <a href="404.html" class="inline-flex items-center gap-2 bg-[#a7e4c9] text-[#23353e] font-bold text-sm px-5 py-2.5 rounded-full hover:bg-white transition-colors self-start sm:self-auto whitespace-nowrap">
@@ -215,7 +218,7 @@
 
       <!-- Card 1: Profile -->
       <div class="kpi-card bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex items-start gap-4">
-        <div class="w-12 h-12 rounded-2xl bg-[#a7e4c9]/20 flex items-center justify-center text-2xl flex-shrink-0">👤</div>
+        <div class="w-12 h-12 rounded-2xl bg-[#a7e4c9]/20 flex items-center justify-center text-lg text-[#48C39E] flex-shrink-0"><i class="fa-solid fa-user"></i></div>
         <div>
           <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">My Profile</p>
           <p class="text-xl font-bold text-[#23353e] mt-1">Active Donor</p>
@@ -225,17 +228,17 @@
 
       <!-- Card 2: Total Donations -->
       <div class="kpi-card bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex items-start gap-4">
-        <div class="w-12 h-12 rounded-2xl bg-yellow-50 flex items-center justify-center text-2xl flex-shrink-0">💰</div>
+        <div class="w-12 h-12 rounded-2xl bg-yellow-50 flex items-center justify-center text-lg text-yellow-600 flex-shrink-0"><i class="fa-solid fa-hand-holding-dollar"></i></div>
         <div>
           <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Total Donations</p>
           <p class="text-xl font-bold text-[#23353e] mt-1">$1,250</p>
-          <p class="text-xs text-green-500 font-semibold mt-0.5">↑ $150 this month</p>
+          <p class="text-xs text-green-500 font-semibold mt-0.5"><i class="fa-solid fa-arrow-up text-[10px] mr-0.5"></i>$150 this month</p>
         </div>
       </div>
 
       <!-- Card 3: Campaigns Supported -->
       <div class="kpi-card bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex items-start gap-4">
-        <div class="w-12 h-12 rounded-2xl bg-red-50 flex items-center justify-center text-2xl flex-shrink-0">❤️</div>
+        <div class="w-12 h-12 rounded-2xl bg-red-50 flex items-center justify-center text-lg text-red-500 flex-shrink-0"><i class="fa-solid fa-heart"></i></div>
         <div>
           <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Campaigns Supported</p>
           <p class="text-xl font-bold text-[#23353e] mt-1">4 Campaigns</p>
@@ -245,17 +248,17 @@
 
       <!-- Card 4: Volunteer Hours -->
       <div class="kpi-card bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex items-start gap-4">
-        <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-2xl flex-shrink-0">🤝</div>
+        <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-lg text-blue-500 flex-shrink-0"><i class="fa-solid fa-handshake"></i></div>
         <div>
           <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Volunteer Hours</p>
           <p class="text-xl font-bold text-[#23353e] mt-1">32 Hours</p>
-          <p class="text-xs text-green-500 font-semibold mt-0.5">↑ 8 hrs this month</p>
+          <p class="text-xs text-green-500 font-semibold mt-0.5"><i class="fa-solid fa-arrow-up text-[10px] mr-0.5"></i>8 hrs this month</p>
         </div>
       </div>
 
       <!-- Card 5: Upcoming Events -->
       <div class="kpi-card bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex items-start gap-4">
-        <div class="w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center text-2xl flex-shrink-0">📅</div>
+        <div class="w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center text-lg text-orange-500 flex-shrink-0"><i class="fa-solid fa-calendar-days"></i></div>
         <div>
           <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Upcoming Events</p>
           <p class="text-xl font-bold text-[#23353e] mt-1">2 Events</p>
@@ -265,7 +268,7 @@
 
       <!-- Card 6: Rewards -->
       <div class="kpi-card bg-[#23353e] rounded-2xl shadow-sm p-6 border border-[#23353e] flex items-start gap-4">
-        <div class="w-12 h-12 rounded-2xl bg-[#a7e4c9]/20 flex items-center justify-center text-2xl flex-shrink-0">🎁</div>
+        <div class="w-12 h-12 rounded-2xl bg-[#a7e4c9]/20 flex items-center justify-center text-lg text-[#a7e4c9] flex-shrink-0"><i class="fa-solid fa-gift"></i></div>
         <div>
           <p class="text-[10px] text-[#a7e4c9] font-bold uppercase tracking-widest">Rewards</p>
           <p class="text-xl font-bold text-white mt-1">Gold Tier Donor</p>
@@ -336,7 +339,7 @@
             <div class="prog-fill h-2 rounded-full bg-[#48C39E]" style="width:0" data-width="75%"></div>
           </div>
           <p class="text-[10px] text-gray-400">Goal: $10,000 · 18 days left</p>
-          <a href="404.html" class="mt-3 block text-center text-[10px] font-bold text-[#48C39E] border border-[#48C39E] py-2 rounded-lg hover:bg-[#48C39E] hover:text-white transition-colors">Support More →</a>
+          <a href="404.html" class="mt-3 block text-center text-[10px] font-bold text-[#48C39E] border border-[#48C39E] py-2 rounded-lg hover:bg-[#48C39E] hover:text-white transition-colors">Support More <i class="fa-solid fa-arrow-right ml-0.5"></i></a>
         </div>
       </div>
 
@@ -356,7 +359,7 @@
             <div class="prog-fill h-2 rounded-full bg-[#a7e4c9]" style="width:0" data-width="72%"></div>
           </div>
           <p class="text-[10px] text-gray-400">Goal: $50,000 · 12 days left</p>
-          <a href="404.html" class="mt-3 block text-center text-[10px] font-bold text-[#48C39E] border border-[#48C39E] py-2 rounded-lg hover:bg-[#48C39E] hover:text-white transition-colors">Support More →</a>
+          <a href="404.html" class="mt-3 block text-center text-[10px] font-bold text-[#48C39E] border border-[#48C39E] py-2 rounded-lg hover:bg-[#48C39E] hover:text-white transition-colors">Support More <i class="fa-solid fa-arrow-right ml-0.5"></i></a>
         </div>
       </div>
 
@@ -376,7 +379,7 @@
             <div class="prog-fill h-2 rounded-full bg-[#48C39E]" style="width:0" data-width="65%"></div>
           </div>
           <p class="text-[10px] text-gray-400">Goal: $50,000 · 30 days left</p>
-          <a href="404.html" class="mt-3 block text-center text-[10px] font-bold text-[#48C39E] border border-[#48C39E] py-2 rounded-lg hover:bg-[#48C39E] hover:text-white transition-colors">Support More →</a>
+          <a href="404.html" class="mt-3 block text-center text-[10px] font-bold text-[#48C39E] border border-[#48C39E] py-2 rounded-lg hover:bg-[#48C39E] hover:text-white transition-colors">Support More <i class="fa-solid fa-arrow-right ml-0.5"></i></a>
         </div>
       </div>
 
@@ -389,37 +392,37 @@
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 badge-grid">
 
       <a href="404.html" class="badge-card bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col items-center gap-2 text-center cursor-pointer">
-        <div class="w-14 h-14 rounded-full bg-yellow-50 flex items-center justify-center text-3xl">🥇</div>
+        <div class="w-14 h-14 rounded-full bg-yellow-50 flex items-center justify-center text-xl text-yellow-500"><i class="fa-solid fa-medal"></i></div>
         <p class="text-xs font-bold text-[#23353e]">Gold Donor</p>
         <p class="text-[10px] text-gray-400">$1,000+ donated</p>
       </a>
 
       <a href="404.html" class="badge-card bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col items-center gap-2 text-center cursor-pointer">
-        <div class="w-14 h-14 rounded-full bg-[#a7e4c9]/20 flex items-center justify-center text-3xl">💧</div>
+        <div class="w-14 h-14 rounded-full bg-[#a7e4c9]/20 flex items-center justify-center text-xl text-blue-500"><i class="fa-solid fa-droplet"></i></div>
         <p class="text-xs font-bold text-[#23353e]">Water Hero</p>
         <p class="text-[10px] text-gray-400">Funded 2 wells</p>
       </a>
 
       <a href="404.html" class="badge-card bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col items-center gap-2 text-center cursor-pointer">
-        <div class="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center text-3xl">📚</div>
+        <div class="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center text-xl text-amber-600"><i class="fa-solid fa-book-open"></i></div>
         <p class="text-xs font-bold text-[#23353e]">Edu Champion</p>
         <p class="text-[10px] text-gray-400">Sponsored 3 students</p>
       </a>
 
       <a href="404.html" class="badge-card bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col items-center gap-2 text-center cursor-pointer">
-        <div class="w-14 h-14 rounded-full bg-green-50 flex items-center justify-center text-3xl">🌱</div>
+        <div class="w-14 h-14 rounded-full bg-green-50 flex items-center justify-center text-xl text-emerald-500"><i class="fa-solid fa-seedling"></i></div>
         <p class="text-xs font-bold text-[#23353e]">Eco Warrior</p>
         <p class="text-[10px] text-gray-400">10 trees planted</p>
       </a>
 
       <a href="404.html" class="badge-card bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col items-center gap-2 text-center cursor-pointer">
-        <div class="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center text-3xl">❤️</div>
+        <div class="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center text-xl text-red-500"><i class="fa-solid fa-heart"></i></div>
         <p class="text-xs font-bold text-[#23353e]">Care Giver</p>
         <p class="text-[10px] text-gray-400">32 volunteer hrs</p>
       </a>
 
       <a href="404.html" class="badge-card bg-[#23353e] rounded-2xl border border-[#23353e] shadow-sm p-4 flex flex-col items-center gap-2 text-center cursor-pointer">
-        <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center text-3xl">🔓</div>
+        <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center text-xl text-white/50"><i class="fa-solid fa-lock-open"></i></div>
         <p class="text-xs font-bold text-white">Next Badge</p>
         <p class="text-[10px] text-white/40">$250 more to unlock</p>
       </a>
@@ -481,7 +484,7 @@
     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
       <div class="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
         <h4 class="font-bold text-[#23353e] text-sm">Donation History</h4>
-        <a href="404.html" class="text-xs font-bold text-[#48C39E] hover:underline">Download PDF →</a>
+        <a href="404.html" class="text-xs font-bold text-[#48C39E] hover:underline">Download PDF <i class="fa-solid fa-arrow-right ml-0.5"></i></a>
       </div>
       <div class="overflow-x-auto">
         <table class="w-full text-sm">
@@ -506,12 +509,12 @@
     <!-- Recurring donation setup card -->
     <div class="bg-gradient-to-r from-[#23353e] to-[#2e4553] rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-white">
       <div>
-        <p class="text-[#a7e4c9] text-[10px] font-bold uppercase tracking-widest mb-1">💡 Make More Impact</p>
+        <p class="text-[#a7e4c9] text-[10px] font-bold uppercase tracking-widest mb-1"><i class="fa-regular fa-lightbulb"></i> Make More Impact</p>
         <h4 class="font-serif italic text-xl">Set up a monthly donation</h4>
         <p class="text-white/60 text-xs mt-1">Small recurring gifts create lasting change.</p>
       </div>
       <a href="404.html" class="bg-[#a7e4c9] text-[#23353e] font-bold text-sm px-6 py-3 rounded-full hover:bg-white transition-colors whitespace-nowrap self-start sm:self-auto">
-        Give Monthly →
+        Give Monthly <i class="fa-solid fa-arrow-right ml-1"></i>
       </a>
     </div>
 
@@ -537,7 +540,7 @@
         <p class="text-2xl font-bold text-[#48C39E]">5</p><p class="text-xs text-gray-400 mt-1 font-semibold">Events Attended</p>
       </div>
       <div class="kpi-card bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center">
-        <p class="text-2xl font-bold text-[#23353e]">★ 4.9</p><p class="text-xs text-gray-400 mt-1 font-semibold">Rating</p>
+        <p class="text-2xl font-bold text-[#23353e]"><i class="fa-solid fa-star text-sm text-yellow-500 mr-0.5"></i> 4.9</p><p class="text-xs text-gray-400 mt-1 font-semibold">Rating</p>
       </div>
       <div class="kpi-card bg-[#23353e] rounded-2xl border border-[#23353e] shadow-sm p-5 text-center">
         <p class="text-2xl font-bold text-white">8 hrs</p><p class="text-xs text-[#a7e4c9] mt-1 font-semibold">This Month</p>
@@ -595,10 +598,10 @@
             <th class="px-5 py-3 text-left text-[10px] font-bold text-gray-400 uppercase tracking-wider">Rating</th>
           </tr></thead>
           <tbody class="divide-y divide-gray-50">
-            <tr class="hover:bg-gray-50"><td class="px-5 py-3 text-gray-400 text-xs">Jul 28</td><td class="px-5 py-3 font-semibold text-[#23353e]">Food Distribution</td><td class="px-5 py-3 text-gray-500 text-xs">Field Worker</td><td class="px-5 py-3 font-bold text-[#23353e]">8</td><td class="px-5 py-3 text-yellow-500 font-bold">★ 5.0</td></tr>
-            <tr class="hover:bg-gray-50"><td class="px-5 py-3 text-gray-400 text-xs">Jul 10</td><td class="px-5 py-3 font-semibold text-[#23353e]">Education Workshop</td><td class="px-5 py-3 text-gray-500 text-xs">Educator</td><td class="px-5 py-3 font-bold text-[#23353e]">6</td><td class="px-5 py-3 text-yellow-500 font-bold">★ 4.8</td></tr>
-            <tr class="hover:bg-gray-50"><td class="px-5 py-3 text-gray-400 text-xs">Jun 22</td><td class="px-5 py-3 font-semibold text-[#23353e]">Medical Camp</td><td class="px-5 py-3 text-gray-500 text-xs">Admin Support</td><td class="px-5 py-3 font-bold text-[#23353e]">10</td><td class="px-5 py-3 text-yellow-500 font-bold">★ 4.9</td></tr>
-            <tr class="hover:bg-gray-50"><td class="px-5 py-3 text-gray-400 text-xs">Jun 5</td><td class="px-5 py-3 font-semibold text-[#23353e]">Water Project Setup</td><td class="px-5 py-3 text-gray-500 text-xs">Field Worker</td><td class="px-5 py-3 font-bold text-[#23353e]">8</td><td class="px-5 py-3 text-yellow-500 font-bold">★ 5.0</td></tr>
+            <tr class="hover:bg-gray-50"><td class="px-5 py-3 text-gray-400 text-xs">Jul 28</td><td class="px-5 py-3 font-semibold text-[#23353e]">Food Distribution</td><td class="px-5 py-3 text-gray-500 text-xs">Field Worker</td><td class="px-5 py-3 font-bold text-[#23353e]">8</td><td class="px-5 py-3 text-yellow-500 font-bold"><i class="fa-solid fa-star text-[10px] mr-0.5"></i> 5.0</td></tr>
+            <tr class="hover:bg-gray-50"><td class="px-5 py-3 text-gray-400 text-xs">Jul 10</td><td class="px-5 py-3 font-semibold text-[#23353e]">Education Workshop</td><td class="px-5 py-3 text-gray-500 text-xs">Educator</td><td class="px-5 py-3 font-bold text-[#23353e]">6</td><td class="px-5 py-3 text-yellow-500 font-bold"><i class="fa-solid fa-star text-[10px] mr-0.5"></i> 4.8</td></tr>
+            <tr class="hover:bg-gray-50"><td class="px-5 py-3 text-gray-400 text-xs">Jun 22</td><td class="px-5 py-3 font-semibold text-[#23353e]">Medical Camp</td><td class="px-5 py-3 text-gray-500 text-xs">Admin Support</td><td class="px-5 py-3 font-bold text-[#23353e]">10</td><td class="px-5 py-3 text-yellow-500 font-bold"><i class="fa-solid fa-star text-[10px] mr-0.5"></i> 4.9</td></tr>
+            <tr class="hover:bg-gray-50"><td class="px-5 py-3 text-gray-400 text-xs">Jun 5</td><td class="px-5 py-3 font-semibold text-[#23353e]">Water Project Setup</td><td class="px-5 py-3 text-gray-500 text-xs">Field Worker</td><td class="px-5 py-3 font-bold text-[#23353e]">8</td><td class="px-5 py-3 text-yellow-500 font-bold"><i class="fa-solid fa-star text-[10px] mr-0.5"></i> 5.0</td></tr>
           </tbody>
         </table>
       </div>
@@ -606,7 +609,7 @@
 
     <!-- Impact statement -->
     <div class="bg-gradient-to-br from-[#a7e4c9]/20 to-[#a7e4c9]/5 rounded-2xl p-6 border border-[#a7e4c9]/30">
-      <p class="text-[10px] font-bold text-[#48C39E] uppercase tracking-widest mb-2">🌍 Your Impact</p>
+      <p class="text-[10px] font-bold text-[#48C39E] uppercase tracking-widest mb-2"><i class="fa-solid fa-earth-americas mr-1"></i> Your Impact</p>
       <p class="font-serif italic text-xl text-[#23353e]">"Your 32 volunteer hours helped feed 240 families, educate 18 children, and support 3 community wells."</p>
     </div>
 
@@ -622,7 +625,7 @@
       <h2 class="font-serif italic text-2xl">Saved Campaigns</h2>
       <p class="text-white/50 text-xs mt-0.5">Causes you're following and supporting</p>
     </div>
-    <a href="404.html" class="bg-[#a7e4c9] text-[#23353e] font-bold text-xs px-4 py-2 rounded-full hover:bg-white transition-colors">Browse More →</a>
+    <a href="404.html" class="bg-[#a7e4c9] text-[#23353e] font-bold text-xs px-4 py-2 rounded-full hover:bg-white transition-colors">Browse More <i class="fa-solid fa-arrow-right ml-0.5"></i></a>
   </div>
   <div class="p-6 space-y-6">
 
@@ -701,12 +704,12 @@
         <div class="flex items-center gap-4 p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors">
           <img src="assets/home/1.webp" alt="" class="w-12 h-12 rounded-xl object-cover flex-shrink-0">
           <div class="flex-1"><p class="text-xs font-bold text-[#23353e]">Women Empowerment Program</p><p class="text-[10px] text-gray-400">55% funded · $40,000 goal</p></div>
-          <a href="404.html" class="text-[10px] font-bold text-[#48C39E] hover:underline whitespace-nowrap">View →</a>
+          <a href="404.html" class="text-[10px] font-bold text-[#48C39E] hover:underline whitespace-nowrap">View <i class="fa-solid fa-arrow-right ml-0.5"></i></a>
         </div>
         <div class="flex items-center gap-4 p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors">
           <img src="assets/home/2.webp" alt="" class="w-12 h-12 rounded-xl object-cover flex-shrink-0">
           <div class="flex-1"><p class="text-xs font-bold text-[#23353e]">Shelter for Families</p><p class="text-[10px] text-gray-400">93% funded · $60,000 goal</p></div>
-          <a href="404.html" class="text-[10px] font-bold text-[#48C39E] hover:underline whitespace-nowrap">View →</a>
+          <a href="404.html" class="text-[10px] font-bold text-[#48C39E] hover:underline whitespace-nowrap">View <i class="fa-solid fa-arrow-right ml-0.5"></i></a>
         </div>
       </div>
     </div>
@@ -729,7 +732,7 @@
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5">
         <div>
           <p class="text-[#a7e4c9] text-[10px] font-bold uppercase tracking-widest mb-1">Current Tier</p>
-          <h3 class="font-serif italic text-2xl">🥇 Gold Donor</h3>
+          <h3 class="font-serif italic text-2xl"><i class="fa-solid fa-medal text-yellow-500 mr-2"></i>Gold Donor</h3>
           <p class="text-white/50 text-xs mt-0.5">$1,250 total donated · 32 volunteer hours</p>
         </div>
         <div class="text-right">
@@ -766,31 +769,31 @@
       <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">Badges Earned</p>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 badge-grid">
         <a href="404.html" class="badge-card bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center gap-2 text-center cursor-pointer">
-          <div class="w-16 h-16 rounded-full bg-yellow-50 flex items-center justify-center text-4xl">🥇</div>
+          <div class="w-16 h-16 rounded-full bg-yellow-50 flex items-center justify-center text-2xl text-yellow-500"><i class="fa-solid fa-medal"></i></div>
           <p class="text-xs font-bold text-[#23353e]">Gold Donor</p>
           <p class="text-[10px] text-gray-400">Earned Aug 2026</p>
           <span class="text-[10px] bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-bold">Unlocked</span>
         </a>
         <a href="404.html" class="badge-card bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center gap-2 text-center cursor-pointer">
-          <div class="w-16 h-16 rounded-full bg-[#a7e4c9]/20 flex items-center justify-center text-4xl">💧</div>
+          <div class="w-16 h-16 rounded-full bg-[#a7e4c9]/20 flex items-center justify-center text-2xl text-blue-500"><i class="fa-solid fa-droplet"></i></div>
           <p class="text-xs font-bold text-[#23353e]">Water Hero</p>
           <p class="text-[10px] text-gray-400">Earned Jul 2026</p>
           <span class="text-[10px] bg-teal-100 text-teal-700 px-2 py-0.5 rounded-full font-bold">Unlocked</span>
         </a>
         <a href="404.html" class="badge-card bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center gap-2 text-center cursor-pointer">
-          <div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center text-4xl">📚</div>
+          <div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center text-2xl text-amber-600"><i class="fa-solid fa-book-open"></i></div>
           <p class="text-xs font-bold text-[#23353e]">Edu Champion</p>
           <p class="text-[10px] text-gray-400">Earned Jun 2026</p>
           <span class="text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-bold">Unlocked</span>
         </a>
         <a href="404.html" class="badge-card bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center gap-2 text-center cursor-pointer">
-          <div class="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center text-4xl">❤️</div>
+          <div class="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center text-2xl text-red-500"><i class="fa-solid fa-heart"></i></div>
           <p class="text-xs font-bold text-[#23353e]">Care Giver</p>
           <p class="text-[10px] text-gray-400">Earned Jun 2026</p>
           <span class="text-[10px] bg-red-100 text-red-700 px-2 py-0.5 rounded-full font-bold">Unlocked</span>
         </a>
         <a href="404.html" class="badge-card bg-gray-50 rounded-2xl border border-dashed border-gray-200 shadow-sm p-5 flex flex-col items-center gap-2 text-center opacity-60 cursor-pointer">
-          <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center text-4xl">🔒</div>
+          <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center text-2xl text-gray-400"><i class="fa-solid fa-lock"></i></div>
           <p class="text-xs font-bold text-gray-400">Platinum Donor</p>
           <p class="text-[10px] text-gray-400">$250 more needed</p>
           <span class="text-[10px] bg-gray-200 text-gray-500 px-2 py-0.5 rounded-full font-bold">Locked</span>
@@ -804,27 +807,27 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="bg-gradient-to-br from-[#23353e] to-[#2e4553] rounded-2xl p-5 text-white flex flex-col gap-3 hover:shadow-lg transition-shadow">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-[#a7e4c9]/20 flex items-center justify-center text-xl">🎓</div>
+            <div class="w-10 h-10 rounded-xl bg-[#a7e4c9]/20 flex items-center justify-center text-lg text-[#48C39E]"><i class="fa-solid fa-graduation-cap"></i></div>
             <div><p class="text-[10px] text-[#a7e4c9] font-semibold uppercase tracking-wider">Certificate</p><p class="text-sm font-bold">Volunteer Excellence</p></div>
           </div>
           <p class="text-xs text-white/60">Awarded for completing 30+ volunteer hours in 2026.</p>
-          <a href="404.html" class="mt-auto text-[10px] font-bold text-[#a7e4c9] hover:text-white transition-colors">Download PDF →</a>
+          <a href="404.html" class="mt-auto text-[10px] font-bold text-[#a7e4c9] hover:text-white transition-colors">Download PDF <i class="fa-solid fa-arrow-right ml-0.5"></i></a>
         </div>
         <div class="bg-gradient-to-br from-[#23353e] to-[#2e4553] rounded-2xl p-5 text-white flex flex-col gap-3 hover:shadow-lg transition-shadow">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-yellow-400/20 flex items-center justify-center text-xl">⭐</div>
+            <div class="w-10 h-10 rounded-xl bg-yellow-400/20 flex items-center justify-center text-lg text-yellow-500"><i class="fa-solid fa-star"></i></div>
             <div><p class="text-[10px] text-[#a7e4c9] font-semibold uppercase tracking-wider">Certificate</p><p class="text-sm font-bold">Gold Tier Donor</p></div>
           </div>
           <p class="text-xs text-white/60">Awarded for cumulative donations exceeding $1,000.</p>
-          <a href="404.html" class="mt-auto text-[10px] font-bold text-[#a7e4c9] hover:text-white transition-colors">Download PDF →</a>
+          <a href="404.html" class="mt-auto text-[10px] font-bold text-[#a7e4c9] hover:text-white transition-colors">Download PDF <i class="fa-solid fa-arrow-right ml-0.5"></i></a>
         </div>
         <div class="bg-gray-100 rounded-2xl p-5 flex flex-col gap-3 opacity-60">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center text-xl">🔒</div>
+            <div class="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center text-lg text-gray-500"><i class="fa-solid fa-lock"></i></div>
             <div><p class="text-[10px] text-gray-400 font-semibold uppercase tracking-wider">Certificate</p><p class="text-sm font-bold text-gray-500">Platinum Donor</p></div>
           </div>
           <p class="text-xs text-gray-400">Donate $250 more to unlock this certificate.</p>
-          <a href="404.html" class="mt-auto text-[10px] font-bold text-[#48C39E]">Unlock Now →</a>
+          <a href="404.html" class="mt-auto text-[10px] font-bold text-[#48C39E]">Unlock Now <i class="fa-solid fa-arrow-right ml-0.5"></i></a>
         </div>
       </div>
     </div>
@@ -873,7 +876,7 @@ document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeSidebar(); }
    SECTION SWITCHING
 ════════════════════════════════════════════════════════ */
 const TITLES = {
-  'sec-overview' : 'Welcome back, John 👋',
+  'sec-overview' : 'Welcome back, John',
   'sec-donations': 'My Donations',
   'sec-volunteer': 'Volunteer Journey',
   'sec-campaigns': 'Saved Campaigns',
@@ -1068,7 +1071,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   // Update TITLES object for dynamic page title updates
   if (typeof TITLES !== 'undefined') {
-    TITLES['sec-overview'] = 'Welcome back, ' + userName + ' 👋';
+    TITLES['sec-overview'] = 'Welcome back, ' + userName;
   }
 
   /* KPI cards stagger in */
