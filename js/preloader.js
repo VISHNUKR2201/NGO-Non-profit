@@ -193,3 +193,47 @@ function runPreloader(preloader, mainTimeline, lenis) {
     }, '-=1.0');
   }
 }
+
+// Automatically highlight active navigation links (header and footer)
+document.addEventListener('DOMContentLoaded', () => {
+  const path = window.location.pathname;
+  let filename = path.substring(path.lastIndexOf('/') + 1);
+  if (!filename || filename === '' || filename === '/') {
+    filename = 'index.html';
+  }
+  
+  // Header Links
+  const headerLinks = document.querySelectorAll('.nav-menu .nav-link');
+  headerLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === filename) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+
+  // Footer Links
+  const footerLinks = document.querySelectorAll('.footer-link-list .footer-link');
+  footerLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    const baseHref = href ? href.split('#')[0].split('?')[0] : '';
+    if (baseHref === filename) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+
+  // Login Buttons (Desktop and Mobile)
+  const loginBtns = document.querySelectorAll('.login-btn');
+  loginBtns.forEach(btn => {
+    const href = btn.getAttribute('href');
+    const baseHref = href ? href.split('#')[0].split('?')[0] : '';
+    if (baseHref === filename) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+});

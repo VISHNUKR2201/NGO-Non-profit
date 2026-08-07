@@ -377,6 +377,17 @@ header.site-header.scrolled .header-container {
   color: var(--primary-dark);
 }
 
+.nav-link.active {
+  color: var(--mint-green-dark) !important;
+}
+
+@media (min-width: 1024px) {
+  .nav-link.active {
+    color: var(--primary-dark) !important;
+    font-weight: 600;
+  }
+}
+
 /* Spotlight Pill Tracker (dynamically positioned by JS) */
 .nav-spotlight {
   position: absolute;
@@ -404,11 +415,29 @@ header.site-header.scrolled .header-container {
   font-size: 0.95rem;
   font-weight: 500;
   text-decoration: none;
-  transition: opacity 0.3s var(--ease-smooth);
+  border: 1.5px solid transparent;
+  padding: 10px 24px;
+  border-radius: 100px;
+  transition: all 0.3s var(--ease-smooth);
 }
 
 .login-btn:hover {
-  opacity: 0.75;
+  border-color: rgba(18, 42, 38, 0.1);
+  background: rgba(18, 42, 38, 0.02);
+}
+
+.login-btn.active {
+  border-color: var(--mint-green-dark);
+  color: var(--mint-green-dark) !important;
+  font-weight: 600;
+  opacity: 1 !important;
+}
+
+.login-btn.active:hover {
+  background-color: var(--mint-green);
+  color: var(--primary-dark) !important;
+  border-color: var(--mint-green);
+  opacity: 1 !important;
 }
 
 .donate-btn-header {
@@ -3758,6 +3787,15 @@ img:not(.logo-wrapper img):not(.section-side-strip img):not(.action-img):hover,
   color: #a8f0d8 !important;
 }
 
+.footer-link.active {
+  color: var(--mint-green) !important;
+  font-weight: 600;
+}
+
+.footer-link.active span::after {
+  width: 100%;
+}
+
 /* ── Footer stat chip (Col 4) ── */
 .footer-stat-chip {
   margin-top: 28px;
@@ -4270,16 +4308,36 @@ img:not(.logo-wrapper img):not(.section-side-strip img):not(.action-img):hover,
   }
 
   .mobile-actions .login-btn {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
     font-size: 1.0rem;
     font-weight: 500;
     color: var(--primary-dark);
     text-decoration: none;
-    padding: 4px 0;
-    transition: opacity 0.3s ease;
+    border: 1.5px solid transparent;
+    padding: 10px 24px;
+    border-radius: 100px;
+    transition: all 0.3s ease;
   }
 
   .mobile-actions .login-btn:hover {
-    opacity: 0.7;
+    border-color: rgba(18, 42, 38, 0.1);
+    background: rgba(18, 42, 38, 0.02);
+  }
+
+  .mobile-actions .login-btn.active {
+    border-color: var(--mint-green-dark);
+    color: var(--mint-green-dark) !important;
+    font-weight: 600;
+    opacity: 1 !important;
+  }
+
+  .mobile-actions .login-btn.active:hover {
+    background-color: var(--mint-green);
+    color: var(--primary-dark) !important;
+    border-color: var(--mint-green);
+    opacity: 1 !important;
   }
 
   .mobile-actions .donate-btn-header {
